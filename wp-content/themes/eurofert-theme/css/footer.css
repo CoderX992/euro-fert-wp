@@ -499,7 +499,10 @@
 /*back to top button */
 .back-to-top {
   position: fixed;
-  bottom: var(--back-top-footer-bottom); /* CHANGED: now controlled by CSS variable / JS */
+  bottom: calc(
+    var(--back-top-footer-bottom, var(--back-top-bottom, 16px)) + var(--back-top-dynamic-offset, 0px) +
+      env(safe-area-inset-bottom, 0px)
+  );
   right: var(--back-top-right); /* CHANGED: responsive gutter instead of hardcoded 20px */
   width: var(--back-top-size); /* CHANGED */
   height: var(--back-top-size); /* CHANGED */

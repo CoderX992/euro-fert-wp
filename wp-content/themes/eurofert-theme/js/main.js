@@ -51,6 +51,7 @@ function syncHeaderOffset() {
 function initScrollHeaderAndBackToTop() {
   var header = qs("#header");
   var backToTopBtn = qs(".back-to-top");
+  var footer = qs("footer.footer") || qs(".footer");
   if (!header) return;
 
   var lastScrollY = window.scrollY || 0;
@@ -89,15 +90,36 @@ function initScrollHeaderAndBackToTop() {
     backToTopBtn.classList.toggle("active", (window.scrollY || 0) > 300);
   }
 
+  function updateBackToTopPosition() {
+    if (!backToTopBtn) return;
+
+    var dynamicOffset = 0;
+    if (footer) {
+      var footerRect = footer.getBoundingClientRect();
+      var viewportHeight = window.innerHeight || document.documentElement.clientHeight;
+
+      // Amount of footer that is currently visible at the bottom of the viewport.
+      var visibleFooter = viewportHeight - footerRect.top;
+      if (visibleFooter > 0) {
+        dynamicOffset = Math.ceil(visibleFooter + 12);
+      }
+    }
+
+    backToTopBtn.style.setProperty("--back-top-dynamic-offset", dynamicOffset + "px");
+  }
+
   addListener(window, "scroll", updateHeaderOnScroll, { passive: true });
   addListener(window, "scroll", updateBackToTopVisibility, { passive: true });
+  addListener(window, "scroll", updateBackToTopPosition, { passive: true });
 
   addListener(window, "resize", function () {
     syncHeaderOffset();
+    updateBackToTopPosition();
   });
 
   addListener(window, "load", function () {
     syncHeaderOffset();
+    updateBackToTopPosition();
   });
 
   addListener(backToTopBtn, "click", function (e) {
@@ -109,6 +131,7 @@ function initScrollHeaderAndBackToTop() {
   updateHeaderOnScroll();
   syncHeaderOffset();
   updateBackToTopVisibility();
+  updateBackToTopPosition();
 }
 
 /* -----------------------------
