@@ -1,0 +1,20 @@
+/*
+ Theme Name: Eurofert Theme
+ Theme URI: http://localhost/eurofert
+ Author: Ahmad Safieddine
+ Author URI: http://localhost/eurofert
+ Description: Custom theme for the Eurofert fertilizer website.
+ Version: 1.0
+ Text Domain: eurofert-theme
+*/
+/* Styles.css changes updated on Nov 29 2025
+
+Google Fonts Import */
+
+/* Breakpoints:
+   - Mobile drawer: up to 767.98px
+   - Tablet/Desktop full menu: from 768px
+   - Fallback: extend drawer to 991.98px if link count > 5 */
+
+/* CRITICAL: Fluid base font size for better zoom behavior */
+/* Self-hosted Libre Baskerville (Baskerville) */

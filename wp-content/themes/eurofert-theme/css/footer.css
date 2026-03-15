@@ -1,0 +1,512 @@
+/*Footer Design updated 1.1 version at 27/02/2026 */
+/*footer main parent*/
+.footer {
+  background: #222; /* use your real footer background color here */
+}
+
+.footer-container {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  padding-top: 1rem;
+}
+/* Mobile-first: upper and lower also stack */
+.footer-upper,
+.footer-lower {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+/* Separator is now a real line between upper and lower */
+.footer-separator {
+  width: 100%;
+  border: 0;
+  border-top: 1px solid #fff;
+  margin: 0;
+  flex: 0 0 auto; /* fixed size, no growing */
+}
+
+/* ---------------------------------------------------------
+   Mobile 
+   - Center logo, but keep text left aligned.
+   --------------------------------------------------------- */
+.footer-top-left-col {
+  width: 100%;
+  text-align: center;
+}
+.footer-top-left-col .content-wrapper > .footer-logo {
+  display: block;
+  width: clamp(220px, 52vw, 320px);
+  max-width: 100%;
+  height: auto;
+  margin: 0 auto;
+  filter: brightness(0) invert(1);
+}
+/*subtitle  */
+.footer-top-left-col .content-wrapper > .footer-subtitle {
+  line-height: 1.5;
+}
+
+/* ---------------------------------------------------------
+   Copyright wrapper + text
+   --------------------------------------------------------- */
+.footer-lower .footer-copyright-col {
+  width: 100%;
+}
+
+.footer-lower .copyright-text {
+  margin: 0;
+  color: rgba(255, 255, 255, 0.72);
+  font-size: 0.9rem;
+}
+
+/* ---------------------------------------------------------
+    LIST : Featured Products become wrapping chips
+   --------------------------------------------------------- */
+/*reset default for links*/
+.footer-links {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+.footer-product-links {
+  list-style: none; /* remove bullets */
+  display: flex; /* horizontal layout */
+  flex-wrap: wrap; /* allow wrapping into rows */
+  justify-content: center; /* center the chip group */
+  gap: 0.5rem; /* space between chips */
+}
+
+.footer-product-links a,
+.footer-quick-links a {
+  display: inline-block;
+  padding: 0;
+  color: #fff;
+  font-size: 0.95rem;
+  text-decoration: none;
+  padding: 0.25rem 0.5rem;
+}
+
+/* --------------------------------------------------------------
+    Mobile: keep "Featured Products" heading + list as ONE centered unit
+   (prevents the list from drifting wider/narrower than the heading)
+---------------------------------------------------------------------------*/
+.upper-list-wrapper {
+  display: flex;
+  max-width: 32rem; /* keeps the unit from stretching too wide on mobile */
+  margin: 0 auto; /* centers the whole unit inside the column */
+  flex-direction: column; /* heading sits above the list */
+  align-items: center; /* centers heading + list together as a single block */
+}
+.footer-heading {
+  text-align: center; /* centers the "Featured Products" label */
+  margin: 0 0 0.5rem 0;
+  font-weight: 600;
+}
+
+@media (min-width: 768px) {
+  .footer-upper,
+  .footer-lower {
+    gap: 0;
+  }
+  .footer-container {
+    display: flex;
+    flex-direction: column;
+  }
+  /*footer grid */
+  .footer-upper {
+    display: grid;
+    gap: 2rem;
+    grid-template-columns: 1fr 2fr 1fr;
+    grid-template-areas: "img-brand product-links quick-links";
+    grid-template-rows: minmax(clamp(190px, 12vw, 240px), auto);
+    align-items: stretch;
+  }
+
+  /*grid items of parent grid footer upper */
+  .footer-center-col,
+  .footer-end-col {
+    display: flex;
+    flex-direction: column;
+    min-height: 0;
+  }
+
+  .footer-separator {
+    margin-block: 0.75rem;
+  }
+
+  /*bottom footer Parent grid*/
+  .footer-lower {
+    display: grid;
+    gap: 2rem;
+    grid-template-columns: minmax(180px, 1fr) minmax(260px, 2fr) minmax(180px, 1fr);
+    grid-template-areas: "copyright legal social";
+    align-items: center;
+    min-height: 50px;
+    gap: clamp(0.75rem, 1.5vw, 2rem);
+  }
+
+  .footer-lower > * {
+    min-width: 0;
+  }
+
+  /*Desktop footer */
+  .footer-top-left-col .content-wrapper > .footer-logo {
+    margin: 0;
+    max-width: 240px;
+  }
+
+  .footer-upper .footer-top-left-col {
+    grid-area: img-brand;
+  }
+
+  .footer-upper .footer-center-col {
+    grid-area: product-links;
+  }
+  .footer-upper .footer-end-col {
+    grid-area: quick-links;
+  }
+
+  /*list container */
+  .upper-list-wrapper {
+    gap: clamp(0.5rem, 0.5rem + 0.2vw, 0.875rem);
+    flex: 1;
+    max-width: none; /* NEW: cancel mobile/global width cap */
+    margin: 0; /* NEW: cancel mobile auto-centering */
+  }
+
+  .footer-end-col .upper-list-wrapper {
+    align-items: flex-start;
+  }
+  /*Product list header desktop */
+  .upper-list-wrapper .footer-heading {
+    display: inline-block;
+    position: relative;
+    padding-bottom: clamp(0.3rem, 0.4vw, 0.45rem);
+    width: auto; /* remove the forced 100% width */
+    font-family: var(--font-primary);
+    font-weight: 600;
+    margin: 0 auto;
+    font-size: clamp(1.05rem, 0.4vw + 0.95rem, 1.25rem);
+  }
+
+  .footer-end-col .upper-list-wrapper > .footer-heading {
+    margin-left: 0.4rem;
+  }
+
+  /* list header green bars */
+  .footer-center-col .footer-heading::after {
+    content: "";
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    bottom: 0;
+    width: 115%;
+    height: 1px;
+    background: var(--primary);
+    opacity: 0.5;
+  }
+
+  .footer-end-col .footer-heading::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    height: 1px;
+    background: var(--primary);
+    opacity: 0.5;
+  }
+
+  /* main ul Desktop list */
+  .footer-links {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    padding-left: 1rem;
+    margin: 0;
+    gap: 0;
+
+    justify-content: space-between;
+    flex: 1;
+  }
+
+  .footer-product-links li,
+  .footer-quick-links li {
+    display: grid;
+    grid-template-columns: 0.35rem auto;
+    gap: clamp(0.25rem, 0.4vw, 0.6rem);
+    align-items: start;
+    text-align: left;
+  }
+
+  .footer-product-links li::before,
+  .footer-quick-links li::before {
+    content: "•";
+    color: var(--primary);
+  }
+  /*Lower footer content*/
+  .footer-lower .footer-copyright-col {
+    grid-area: copyright;
+    justify-self: start;
+    align-self: center;
+    max-width: 24ch;
+  }
+  .footer-lower .copyright-text {
+    margin: 0;
+    color: rgba(255, 255, 255, 0.72);
+    font-size: clamp(0.76rem, 0.14vw + 0.72rem, 0.9rem);
+    white-space: nowrap;
+  }
+  .footer-lower .footer-legal-col {
+    grid-area: legal;
+    justify-self: center;
+  }
+
+  /*legal links list */
+  .footer-legal-list {
+    display: flex;
+    flex-wrap: nowrap;
+    justify-content: center;
+    align-items: center;
+    gap: clamp(0.45rem, 0.8vw, 0.9rem);
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    white-space: nowrap;
+  }
+
+  .footer-legal-link {
+    display: inline-block;
+    white-space: nowrap;
+    font-size: clamp(0.82rem, 0.2vw + 0.76rem, 0.95rem);
+  }
+
+  .footer-lower .footer-social-col {
+    display: flex;
+    grid-area: social;
+    justify-self: start;
+  }
+
+  .footer-social-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    width: clamp(180px, 22vw, 220px); /* temporary lane width for desktop alignment test */
+
+    gap: 0.75rem;
+  }
+  .social-link {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.1rem;
+    text-decoration: none;
+  }
+
+  .social-link:hover,
+  .social-link:focus,
+  .social-link:active {
+    text-decoration: none;
+  }
+}
+
+/*Mobile footer specific media query */
+
+@media (max-width: 767px) {
+  /* Mobile bottom footer */
+  .footer-lower {
+    width: 100%;
+    display: flex;
+    align-self: stretch; /* NEW: defeats parent .footer-container align-items:center */
+    flex-direction: column;
+    align-items: center;
+    gap: 0.875rem;
+  }
+
+  .footer-center-col,
+  .footer-end-col {
+    width: 100%;
+  }
+  /*Mobile vertical layout - flexbox Mobile */
+  .footer-lower .footer-legal-col,
+  .footer-lower .footer-social-col,
+  .footer-lower .footer-copyright-col {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+  }
+
+  .footer-lower .footer-social-col {
+    order: 1;
+  }
+  .footer-lower .footer-legal-col {
+    order: 2;
+  }
+  .footer-lower .footer-copyright-col {
+    order: 3;
+  }
+
+  .footer-legal-list {
+    list-style: none;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 1rem;
+    margin: 0;
+    padding: 0;
+    font-size: 0.9rem;
+  }
+
+  .footer-legal-list li::before {
+    content: none; /* NEW: safety reset so no bullets appear */
+  }
+
+  .footer-social-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+    width: 100%;
+  }
+
+  .footer-lower .footer-copyright-col {
+    justify-content: center;
+  }
+
+  .footer-lower .copyright-text {
+    text-align: center;
+  }
+  .footer-container {
+    align-items: center;
+    gap: 1.5rem;
+  }
+
+  /*Quick links on Mobile*/
+  .footer-end-col .upper-list-wrapper {
+    margin: 0 auto;
+    align-items: center;
+  }
+
+  .footer-quick-links {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 0.5rem 1rem; /* row gap, column gap */
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    row-gap: 0.75rem;
+    column-gap: 1.5rem;
+  }
+  .footer-quick-links a {
+    display: inline-block;
+    padding: 0;
+    text-align: center;
+    white-space: nowrap; /* keep each link label on one line */
+    padding: 0.15rem 0.25rem;
+  }
+  .footer-product-links {
+    display: flex;
+    width: 100%; /* ensures centering uses full row width */
+    flex-wrap: wrap;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    justify-content: center;
+    gap: 0.5rem;
+  }
+
+  .footer-center-col .footer-links li {
+    display: inline-block;
+    margin: 0;
+    padding: 0;
+  }
+
+  .footer-social-wrapper .social-link {
+    min-width: 2.25rem; /* NEW: bigger touch target */
+    min-height: 2.25rem; /* NEW: adds visual height */
+    font-size: 1.35rem; /* CHANGED: makes icon glyph larger */
+  }
+}
+
+@media (min-width: 768px) and (max-width: 860px) {
+  .footer-lower .copyright-text {
+    font-size: 0.75rem;
+    white-space: nowrap;
+  }
+
+  .footer-legal-list {
+    gap: 0.5rem;
+  }
+
+  .footer-legal-link {
+    font-size: 0.8rem;
+  }
+
+  .footer-social-wrapper {
+    width: 180px;
+    gap: 0.5rem;
+  }
+}
+
+/*back to top button */
+.back-to-top {
+  position: fixed;
+  bottom: var(--back-top-footer-bottom); /* CHANGED: now controlled by CSS variable / JS */
+  right: var(--back-top-right); /* CHANGED: responsive gutter instead of hardcoded 20px */
+  width: var(--back-top-size); /* CHANGED */
+  height: var(--back-top-size); /* CHANGED */
+  background-color: var(--primary);
+  color: white;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  visibility: hidden;
+  z-index: 999;
+  transition:
+    opacity 0.2s ease,
+    transform 0.2s ease,
+    right 0.2s ease,
+    bottom 0.2s ease; /* CHANGED: animate position changes too */
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+  pointer-events: none;
+}
+
+.back-to-top.active {
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto; /* CHANGED: clickable only when visible */
+}
+
+.back-to-top:hover {
+  background-color: var(--primary-dark);
+  color: white;
+  transform: translateY(-3px);
+}
+
+/* Back to Top Button - responsive breakpoints */
+
+@media (min-width: 1200px) and (max-width: 1478px) {
+  .back-to-top {
+    bottom: 88px;
+  }
+}
+
+/* Medium desktop / laptop range */
+@media (min-width: 992px) and (max-width: 1199.98px) {
+  .back-to-top {
+    bottom: 108px;
+  }
+}
+
+/* IMPORTANT: 991px is still in your non-mobile footer layout */
+@media (min-width: 768px) and (max-width: 991.98px) {
+  .back-to-top {
+    bottom: 156px; /* CHANGED: stronger lift to clear the social icons */
+  }
+}
+
+/* NEW END */

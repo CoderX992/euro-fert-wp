@@ -1,0 +1,1187 @@
+/* Header Style Updated */
+*,
+*:before,
+*:after {
+  box-sizing: border-box;
+}
+
+/* global header */
+.header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  background-color: #ffffff;
+  box-shadow: 0 1px 15px rgba(0, 0, 0, 0.04);
+  z-index: 3;
+  min-height: 60px;
+  padding-block: 1.5rem;
+  transition:
+    padding 0.3s ease,
+    box-shadow 0.3s ease,
+    transform 0.3s ease;
+  box-shadow: 0 1px 15px rgba(0, 0, 0, 0.04);
+}
+
+.header--scrolled {
+  padding-block: 1rem;
+  /* Change 2: Increase background opacity */
+  background-color: rgba(255, 255, 255, 0.98);
+
+  /* Change 3: Stronger shadow to separate from content */
+  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
+}
+
+.header.header--hidden {
+  /* Slide the header UP out of view */
+  /* Since Admin Bar is z-index: 99999, this slides neatly underneath it */
+  transform: translateY(-100%);
+}
+
+/* main navigation container site nav 
+   Site navigation  GLOBAL
+   Site nav global 
+*/
+
+.site-nav {
+  flex: 1; /*grow to full width*/
+  display: flex;
+  align-items: center;
+  justify-content: space-between; /* center logo on mobile */
+  position: relative; /* so toggler can be absolute */
+}
+
+/* Custom Menu Header Title and Separator */
+.menu-header {
+  padding: 0 1rem;
+  margin-bottom: 0;
+  padding-bottom: 1rem;
+}
+
+.menu-title {
+  font-weight: 700;
+  font-size: 1.125rem;
+  color: var(--gray-600); /* Muted gray text color */
+
+  margin: 0;
+  padding-top: 1rem;
+  line-height: 1.5;
+}
+/****************
+  Mobile first logo 
+ *****************
+  */
+.brand-logo {
+  display: flex;
+  align-items: center;
+  margin-right: 1rem;
+  font-size: 1.25rem;
+}
+/* Eurofert Logo */
+.logo {
+  display: block;
+  width: auto;
+  /*logo responsive height and width based on view port */
+  max-width: clamp(160px, 20vw, 430px);
+  max-height: clamp(46px, 5vh, 70px);
+
+  object-fit: contain;
+  image-rendering: -webkit-optimize-contrast; /* sharper in WebKit */
+  transition: all 0.3s ease;
+}
+
+.nav-link span {
+  position: relative;
+  display: inline-block;
+}
+
+.dropdown-menu {
+  border: none;
+  border-radius: 0.5rem;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+}
+
+.dropdown-item {
+  padding: 0.5rem 1.5rem;
+  font-weight: 500;
+  color: var(--gray-700);
+  transition: all 0.2s ease;
+  font-family: var(--font-secondary);
+  background-clip: padding-box;
+}
+
+.dropdown-item:hover,
+.dropdown-item:focus {
+  background-color: rgba(46, 125, 50, 0.1);
+  color: var(--primary);
+}
+
+/* ================================
+   Mobile navbar  adjustments
+\================================== */
+
+/* Menu Container - global menu font */
+.navbar-collapse-container {
+  font-family: var(--font-menu);
+}
+
+.nav-menu {
+  display: flex;
+  color: var(--primary);
+  margin: 0;
+  list-style: none;
+}
+
+/*nav item global */
+.nav-menu > .nav-item {
+  display: flex;
+}
+
+/*  Dropdown Global
+    Menu Dropdown global */
+.nav-menu > .nav-item.has-dropdown {
+  position: relative;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: stretch; /* Ensures children fill vertical height */
+  justify-content: center;
+  margin: 0;
+  max-width: 100%;
+}
+
+/* Nav link global, global menu link for Mobile First approach */
+
+.nav-menu > .nav-item > .nav-link {
+  display: flex; /* important */
+  align-items: center;
+  padding-block: 0.55rem;
+  padding-inline: 0.75rem;
+  font-weight: 500;
+  text-decoration: none;
+  transition: all 0.2s ease;
+  text-align: left;
+  background: transparent;
+  border-radius: 0;
+  letter-spacing: 0.08em;
+}
+
+/* Style for the active link */
+.nav-link.active {
+}
+
+/* Hover effect: ensure borders don't disappear */
+.nav-link:hover {
+  color: var(--primary-light) !important;
+  background-color: var(--gray-100);
+}
+
+/* Hover effect */
+.nav-link:hover {
+  color: var(--primary-light) !important;
+  background-color: var(--gray-100);
+}
+
+/* Arrow Icon Styling for Dropdown Parents (Mobile) */
+.arrow-icon {
+  position: relative;
+  font-size: 1.1rem;
+  color: var(--primary-dark);
+  vertical-align: middle;
+  transition: transform 0.25s ease;
+  transform-origin: center; /* Ensures smooth rotation around its middle */
+}
+
+/*Arrow Flip Animation (When Sub-menu is active) */
+.nav-item.open .arrow-icon {
+  transform: rotate(90deg);
+  color: var(--primary); /* Makes the arrow green when active */
+}
+
+/* Mobile touch effect - visual feedback when tapping */
+.collapse.navbar-collapse-container .nav-menu > .nav-item > .nav-link:active {
+  color: var(--primary-light) !important;
+  background-color: var(--gray-100);
+  transform: scale(0.98); /* Subtle press effect */
+}
+
+/* Touch device optimization - use active state instead of hover */
+@media (hover: none) and (pointer: coarse) {
+  .collapse.navbar-collapse-container .nav-menu > .nav-item > .nav-link:active {
+    color: var(--primary-light) !important;
+    background-color: var(--gray-100);
+  }
+}
+/* ******************* Mobile main menu side bar  *******************
+                         Mobile header 
+                         Mobile Menu
+     ****************** Mobile Layout Mobile Query ******************     */
+
+@media (max-width: 767.98px) {
+  .header {
+    display: flex;
+    align-items: center;
+    left: 0;
+    width: 100%;
+    z-index: 3;
+  }
+
+  #wpadminbar {
+    position: fixed !important;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 99999; /* Ensure it stays above everything */
+  }
+
+  .site-nav {
+    padding: 0 1rem;
+  }
+
+  .brand-logo {
+    position: relative;
+    margin-left: 1rem;
+  }
+  .nav-menu {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .navbar-toggler {
+    position: absolute;
+    /* Set a STABLE vertical position (approx 20px from top) */
+    top: 50%;
+    transform: translateY(-50%);
+    right: 1rem;
+    /* Set the horizontal position for the closed state */
+    z-index: 10;
+    padding: 0.5rem;
+    border: 1px solid var(--gray-400);
+    border-radius: 0.25rem;
+    background: white;
+    /* Explicitly transition only 'right' (horizontal slide) and 'background' (color) */
+    transition:
+      right 0.7s cubic-bezier(0.4, 0, 0.2, 1),
+      transform 0.5s ease; /*  allow rotation */
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    flex-shrink: 0;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
+
+  .collapse:not(.show) {
+    /*  hides the menu initially */
+    display: none !important;
+  }
+
+  .collapse.show {
+    /* Ensures the menu is shown when expanded */
+    display: block !important;
+  }
+
+  .collapsing {
+    /* Required for smooth, animating height change */
+    height: 0;
+    overflow: hidden;
+    transition: height 0.35s ease;
+  }
+
+  /* TOGGLER ICON , Toggler animation */
+  /* base icon = MIDDLE bar */
+  .navbar-toggler-icon {
+    display: block;
+    width: 20px;
+    height: 2px; /* this makes the middle line visible */
+    background: #000;
+    position: relative;
+    transition:
+      transform 0.4s cubic-bezier(0.4, 0, 0.2, 1),
+      background-color 0.4s ease 0.05s,
+      /* tiny delay */ opacity 0.4s ease;
+  }
+
+  /* top + bottom bars  Toggler bars (same width, same color) */
+  .navbar-toggler-icon::before,
+  .navbar-toggler-icon::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    width: 20px;
+    height: 2px;
+    border-radius: 1px;
+    background: #000;
+    transition:
+      transform 0.4s cubic-bezier(0.4, 0, 0.2, 1),
+      top 0.4s cubic-bezier(0.4, 0, 0.2, 1),
+      background-color 0.4s ease;
+  }
+
+  /* top bar sits 6px above middle */
+  .navbar-toggler-icon::before {
+    top: -8px;
+  }
+
+  /* bottom bar sits 6px below middle */
+  .navbar-toggler-icon::after {
+    top: 8px;
+  }
+
+  body.menu-open .navbar-toggler-icon {
+    background: #fff; /* stays white during transition back */
+  }
+
+  body.menu-open .navbar-toggler-icon::before,
+  body.menu-open .navbar-toggler-icon::after {
+    background-color: #fff !important;
+  }
+
+  /* --- WHEN OPEN: Turn into X ANIMATION AND FLIP --- */
+
+  /* 1. MIDDLE BAR: Disappears */
+  .navbar-toggler[aria-expanded="true"] .navbar-toggler-icon {
+    background: transparent;
+  }
+
+  /* 2. TOP BAR: Moves down and rotates 45 degrees */
+  .navbar-toggler[aria-expanded="true"] .navbar-toggler-icon::before {
+    top: 0;
+    transform: rotate(45deg);
+  }
+
+  /* 3. BOTTOM BAR: Moves up and rotates -45 degrees */
+  .navbar-toggler[aria-expanded="true"] .navbar-toggler-icon::after {
+    top: 0;
+    transform: rotate(-45deg);
+  }
+
+  .navbar-toggler[aria-expanded="true"] .navbar-toggler-icon::before,
+  .navbar-toggler[aria-expanded="true"] .navbar-toggler-icon::after {
+    transform-origin: center;
+  }
+
+  body.menu-open .navbar-toggler-icon {
+    background: #fff; /* stays white during transition back */
+  }
+
+  body.menu-open .navbar-toggler-icon::before,
+  body.menu-open .navbar-toggler-icon::after {
+    background-color: #fff !important;
+  }
+  /* OPEN state = do the flip  */
+  .navbar-toggler[aria-expanded="true"],
+  body.menu-open .navbar-toggler {
+    transform: translateY(-50%) rotate(90deg);
+    transform-origin: center;
+  }
+  /* keep it straight when CLOSED */
+  .navbar-toggler:not([aria-expanded="true"]),
+  .navbar-toggler:not([aria-expanded="true"]):hover,
+  .navbar-toggler:not([aria-expanded="true"]):focus {
+    transform: translateY(-50%) !important;
+  }
+
+  /* END OF TOGGLER ICON , TOGGLER ANIMATION*/
+
+  /* Prevent body scroll when menu is open */
+  body.menu-open {
+    overflow: hidden;
+    position: fixed;
+    width: 100%;
+    height: 100%;
+  }
+
+  .navbar-toggler:focus {
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(46, 125, 50, 0.25);
+  }
+
+  /*Mobile main menu  
+  Mobile side bar */
+  .site-nav > .navbar-collapse-container {
+    position: fixed;
+    top: var(--adminbar-h, 0px);
+    right: 0;
+    width: min(80vw, 360px);
+    height: 100vh;
+    background: white;
+    box-shadow: 1px 0 20px rgba(0, 0, 0, 0.1);
+    padding: 1.25rem 0 2rem 0;
+    overflow-y: auto;
+    margin-top: 0;
+    border-left: 1px solid var(--gray-300);
+    transform: translateX(100%);
+    transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    flex-basis: auto;
+    flex-grow: 0;
+    align-items: stretch;
+    border-radius: 0;
+    z-index: 4;
+    /* Fix scrolling issue: hide drawer when collapsed */
+    display: none;
+    pointer-events: none;
+  }
+  /* 2. SHOW STATE (Visible & On-screen)*/
+  .site-nav > .navbar-collapse-container.show {
+    transform: translateX(0); /* Slide in to 0 */
+    display: block; /* Show drawer when open */
+    pointer-events: auto; /* Enable clicking */
+  }
+  /* 3. COLLAPSING STATE (Bootstrap Animation Class) */
+  .navbar-collapse-container.collapsing {
+    /* Show during animation */
+    display: block;
+    pointer-events: none;
+    transform: translateX(100%); /* Slide out */
+    transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .navbar-collapse-container.show {
+    max-height: 100dvh; /* modern viewport height (better than 100vh on mobile) */
+    overflow-y: auto;
+    overscroll-behavior: contain;
+    transform: translateX(0);
+  }
+
+  .collapse:not(.show) {
+    /* CRITICAL: This is what hides the menu initially */
+    display: none !important;
+  }
+
+  /* link items - Mobile menu items  */
+  .nav-menu > .nav-item.has-dropdown,
+  .nav-menu > .nav-item {
+    border-top: 1px solid var(--drawer-divider); /* Menu Borders */
+    min-height: var(--mobile-nav-row); /* Set height here */
+    height: auto;
+  }
+
+  /*Mobile nav links */
+  .nav-menu > .nav-item > .nav-link {
+    flex: 1;
+    font-size: 0.9rem;
+    align-self: stretch;
+    display: flex;
+    align-items: center; /* Vertically centers the text inside the link */
+    justify-content: flex-start; /* Keeps text to the left */
+    height: auto;
+    padding-left: 1rem;
+  }
+
+  .nav-link span {
+    text-align: left;
+  }
+  .nav-menu > .nav-item:last-child {
+    border-bottom: 1px solid var(--drawer-divider);
+  }
+
+  body.menu-open .navbar-toggler {
+    right: calc(min(80vw, 360px) + 0.4rem);
+    background: var(--primary);
+    border-color: var(--primary);
+  }
+
+  /** Mobile header - Mobile Fixed header **/
+  .header.header--scrolled {
+    padding: 0.35rem 0;
+    background-color: rgba(255, 255, 255, 0.9);
+    box-shadow: 0 3px 15px rgba(0, 0, 0, 0.05); /* Softer shadow */
+  }
+
+  /*************************************************************************************** 
+     Mobile Submenu 
+  *****************************************************************************************/
+  /* Mobile Category DROPDOWN LIST */
+
+  /*mobile dropdown mobile sub  menu - category sub menu*/
+  .dropdown-menu {
+    /* 1. Change to static/relative so it pushes items down */
+    position: relative;
+    display: block;
+    flex: 0 0 100%;
+    width: 100%;
+    /* 3. Style as a nested 'well' instead of a floating card */
+    background: #f4f7f4; /* That professional Sage tint */
+    border: none; /* Remove outer border to stop clashing */
+    box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.05); /* Interior shadow for depth */
+
+    margin: 0;
+    padding: 0;
+    border-radius: 0; /* Square it off to match the menu width */
+
+    /* Accordion closed state */
+    max-height: 0;
+    opacity: 0;
+    visibility: hidden;
+    overflow: hidden;
+    z-index: 3;
+  }
+
+  /* Accordion open state */
+  .nav-item.has-dropdown.open > .dropdown-menu {
+    max-height: 65vh; /* enough for your list */
+    opacity: 1;
+    visibility: visible;
+  }
+
+  /* No Border double-up, when the menu is open */
+  .nav-menu .nav-item.has-dropdown.open {
+    border-bottom: none;
+  }
+
+  /*Mobile Arrow container  - Mobile Opener */
+  .nav-opener {
+    position: relative;
+    flex: 0 0 var(--mobile-nav-row);
+    width: var(--mobile-nav-row);
+    height: var(--mobile-nav-row);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+
+    /* RESET default <button> look */
+    padding: 0;
+    border: none;
+    border-radius: 0;
+    background: transparent;
+    box-shadow: none;
+    outline: none;
+    -webkit-appearance: none;
+    appearance: none;
+
+    /* vertical left separator to emphasize arrow container look */
+    border-left: 1px solid var(--border-green-light);
+    cursor: pointer;
+  }
+
+  /*  submenu items */
+  .nav-menu .nav-item.has-dropdown .dropdown-menu li {
+    list-style: none;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.07); /* or 0.1 for slightly more visible */
+    border-right: 1px solid rgba(0, 0, 0, 0.07);
+    margin-left: 0;
+    background: #f2f6f2;
+  }
+  .collapse.navbar-collapse-container .dropdown-menu .submenu-title {
+    display: none;
+  }
+  /* submenu links */
+  .submenu__link {
+    font-family: "Heebo", sans-serif;
+    display: block;
+    text-align: left; /* force left alignment */
+    padding: 0.85rem 20px 0.85rem 25px; /* consistent spacing */
+    line-height: 1.2;
+    font-size: 0.85rem;
+    background-color: #f9fbf9; /* Very light sage background for contrast */
+    text-decoration: none; /* remove underline */
+    color: var(--primary-muted); /* Your brand green */
+    -webkit-tap-highlight-color: transparent;
+    transition:
+      background-color 0.15s ease,
+      transform 0.15s ease,
+      color 0.15s ease;
+  }
+
+  .nav-menu .nav-item.has-dropdown .dropdown-menu li:hover {
+    background: #f2f6f2; /* Slightly darker shade on hover */
+  }
+
+  .nav-menu .nav-item.has-dropdown .dropdown-menu li:hover .submenu__link,
+  .collapse.navbar-collapse-container .dropdown-menu .submenu__link:active {
+    border-left: 4px solid #daa520; /* The Gold Accent */
+    padding-left: 21px; /* Offset padding so text doesn't jump */
+    color: var(--primary-dark);
+  }
+  /* only show hover on real hover devices (desktop mouse) */
+  @media (hover: hover) and (pointer: fine) {
+    .collapse.navbar-collapse-container .dropdown-menu .submenu__link:hover {
+      background: var(--gray-100);
+    }
+  }
+}
+
+/* ==================================================================================
+   MOBILE HEADER SHRINKING: Below 375px
+   ==================================================================================
+   TARGET: Small mobile devices (below 375px - iPhone SE and similar)
+   PURPOSE: Reduce header height and elements to save vertical screen space
+   WHAT CHANGES:
+   - Header min-height: 64px → 56px
+   - Logo max-height: 54px → 48px
+   - Toggler button: 40px → 36px
+   - Top positioning adjusted for smaller header
+   ================================================================================== */
+@media (max-width: 374.98px) {
+  /* Reduce logo size */
+  .logo {
+    max-height: 48px;
+  }
+
+  /* Reduce toggler button size */
+  .navbar-toggler {
+    width: 36px;
+    height: 36px;
+    padding: 0.4rem;
+  }
+
+  /* Adjust toggler icon size */
+  .navbar-toggler-icon {
+    width: 18px;
+  }
+
+  .navbar-toggler-icon::before,
+  .navbar-toggler-icon::after {
+    width: 18px;
+  }
+
+  .collapse.navbar-collapse-container .nav-menu > .nav-item:last-child {
+    border-bottom: 1px solid var(--border-green-light);
+  }
+}
+
+/* ==================================================================================
+   MOBILE HEADER SHRINKING: Below 320px (Progressive)
+   ==================================================================================
+   TARGET: Very small mobile devices (below 320px)
+   PURPOSE: Further reduce header height to maximize content space
+   WHAT CHANGES:
+   - Header min-height: 56px → 52px
+   - Logo max-height: 48px → 44px
+   - Toggler button: 36px → 34px
+   ================================================================================== */
+@media (max-width: 319.98px) {
+  /* Further reduce header height */
+  .header {
+    min-height: 52px !important;
+  }
+
+  .header .container,
+  .site-nav {
+    min-height: 52px !important;
+  }
+
+  .header,
+  .header.header--scrolled {
+    min-height: 52px !important;
+  }
+
+  /* Further reduce logo size */
+  .logo {
+    max-height: 44px;
+  }
+
+  /* Further reduce toggler button */
+  .navbar-toggler {
+    width: 34px;
+    height: 34px;
+    padding: 0.35rem;
+  }
+
+  /* Adjust toggler icon */
+  .navbar-toggler-icon {
+    width: 17px;
+  }
+
+  .navbar-toggler-icon::before,
+  .navbar-toggler-icon::after {
+    width: 17px;
+  }
+
+  /* Adjust header*/
+  body.has-fixed-header {
+    padding-top: var(--header-offset);
+  }
+}
+
+/* ==================================================================================
+   VERY SMALL SCREENS: Extreme Mobile Optimization (260px - 296px)
+   ==================================================================================
+   TARGET: Smallest realistic mobile devices (e.g., iPhone SE in portrait, old Android)
+   PURPOSE: Prevent nav-opener arrow from overlapping with menu item text
+   WHAT CHANGES:
+   - nav-opener width: 50px → 35px (saves 15px horizontal space)
+   - arrow-icon size: 1.1rem → 0.9rem (smaller, but still tappable)
+   - nav-link font-size: 1em → 0.85em (better fit for tiny screens)
+   - nav-link letter-spacing: 0.05em → 0.03em (tighter text)
+   - nav-link padding: 5px 20px → 5px 12px (more compact)
+   - sub-menu link padding reduced for consistency
+
+   RESULT: Menu items like "Product Categories" won't be cut off by the arrow
+   NOTE: This ONLY affects screens below 297px. Larger screens remain unchanged.
+   ================================================================================== */
+@media (max-width: 296.98px) {
+  /* STEP 1: Shrink the arrow opener container from 50px to 35px */
+  .nav-opener {
+    width: 35px; /* Reduced from 50px */
+    min-width: 35px; /* Keep consistent with width */
+    flex: 0 0 35px; /* Prevent flex stretching */
+  }
+
+  /* STEP 2: Make the arrow icon itself smaller */
+  .arrow-icon {
+    font-size: 0.9rem; /* Reduced from 1.1rem */
+  }
+
+  /* STEP 3: Reduce menu item text size and spacing to fit better */
+  .collapse.navbar-collapse-container .nav-menu > .nav-item > .nav-link {
+    font-size: 0.75em; /* Reduced from 1em */
+    letter-spacing: 0.03em; /* Tighter than 0.05em */
+    padding: 5px 12px; /* Reduced from 5px 20px */
+  }
+
+  /* STEP 4: Make sub-menu links more compact too */
+  .sub-menu___link {
+    padding: 0.4rem 12px 0.4rem 20px; /* Reduced from 0.5rem 20px 0.5rem 30px */
+    font-size: 0.85em; /* Match parent menu font size */
+  }
+}
+
+/* ==================================================================================
+   ULTRA-SMALL SCREENS: Header Optimization (Below 300px)
+   ==================================================================================
+   TARGET: Devices 280px - 299px width (smallest realistic smartphones)
+   PURPOSE: Prevent logo from overlapping with mobile menu toggler in fixed header
+   WHAT CHANGES:
+   - Logo max-width: Reduce from 70vw to 58vw to save horizontal space
+   - Logo max-height: Reduce from 54px to 42px for smaller vertical footprint
+   - Toggler button: Reduce from 40px to 36px for more compact size
+   - Header min-height: Reduce slightly to accommodate smaller logo
+
+   RESULT: Logo and toggler button have adequate spacing, no overlap
+   NOTE: Only affects screens below 300px. Larger screens maintain original styling.
+   ================================================================================== */
+@media (max-width: 299.98px) {
+  /* Reduce logo dimensions to prevent overlap with toggler */
+  .logo {
+    max-height: 42px; /* Reduced from 54px */
+    max-width: min(58vw, 160px); /* Reduced from 70vw to provide more space */
+  }
+
+  /* Slightly reduce header height to match smaller logo */
+  .header {
+    min-height: 50px; /* Further reduced for ultra-small screens */
+  }
+
+  .header .container,
+  .site-nav {
+    min-height: 50px; /* Match header height */
+  }
+
+  /* Make toggler button slightly smaller to save space */
+  .navbar-toggler {
+    width: 34px; /* Reduced for ultra-small screens */
+    height: 34px; /* Reduced for ultra-small screens */
+    padding: 0.35rem; /* More compact */
+    right: 0.625rem; /* Slightly closer to edge */
+  }
+
+  /* Adjust toggler icon size to match smaller button */
+  .navbar-toggler-icon {
+    width: 17px; /* Reduced from 20px */
+    height: 2px; /* Keep same thickness */
+  }
+
+  .navbar-toggler-icon::before,
+  .navbar-toggler-icon::after {
+    width: 17px; /* Match icon width */
+  }
+
+  /* Adjust body padding to match smaller header */
+  body.has-fixed-header {
+    padding-top: var(--header-offset);
+  }
+
+  /* ====================================================================
+     MOBILE MENU ADJUSTMENTS: Hide title and reposition X icon
+     ==================================================================== */
+
+  /* Hide the "Menu Navigation" title to save vertical space */
+  .menu-header {
+    display: none !important;
+  }
+
+  /* Remove top padding from menu since title is gone */
+  .navbar-collapse-container {
+    padding-top: 0 !important;
+  }
+
+  /* Add small padding to first menu item for breathing room */
+  .nav-menu {
+    padding-top: 0.5rem;
+  }
+
+  /* Position X icon at top-right corner when menu is open */
+  body.menu-open .navbar-toggler {
+    top: 0.75rem; /* Fixed distance from top of menu */
+    /* Right position calculated by menu width + gap (handled by parent media query) */
+  }
+}
+
+/* ==================================================================================
+   SMALL SCREENS: Menu Width Strategy (Below 360px)
+   ==================================================================================
+   TARGET: Small mobile devices (260px - 359px width)
+   PURPOSE: Allow menu to shrink naturally (fluid width) instead of fixed 340px
+
+   WHY THIS MATTERS:
+   - Above 360px: Menu is FIXED at 340px (looks clean, consistent)
+   - Below 360px: Menu is FLUID at 85vw (adapts to screen width)
+
+   EXAMPLE:
+   - On 320px screen: Menu = 85% of 320px = 272px (fits perfectly)
+   - On 280px screen: Menu = 85% of 280px = 238px (no overflow)
+   - On 400px screen: Menu = 340px (fixed, ignores this media query)
+
+   RESULT: No horizontal scrolling, no cut-off content on tiny screens
+   ================================================================================== */
+@media (max-width: 359.98px) {
+  /* STEP 1: Remove the 340px cap, let menu be fluid (85% of screen width) */
+  .navbar-collapse-container {
+    width: 85vw; /* NO max-width cap = truly responsive */
+  }
+
+  /* STEP 2: Position the X button correctly when menu is open */
+  body.menu-open .navbar-toggler {
+    /* Position = menu width (85vw) + consistent gap (0.75rem) */
+    /* Simple calculation maintains fixed gap from menu border */
+    right: calc(85vw + 0.75rem);
+  }
+}
+
+/**DESKTOP Navbar - 768px and above**/
+@media (min-width: 768px) {
+  /*header desktop container*/
+
+  .header {
+    padding-inline: clamp(0.5rem, 1vw, 1rem);
+
+    padding-block: clamp(0.4rem, 0.9vw, 0.9rem);
+  }
+  /** Desktop nav element  - Desktop site nav **/
+  .site-nav {
+    width: 100%;
+    min-width: 0;
+  }
+
+  /* Hide hamburger icon, always show the menu on desktop */
+  .navbar-toggler {
+    display: none;
+  }
+  /* desktop internal navbar - 
+    inner nav*/
+  .navbar-collapse-container {
+    display: block !important; /*  if any collapse CSS hides it */
+    margin-left: auto;
+    min-width: 0; /* let it shrink */
+  }
+
+  /* Desktop Nav item  */
+  .nav-menu > .nav-item {
+    width: auto;
+    flex: 0 0 auto;
+  }
+  .nav-menu {
+    flex-direction: row;
+    align-items: center;
+    gap: clamp(0.5rem, 1.2vw, 1.25rem);
+  }
+  /* Desktop Nav link styling */
+  .nav-menu > .nav-item > .nav-link {
+    background: transparent;
+    flex: 0 0 auto;
+    letter-spacing: 0.05rem;
+    font-size: clamp(0.78rem, 1.1vw, 1rem);
+    padding: 5px clamp(8px, 1.2vw, 20px);
+    min-height: 65px;
+  }
+
+  .nav-link.active {
+    padding-left: 0.5rem;
+  }
+
+  /*Target dropdown for arrow spacing*/
+  .collapse.navbar-collapse-container .nav-menu > .nav-item.nav-item.has-dropdown > .nav-link {
+    padding-right: 0;
+  }
+
+  /*  Desktop Sub menu Desktop Categories dropdown */
+  .nav-item.has-dropdown.open .dropdown-menu.submenu-items {
+    display: flex;
+    font-family: var(--font-primary);
+    font-weight: 500;
+    color: #606066;
+    margin-top: 10px;
+  }
+  /*Desktop main category navigation dropdown  desktop sub menu */
+  .nav-item.has-dropdown .dropdown-menu {
+    position: absolute;
+    top: 100%;
+    right: 0;
+    flex-flow: row wrap;
+    width: min(600px, calc(100vw - 32px));
+    left: auto;
+    background: #fff;
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.12);
+    z-index: 4;
+    transition: margin-top 0.2s cubic-bezier(0.39, 0.575, 0.565, 1);
+    display: none; /* JS will "open" it via .open on the <li> , hidden by default */
+    list-style: none;
+  }
+
+  /*arrow of menu= > holding down the dropdown menu above */
+  .nav-menu > .nav-item.has-dropdown::after {
+    content: "";
+    position: absolute;
+    top: 100%;
+    margin-top: 1px; /* 1px lower than the border triangle */
+    z-index: 6;
+    width: 0;
+    height: 0;
+    border-style: solid;
+    /* Slightly smaller than ::before to let the border peek out */
+    border-width: 0 10px 12px 10px;
+    border-color: transparent transparent #fff transparent;
+
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity 0.2s ease;
+  }
+
+  .nav-menu > .nav-item.has-dropdown::before {
+    content: "";
+    position: absolute;
+    top: 100%;
+
+    z-index: 6;
+    margin-top: -1px;
+    width: 0;
+    height: 0;
+    border-style: solid;
+    /* Increased values: 11px wide sides, 13px tall point */
+    border-width: 0 11px 13px 11px;
+    /* This color creates the "outline" against the white header */
+    border-color: transparent transparent rgba(0, 0, 0, 0.1) transparent;
+
+    opacity: 0;
+    transition: opacity 0.2s ease;
+    pointer-events: none;
+  }
+  .nav-item.has-dropdown.open::after,
+  .nav-item.has-dropdown.open::before {
+    opacity: 1;
+  }
+  /* Show the notch only when dropdown is open */
+  .nav-menu > .nav-item.has-dropdown.open::after {
+    opacity: 1;
+  }
+
+  .dropdown-menu.submenu-items .submenu__link {
+    text-decoration: none;
+  }
+
+  .dropdown-menu .submenu-item {
+    display: flex;
+    max-width: 50%;
+    width: 50%;
+    flex-basis: 50%;
+    padding-left: 40px;
+  }
+
+  .dropdown-menu.submenu-items > .submenu-item:first-child {
+    max-width: 100%;
+    width: 100%;
+    flex-basis: 100%;
+    border-bottom: 1px solid var(--border-green-light);
+  }
+  /*sub menu hover application*/
+  .dropdown-menu > div .submenu-item .submenu__link {
+    display: flex;
+    align-items: baseline;
+    padding-block: 20px;
+    padding-right: 40px;
+    transition:
+      color 0.2s ease,
+      transform 0.2s ease;
+  }
+
+  .dropdown-menu > div .submenu-item .submenu__link::before {
+    content: "";
+    width: 0;
+    height: 2px;
+    flex-shrink: 0;
+    background: var(--primary);
+    margin-right: 0;
+    align-self: center;
+    transition: 0.2s cubic-bezier(0.39, 0.575, 0.565, 1);
+    transition-property: margin-inline, width;
+  }
+
+  .dropdown-menu > div .submenu-item:hover .submenu__link::before {
+    width: 14px; /* length of the dash */
+    margin-right: 12px; /* pushes the text a bit to the right */
+  }
+
+  .dropdown-menu > div .submenu-item:hover .submenu__link {
+    color: #17171a;
+    transform: translateX(4px);
+  }
+
+  .dropdown-menu.submenu-items > .submenu-item:first-child .submenu__link {
+    padding-top: 40px;
+    padding-bottom: 40px;
+    color: #17171a;
+  }
+
+  .dropdown-menu > div {
+    display: flex;
+    flex-flow: row wrap;
+    width: 100%;
+    padding-block: 20px;
+  }
+
+  /* Optional: hide the mobile-only menu header title */
+  .menu-header {
+    display: none !important;
+  }
+
+  /* Hover effect: remove borders on desktop */
+  .nav-link:hover {
+    color: var(--primary-light) !important;
+    background-color: var(--gray-100);
+    border-bottom: 0;
+  }
+  /*  Categories link - 
+      Product link - Desktop product link 
+       Desktop Dropdown link */
+  .nav-menu > .nav-item.has-dropdown {
+    position: relative;
+    display: flex;
+    flex-wrap: wrap; /* Allows dropdown to wrap to next line */
+    align-items: stretch;
+  }
+
+  /* Desktop arrow dropdown arrow*/
+  .nav-opener {
+    background: transparent;
+    border: none;
+    display: inline-flex;
+    align-items: center;
+    line-height: 1; /* important */
+    justify-content: center;
+    cursor: pointer;
+    padding: 0.75rem 0.75em;
+    margin-right: 0.5em;
+    appearance: none;
+    -webkit-appearance: none;
+    cursor: pointer;
+    border: 0;
+    height: auto;
+    transform: translate(-1.5px, 1px);
+  }
+
+  .nav-opener .arrow-icon::before {
+    display: block;
+    line-height: 1;
+  }
+
+  /* B) Normalize the nav text line box (prevents baseline weirdness) */
+  .nav-item.has-dropdown > .nav-link.parent-link .link-title {
+    display: inline-flex;
+    align-items: center;
+    line-height: 1; /* key: same vertical rhythm as icon */
+  }
+
+  /* Keep the arrow visible on both mobile and desktop */
+  .nav-opener .arrow-icon {
+    display: block;
+    font-size: 0.8em;
+
+    line-height: 1;
+    margin: 0;
+    padding: 0;
+  }
+
+  .nav-item.has-dropdown > .nav-link {
+    display: inline-flex;
+    align-items: center;
+  }
+
+  .collapse.navbar-collapse-container .nav-menu > .nav-item > .nav-link:active {
+    border: 0;
+  }
+
+  /* ============================================
+     3. BIGGER LOGO FOR DESKTOP
+     ============================================ */
+
+  .brand-logo {
+    display: flex;
+    flex: 0 1 auto; /* don’t force huge width */
+    min-width: 0;
+    align-items: center;
+  }
+
+  .brand-logo .logo {
+    flex: 1 1 auto;
+  }
+
+  /* === Instant “flip” with ZERO jitter: overlay up + down and crossfade === */
+
+  /* Hide the FA <i> glyph on desktop (we render icons via pseudo elements) */
+  .nav-item.has-dropdown > .nav-opener > .arrow-icon {
+    display: none;
+  }
+
+  /* Two icons in same exact spot */
+  .nav-item.has-dropdown > .nav-opener::before,
+  .nav-item.has-dropdown > .nav-opener::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    display: grid;
+    place-items: center;
+
+    font-family: "Font Awesome 6 Free";
+    font-weight: 900;
+    font-size: 0.9rem;
+    line-height: 1;
+    color: currentColor;
+    transition: opacity 60ms linear;
+    pointer-events: none;
+  }
+
+  /* Desktop: flip chevron with overlay pseudo-elements (no rotation / no jitter) */
+  .nav-item.has-dropdown > .nav-opener::before {
+    content: "\f077"; /* chevron-up */
+    opacity: 1;
+  }
+
+  /* Closed: DOWN hidden */
+  .nav-item.has-dropdown > .nav-opener::after {
+    content: "\f078"; /* chevron-down */
+    opacity: 0;
+  }
+
+  /* Open: swap opacity (no rotation) */
+  .nav-item.has-dropdown.open > .nav-opener::before {
+    opacity: 0;
+  }
+  .nav-item.has-dropdown.open > .nav-opener::after {
+    opacity: 1;
+  }
+
+  /* Size of the replacement arrows */
+  .nav-item.has-dropdown > .nav-opener::before,
+  .nav-item.has-dropdown > .nav-opener::after {
+    font-size: 0.8em; /* fixed size */
+  }
+}
