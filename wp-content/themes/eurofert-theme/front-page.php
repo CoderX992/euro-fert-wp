@@ -42,6 +42,28 @@
     </div>
   </section>
 
+  <!-- Intro Section -->
+  <section class="intro-section" id="intro">
+    <div class="container">
+      <div class="row justify-content-center">
+        <div class="col-lg-9 col-xl-12 text-center">
+          <h2 class="section-title display-5 fw-bold mb-3 text-primary">Welcome to Eurofert</h2>
+          <p class="intro-lead text-muted mb-3">
+            At Eurofert, we believe sustainable agriculture starts with the soil. Our fertilizers are designed to
+            enrich crops while preserving the planet. With decades of experience in soil nutrition, Eurofert delivers
+            science-backed solutions that improve yield quality, reduce environmental impact, and support farming
+            communities worldwide.
+          </p>
+          <p class="text-muted mb-3">
+            From high-concentration pastes to precision liquid and granular fertilizers, every Eurofert product is
+            designed to deliver consistent nutrient availability, excellent solubility, and predictable results in
+            real-world farming conditions. Our ranges are tested across different crops, climates, and irrigation
+            systems to make sure they perform where it matters most: in your fields.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
 
   <!-- Quick Products Preview / Category Teaser -->
 
@@ -82,7 +104,7 @@
               $category_image_alt = !empty($category_featured_image['alt']) ? $category_featured_image['alt'] : $category_name;
             }
           ?>
-            <div class="category-wrapper col-12 col-sm-6 col-xl-4 col-xxl-3">
+            <div class="category-wrapper col-12 col-xl-4 col-xxl-3">
               <div class="category-card card h-100 shadow-sm fade-in" style="cursor:pointer">
                 <img
                   src="<?php echo esc_url($category_image_url); ?>"
