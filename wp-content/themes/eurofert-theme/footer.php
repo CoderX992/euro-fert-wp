@@ -1,4 +1,4 @@
-    <!-- Footer /*Footer Design updated 1.1 version */ -->
+    <!-- Footer Design updated v1.1 -->
 
 
     <footer class="footer">
@@ -28,7 +28,7 @@
                             <li><a href="#"><span>Colfert
                                         Power</span></a></li>
                             <li><a href="#"><span>Colfert
-                                        Special A‑Z Plus</span></a></li>
+                                        Special A-Z Plus</span></a></li>
                             <li><a href="#"><span>Colfert
                                         Trace 16</span></a></li>
                             <li><a href="#"><span>Colfert Combi</span></a></li>
@@ -77,10 +77,10 @@
                 </div>
                 <div class="footer-social-col">
                     <div class="footer-social-wrapper">
-                        <a href="#" class="social-link"><i class="fab fa-facebook-f"></i></a>
-                        <a href="#" class="social-link"><i class="fab fa-twitter"></i></a>
-                        <a href="#" class="social-link"><i class="fab fa-linkedin-in"></i></a>
-                        <a href="#" class="social-link"><i class="fab fa-instagram"></i></a>
+                        <a href="#" class="social-link" aria-label="Facebook"><i class="fab fa-facebook-f" aria-hidden="true"></i></a>
+                        <a href="#" class="social-link" aria-label="Twitter"><i class="fab fa-twitter" aria-hidden="true"></i></a>
+                        <a href="#" class="social-link" aria-label="LinkedIn"><i class="fab fa-linkedin-in" aria-hidden="true"></i></a>
+                        <a href="#" class="social-link" aria-label="Instagram"><i class="fab fa-instagram" aria-hidden="true"></i></a>
                     </div>
 
                 </div>
