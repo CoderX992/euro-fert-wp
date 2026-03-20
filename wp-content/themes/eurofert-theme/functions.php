@@ -1,8 +1,7 @@
 <?php
 /* NEW START: Admin-only CSS for CMB2 recommendations metabox */
-/*admin-cmb2.css doesn't exist yet */
-function eurofert_admin_files($hook)
 
+function eurofert_admin_files($hook)
 
 {
     if ($hook !== 'post.php' && $hook !== 'post-new.php') {

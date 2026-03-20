@@ -63,18 +63,12 @@
 
                 <div class="footer-legal-col">
                     <ul class="footer-legal-list">
-                        <li>
-                            <a href="#" class="footer-legal-link text-muted">Privacy Policy</a>
-                        </li>
-                        <li>
-                            <a href="#" class="footer-legal-link text-muted">Terms of Service</a>
-                        </li>
-                        <li>
-                            <a href="#" class="footer-legal-link text-muted">Cookie Policy</a>
-                        </li>
+                        <li> <a href="#" class="footer-legal-link text-muted">Privacy Policy</a></li>
+                        <li><a href="#" class="footer-legal-link text-muted">Terms of Service</a></li>
+                        <li><a href="#" class="footer-legal-link text-muted">Cookie Policy</a></li>
                     </ul>
-
                 </div>
+
                 <div class="footer-social-col">
                     <div class="footer-social-wrapper">
                         <a href="#" class="social-link" aria-label="Facebook"><i class="fab fa-facebook-f" aria-hidden="true"></i></a>
@@ -82,10 +76,7 @@
                         <a href="#" class="social-link" aria-label="LinkedIn"><i class="fab fa-linkedin-in" aria-hidden="true"></i></a>
                         <a href="#" class="social-link" aria-label="Instagram"><i class="fab fa-instagram" aria-hidden="true"></i></a>
                     </div>
-
                 </div>
-
-
             </div>
         </div>
 
