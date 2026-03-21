@@ -18,6 +18,6 @@ jobs:
           username: ${{ secrets.SFTP_USERNAME }}
           server: ${{ secrets.SFTP_SERVER_IP }}
           ssh_private_key: ${{ secrets.SFTP_SSH_KEY }}
-          local_path: "./*"
+          local_path: "wp-content/themes/eurofert-theme/*"
           remote_path: "/opt/bitnami/wordpress/wp-content/themes/eurofert-theme"
           args: "-o ConnectTimeout=5"
