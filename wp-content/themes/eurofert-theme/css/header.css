@@ -14,7 +14,6 @@
   background-color: #ffffff;
   box-shadow: 0 1px 15px rgba(0, 0, 0, 0.04);
   z-index: 3;
-  min-height: 60px;
   padding-block: 1.5rem;
   transition:
     padding 0.3s ease,
@@ -62,21 +61,23 @@
   font-weight: 700;
   font-size: 1.125rem;
   color: var(--gray-600); /* Muted gray text color */
-
   margin: 0;
   padding-top: 1rem;
   line-height: 1.5;
 }
+
 /****************
   Mobile first logo 
  *****************
   */
+
 .brand-logo {
   display: flex;
   align-items: center;
   margin-right: 1rem;
   font-size: 1.25rem;
 }
+
 /* Eurofert Logo */
 .logo {
   display: block;
@@ -130,27 +131,16 @@
   color: var(--primary);
   margin: 0;
   list-style: none;
+  width: 100%;
 }
 
-/*nav item global */
+/* global nav item  */
 .nav-menu > .nav-item {
   display: flex;
-}
-
-/*  Dropdown Global
-    Menu Dropdown global */
-.nav-menu > .nav-item.has-dropdown {
-  position: relative;
-  display: flex;
-  flex-wrap: wrap;
-  align-items: stretch; /* Ensures children fill vertical height */
-  justify-content: center;
-  margin: 0;
-  max-width: 100%;
+  width: auto;
 }
 
 /* Nav link global, global menu link for Mobile First approach */
-
 .nav-menu > .nav-item > .nav-link {
   display: flex; /* important */
   align-items: center;
@@ -165,14 +155,20 @@
   letter-spacing: 0.08em;
 }
 
-/* Style for the active link */
-.nav-link.active {
+/*  Dropdown Global
+    Menu Dropdown global */
+.nav-menu > .nav-item.has-dropdown {
+  position: relative;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: stretch; /* Ensures children fill vertical height */
+  justify-content: center;
+  margin: 0;
+  max-width: 100%;
 }
 
-/* Hover effect: ensure borders don't disappear */
-.nav-link:hover {
-  color: var(--primary-light) !important;
-  background-color: var(--gray-100);
+/* Style for the active link */
+.nav-link.active {
 }
 
 /* Hover effect */
@@ -211,18 +207,11 @@
     background-color: var(--gray-100);
   }
 }
-/* ******************* Mobile main menu side bar  *******************
-                         Mobile header 
-                         Mobile Menu
-     ****************** Mobile Layout Mobile Query ******************     */
 
+/* Mobile main menu side bar   */
 @media (max-width: 767.98px) {
   .header {
     display: flex;
-    align-items: center;
-    left: 0;
-    width: 100%;
-    z-index: 3;
   }
 
   #wpadminbar {
@@ -237,14 +226,9 @@
     padding: 0 1rem;
   }
 
-  .brand-logo {
-    position: relative;
-    margin-left: 1rem;
-  }
   .nav-menu {
     display: flex;
     flex-direction: column;
-    width: 100%;
     margin: 0;
     padding: 0;
     list-style: none;
@@ -333,10 +317,6 @@
     top: 8px;
   }
 
-  body.menu-open .navbar-toggler-icon {
-    background: #fff; /* stays white during transition back */
-  }
-
   body.menu-open .navbar-toggler-icon::before,
   body.menu-open .navbar-toggler-icon::after {
     background-color: #fff !important;
@@ -374,13 +354,15 @@
   body.menu-open .navbar-toggler-icon::after {
     background-color: #fff !important;
   }
+
   /* OPEN state = do the flip  */
   .navbar-toggler[aria-expanded="true"],
   body.menu-open .navbar-toggler {
     transform: translateY(-50%) rotate(90deg);
     transform-origin: center;
   }
-  /* keep it straight when CLOSED */
+
+  /* CLOSED  state */
   .navbar-toggler:not([aria-expanded="true"]),
   .navbar-toggler:not([aria-expanded="true"]):hover,
   .navbar-toggler:not([aria-expanded="true"]):focus {
@@ -491,7 +473,8 @@
   .header.header--scrolled {
     padding: 0.35rem 0;
     background-color: rgba(255, 255, 255, 0.9);
-    box-shadow: 0 3px 15px rgba(0, 0, 0, 0.05); /* Softer shadow */
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08); /* Softer shadow */
+    border-bottom: 1px solid rgba(0, 0, 0, 0.06);
   }
 
   /*************************************************************************************** 
@@ -641,188 +624,6 @@
   .navbar-toggler-icon::after {
     width: 18px;
   }
-
-  .collapse.navbar-collapse-container .nav-menu > .nav-item:last-child {
-    border-bottom: 1px solid var(--border-green-light);
-  }
-}
-
-/* ==================================================================================
-   MOBILE HEADER SHRINKING: Below 320px (Progressive)
-   ==================================================================================
-   TARGET: Very small mobile devices (below 320px)
-   PURPOSE: Further reduce header height to maximize content space
-   WHAT CHANGES:
-   - Header min-height: 56px → 52px
-   - Logo max-height: 48px → 44px
-   - Toggler button: 36px → 34px
-   ================================================================================== */
-@media (max-width: 319.98px) {
-  /* Further reduce header height */
-  .header {
-    min-height: 52px !important;
-  }
-
-  .header .container,
-  .site-nav {
-    min-height: 52px !important;
-  }
-
-  .header,
-  .header.header--scrolled {
-    min-height: 52px !important;
-  }
-
-  /* Further reduce logo size */
-  .logo {
-    max-height: 44px;
-  }
-
-  /* Further reduce toggler button */
-  .navbar-toggler {
-    width: 34px;
-    height: 34px;
-    padding: 0.35rem;
-  }
-
-  /* Adjust toggler icon */
-  .navbar-toggler-icon {
-    width: 17px;
-  }
-
-  .navbar-toggler-icon::before,
-  .navbar-toggler-icon::after {
-    width: 17px;
-  }
-
-  /* Adjust header*/
-  body.has-fixed-header {
-    padding-top: var(--header-offset);
-  }
-}
-
-/* ==================================================================================
-   VERY SMALL SCREENS: Extreme Mobile Optimization (260px - 296px)
-   ==================================================================================
-   TARGET: Smallest realistic mobile devices (e.g., iPhone SE in portrait, old Android)
-   PURPOSE: Prevent nav-opener arrow from overlapping with menu item text
-   WHAT CHANGES:
-   - nav-opener width: 50px → 35px (saves 15px horizontal space)
-   - arrow-icon size: 1.1rem → 0.9rem (smaller, but still tappable)
-   - nav-link font-size: 1em → 0.85em (better fit for tiny screens)
-   - nav-link letter-spacing: 0.05em → 0.03em (tighter text)
-   - nav-link padding: 5px 20px → 5px 12px (more compact)
-   - sub-menu link padding reduced for consistency
-
-   RESULT: Menu items like "Product Categories" won't be cut off by the arrow
-   NOTE: This ONLY affects screens below 297px. Larger screens remain unchanged.
-   ================================================================================== */
-@media (max-width: 296.98px) {
-  /* STEP 1: Shrink the arrow opener container from 50px to 35px */
-  .nav-opener {
-    width: 35px; /* Reduced from 50px */
-    min-width: 35px; /* Keep consistent with width */
-    flex: 0 0 35px; /* Prevent flex stretching */
-  }
-
-  /* STEP 2: Make the arrow icon itself smaller */
-  .arrow-icon {
-    font-size: 0.9rem; /* Reduced from 1.1rem */
-  }
-
-  /* STEP 3: Reduce menu item text size and spacing to fit better */
-  .collapse.navbar-collapse-container .nav-menu > .nav-item > .nav-link {
-    font-size: 0.75em; /* Reduced from 1em */
-    letter-spacing: 0.03em; /* Tighter than 0.05em */
-    padding: 5px 12px; /* Reduced from 5px 20px */
-  }
-
-  /* STEP 4: Make sub-menu links more compact too */
-  .sub-menu___link {
-    padding: 0.4rem 12px 0.4rem 20px; /* Reduced from 0.5rem 20px 0.5rem 30px */
-    font-size: 0.85em; /* Match parent menu font size */
-  }
-}
-
-/* ==================================================================================
-   ULTRA-SMALL SCREENS: Header Optimization (Below 300px)
-   ==================================================================================
-   TARGET: Devices 280px - 299px width (smallest realistic smartphones)
-   PURPOSE: Prevent logo from overlapping with mobile menu toggler in fixed header
-   WHAT CHANGES:
-   - Logo max-width: Reduce from 70vw to 58vw to save horizontal space
-   - Logo max-height: Reduce from 54px to 42px for smaller vertical footprint
-   - Toggler button: Reduce from 40px to 36px for more compact size
-   - Header min-height: Reduce slightly to accommodate smaller logo
-
-   RESULT: Logo and toggler button have adequate spacing, no overlap
-   NOTE: Only affects screens below 300px. Larger screens maintain original styling.
-   ================================================================================== */
-@media (max-width: 299.98px) {
-  /* Reduce logo dimensions to prevent overlap with toggler */
-  .logo {
-    max-height: 42px; /* Reduced from 54px */
-    max-width: min(58vw, 160px); /* Reduced from 70vw to provide more space */
-  }
-
-  /* Slightly reduce header height to match smaller logo */
-  .header {
-    min-height: 50px; /* Further reduced for ultra-small screens */
-  }
-
-  .header .container,
-  .site-nav {
-    min-height: 50px; /* Match header height */
-  }
-
-  /* Make toggler button slightly smaller to save space */
-  .navbar-toggler {
-    width: 34px; /* Reduced for ultra-small screens */
-    height: 34px; /* Reduced for ultra-small screens */
-    padding: 0.35rem; /* More compact */
-    right: 0.625rem; /* Slightly closer to edge */
-  }
-
-  /* Adjust toggler icon size to match smaller button */
-  .navbar-toggler-icon {
-    width: 17px; /* Reduced from 20px */
-    height: 2px; /* Keep same thickness */
-  }
-
-  .navbar-toggler-icon::before,
-  .navbar-toggler-icon::after {
-    width: 17px; /* Match icon width */
-  }
-
-  /* Adjust body padding to match smaller header */
-  body.has-fixed-header {
-    padding-top: var(--header-offset);
-  }
-
-  /* ====================================================================
-     MOBILE MENU ADJUSTMENTS: Hide title and reposition X icon
-     ==================================================================== */
-
-  /* Hide the "Menu Navigation" title to save vertical space */
-  .menu-header {
-    display: none !important;
-  }
-
-  /* Remove top padding from menu since title is gone */
-  .navbar-collapse-container {
-    padding-top: 0 !important;
-  }
-
-  /* Add small padding to first menu item for breathing room */
-  .nav-menu {
-    padding-top: 0.5rem;
-  }
-
-  /* Position X icon at top-right corner when menu is open */
-  body.menu-open .navbar-toggler {
-    top: 0.75rem; /* Fixed distance from top of menu */
-    /* Right position calculated by menu width + gap (handled by parent media query) */
-  }
 }
 
 /* ==================================================================================
@@ -856,7 +657,8 @@
   }
 }
 
-/**DESKTOP Navbar - 768px and above**/
+/** DESKTOP Navbar 
+Desktop main menu - 768px and above**/
 @media (min-width: 768px) {
   /*header desktop container*/
 
@@ -864,11 +666,6 @@
     padding-inline: clamp(0.5rem, 1vw, 1rem);
 
     padding-block: clamp(0.4rem, 0.9vw, 0.9rem);
-  }
-  /** Desktop nav element  - Desktop site nav **/
-  .site-nav {
-    width: 100%;
-    min-width: 0;
   }
 
   /* Hide hamburger icon, always show the menu on desktop */
@@ -883,16 +680,12 @@
     min-width: 0; /* let it shrink */
   }
 
-  /* Desktop Nav item  */
-  .nav-menu > .nav-item {
-    width: auto;
-    flex: 0 0 auto;
-  }
   .nav-menu {
     flex-direction: row;
     align-items: center;
     gap: clamp(0.5rem, 1.2vw, 1.25rem);
   }
+
   /* Desktop Nav link styling */
   .nav-menu > .nav-item > .nav-link {
     background: transparent;
@@ -937,7 +730,7 @@
     list-style: none;
   }
 
-  /*arrow of menu= > holding down the dropdown menu above */
+  /* arrow of menu= > holding down the dropdown menu above */
   .nav-menu > .nav-item.has-dropdown::after {
     content: "";
     position: absolute;
@@ -947,6 +740,7 @@
     width: 0;
     height: 0;
     border-style: solid;
+
     /* Slightly smaller than ::before to let the border peek out */
     border-width: 0 10px 12px 10px;
     border-color: transparent transparent #fff transparent;
@@ -1002,6 +796,7 @@
     flex-basis: 100%;
     border-bottom: 1px solid var(--border-green-light);
   }
+
   /*sub menu hover application*/
   .dropdown-menu > div .submenu-item .submenu__link {
     display: flex;

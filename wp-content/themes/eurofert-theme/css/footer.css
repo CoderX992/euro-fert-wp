@@ -18,13 +18,13 @@
   flex-direction: column;
   gap: 1.25rem;
 }
+
 /* Separator is now a real line between upper and lower */
 .footer-separator {
   width: 100%;
   border: 0;
   border-top: 1px solid #fff;
   margin: 0;
-  flex: 0 0 auto; /* fixed size, no growing */
 }
 
 /* ---------------------------------------------------------
@@ -43,6 +43,7 @@
   margin: 0 auto;
   filter: brightness(0) invert(1);
 }
+
 /*subtitle  */
 .footer-top-left-col .content-wrapper > .footer-subtitle {
   line-height: 1.5;
@@ -71,6 +72,7 @@
   padding: 0;
   margin: 0;
 }
+
 .footer-product-links {
   list-style: none; /* remove bullets */
   display: flex; /* horizontal layout */
@@ -269,12 +271,9 @@
   .footer-legal-list {
     display: flex;
     flex-wrap: nowrap;
-    justify-content: center;
-    align-items: center;
     margin: 0;
     padding: 0;
     list-style: none;
-    white-space: nowrap;
   }
 
   .footer-legal-link {
@@ -297,6 +296,7 @@
 
     gap: 0.75rem;
   }
+
   .social-link {
     display: inline-flex;
     align-items: center;
