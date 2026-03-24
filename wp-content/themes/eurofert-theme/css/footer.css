@@ -264,12 +264,15 @@
   .footer-lower .footer-legal-col {
     grid-area: legal;
     justify-self: center;
+    max-width: 100%; /* prevent content from pushing the grid column wider */
   }
 
   /*legal links list */
   .footer-legal-list {
     display: flex;
-    flex-wrap: nowrap;
+    flex-wrap: wrap; /* wrap instead of overflow so gap never breaks the grid */
+    justify-content: center;
+    gap: clamp(0.75rem, 1.5vw, 1.5rem); /* responsive spacing between legal links */
     margin: 0;
     padding: 0;
     list-style: none;
