@@ -273,6 +273,7 @@
     margin: 0;
     padding: 0;
     list-style: none;
+    gap: clamp(0.75rem, 1.5vw, 2rem);
   }
 
   .footer-legal-link {
@@ -453,9 +454,9 @@
 
   .footer-lower {
     grid-template-columns: 1fr 1fr;
-    /* grid-template-areas:
+    grid-template-areas:
       "copyright social"
-      "legal legal"; */
+      "legal legal";
     row-gap: 0.85rem;
   }
 
@@ -464,11 +465,12 @@
   }
 
   .footer-lower .footer-legal-col {
+    grid-column: 1 / -1;
     justify-self: center;
   }
 
   .footer-legal-list {
-    flex-wrap: wrap;
+    flex-wrap: nowrap;
   }
 }
 
