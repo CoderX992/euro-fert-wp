@@ -142,7 +142,6 @@
   /*bottom footer Parent grid*/
   .footer-lower {
     display: grid;
-    gap: 2rem;
     grid-template-columns: minmax(180px, 1fr) minmax(260px, 2fr) minmax(180px, 1fr);
     grid-template-areas: "copyright legal social";
     align-items: center;
@@ -440,9 +439,6 @@
 @media (min-width: 768px) and (max-width: 1023px) {
   .footer-upper {
     grid-template-columns: 1fr 1fr;
-    /* grid-template-areas:
-      "img-brand img-brand"
-      "product-links quick-links"; */
     grid-template-rows: auto auto;
     gap: 1.5rem;
   }
