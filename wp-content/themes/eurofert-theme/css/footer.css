@@ -146,7 +146,7 @@
     grid-template-areas: "copyright legal social";
     align-items: center;
     min-height: 50px;
-    gap: clamp(0.75rem, 1.5vw, 2rem);
+    gap: 2rem; /* match .footer-upper gap so 1fr 2fr 1fr columns align */
   }
 
   .footer-lower > * {
