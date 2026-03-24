@@ -273,6 +273,9 @@
     margin: 0;
     padding: 0;
     list-style: none;
+    max-width: 100%;
+    gap: clamp(0.5rem, 2vw, 2rem);
+    justify-content: center;
   }
 
   .footer-legal-link {
