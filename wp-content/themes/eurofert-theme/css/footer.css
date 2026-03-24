@@ -142,7 +142,7 @@
   /*bottom footer Parent grid*/
   .footer-lower {
     display: grid;
-    grid-template-columns: minmax(180px, 1fr) minmax(260px, 2fr) minmax(180px, 1fr);
+    grid-template-columns: 1fr 2fr 1fr;
     grid-template-areas: "copyright legal social";
     align-items: center;
     min-height: 50px;
@@ -270,7 +270,7 @@
   /*legal links list */
   .footer-legal-list {
     display: flex;
-    flex-wrap: wrap; /* wrap instead of overflow so gap never breaks the grid */
+    flex-wrap: nowrap; /* links must stay on one line at all widths above 767px */
     justify-content: center;
     gap: clamp(0.75rem, 1.5vw, 1.5rem); /* responsive spacing between legal links */
     margin: 0;
@@ -471,7 +471,7 @@
   }
 
   .footer-legal-list {
-    flex-wrap: wrap;
+    flex-wrap: nowrap; /* keep all three links on one line on tablet */
   }
 }
 
