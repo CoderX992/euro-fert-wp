@@ -174,8 +174,9 @@
   .upper-list-wrapper {
     gap: clamp(0.5rem, 0.5rem + 0.2vw, 0.875rem);
     flex: 1;
-    max-width: none; /* NEW: cancel mobile/global width cap */
-    margin: 0; /* NEW: cancel mobile auto-centering */
+    max-width: none; /* cancel mobile/global width cap */
+    margin: 0; /* cancel mobile auto-centering */
+    align-items: center; /* ensure children (heading + list) are centered within the wrapper */
   }
 
   .footer-end-col .upper-list-wrapper {
@@ -226,12 +227,17 @@
     display: flex;
     flex-direction: column;
     flex-wrap: nowrap;
-    padding-left: 1rem;
+    padding-left: 0; /* no asymmetric indent on center col — keeps list box symmetric for centering */
     margin: 0;
     gap: 0;
 
     justify-content: space-between;
     flex: 1;
+  }
+
+  /* Quick Links column keeps its left indent so bullets align under the heading */
+  .footer-end-col .footer-links {
+    padding-left: 1rem;
   }
 
   .footer-product-links li,
