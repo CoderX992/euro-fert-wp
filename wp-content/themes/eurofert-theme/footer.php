@@ -45,7 +45,7 @@
                             <li><a href="<?php echo esc_url(home_url('/')); ?>">Home</a></li>
                             <li><a href="<?php echo esc_url(home_url('/services')); ?>">Services</a></li>
                             <li><a href="<?php echo esc_url(home_url('/about')); ?>">About Us</a></li>
-                            <li><a href="<?php echo esc_url(home_url('/product-categories')); ?>">Product Categories Overview</a></li>
+                            <li><a href="<?php echo esc_url(home_url('/product-categories')); ?>">Products Overview</a></li>
                         </ul>
 
                     </div>

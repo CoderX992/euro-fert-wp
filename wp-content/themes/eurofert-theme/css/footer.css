@@ -84,7 +84,6 @@
 .footer-product-links a,
 .footer-quick-links a {
   display: inline-block;
-  padding: 0;
   color: #fff;
   font-size: 0.95rem;
   text-decoration: none;
@@ -107,27 +106,56 @@
   margin: 0 0 0.5rem 0;
   font-weight: 600;
 }
-
+/* desktop footer */
 @media (min-width: 768px) {
-  .footer-upper,
-  .footer-lower {
-    gap: 0;
-  }
   .footer-container {
-    display: flex;
-    flex-direction: column;
-  }
-  /*footer grid */
-  .footer-upper {
     display: grid;
-    gap: 2rem;
-    grid-template-columns: 1fr 2fr 1fr;
-    grid-template-areas: "img-brand product-links quick-links";
+    grid-template-columns: 1.2fr 1.6fr 1.2fr;
+    grid-template-rows: auto auto auto;
+    gap: 0 clamp(1rem, 2vw, 2rem);
+  }
+
+  /* upper footer grid */
+  .footer-upper {
+    grid-column: 1 / -1;
+    display: grid;
+    grid-template-columns: subgrid;
     grid-template-rows: minmax(clamp(190px, 12vw, 240px), auto);
     align-items: stretch;
   }
 
-  /*grid items of parent grid footer upper */
+  .footer-upper .footer-top-left-col {
+    grid-column: 1;
+  }
+
+  .footer-upper .footer-center-col {
+    grid-column: 2;
+  }
+
+  .footer-upper .footer-end-col {
+    grid-column: 3;
+    justify-self: center;
+  }
+
+  .footer-separator {
+    grid-column: 1 / -1;
+    margin-block: 0.75rem;
+  }
+
+  /* bottom footer Parent grid*/
+  .footer-lower {
+    display: grid;
+    grid-template-columns: subgrid;
+    align-items: center;
+    grid-column: 1/-1;
+    padding-bottom: 1rem;
+  }
+
+  .footer-lower > * {
+    min-width: 0;
+  }
+
+  /* footer upper children sections left center and end */
   .footer-center-col,
   .footer-end-col {
     display: flex;
@@ -135,67 +163,93 @@
     min-height: 0;
   }
 
-  .footer-separator {
-    margin-block: 0.75rem;
+  /* parent containers for lower footer content*/
+  .footer-lower .footer-copyright-col {
+    grid-column: 1;
+    justify-self: start;
+    align-self: center;
   }
 
-  /*bottom footer Parent grid*/
-  .footer-lower {
-    display: grid;
-    grid-template-columns: 1fr 2fr 1fr;
-    grid-template-areas: "copyright legal social";
-    align-items: center;
-    min-height: 50px;
-    gap: 2rem; /* match .footer-upper gap so 1fr 2fr 1fr columns align */
+  .footer-lower .footer-social-col {
+    grid-column: 3;
+    display: flex;
+    justify-self: center;
   }
 
-  .footer-lower > * {
-    min-width: 0;
-  }
+  /****  =================================================================
+                          Footer content 
+    =======================================================================  *****/
 
-  /*Desktop footer */
+  /**   =======================================
+                Footer logo - brand logo **/
+
   .footer-top-left-col .content-wrapper > .footer-logo {
     margin: 0;
-    max-width: 312px;
+    width: clamp(260px, 20vw, 340px);
+    max-width: 100%;
   }
 
-  .footer-upper .footer-top-left-col {
-    grid-area: img-brand;
-  }
+  /** =======================================  **/
 
-  .footer-upper .footer-center-col {
-    grid-area: product-links;
-  }
-  .footer-upper .footer-end-col {
-    grid-area: quick-links;
-  }
-
-  /*list container */
+  /* list container quicks links and featured products */
   .upper-list-wrapper {
     gap: clamp(0.5rem, 0.5rem + 0.2vw, 0.875rem);
     flex: 1;
     max-width: none; /* cancel mobile/global width cap */
     margin: 0; /* cancel mobile auto-centering */
-    align-items: center; /* ensure children (heading + list) are centered within the wrapper */
+    align-items: flex-start; /* ensure children (heading + list) are centered within the wrapper */
   }
 
   .footer-end-col .upper-list-wrapper {
     align-items: flex-start;
   }
-  /*Product list header desktop */
+
+  .footer-center-col .upper-list-wrapper {
+    align-self: center;
+  }
+
+  /* main ul list for both products and quick links*/
+  .footer-links {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    padding-left: 0; /* no asymmetric indent on center col — keeps list box symmetric for centering */
+    margin: 0;
+    gap: 0;
+    justify-content: space-between;
+    flex: 1;
+  }
+
+  /* list items inside footer */
+  .footer-product-links li,
+  .footer-quick-links li {
+    position: relative;
+    padding-inline-start: clamp(0.6rem, 0.8vw, 1rem);
+    text-align: left;
+  }
+
+  .footer-product-links li::before,
+  .footer-quick-links li::before {
+    content: "•";
+    color: var(--primary);
+    position: absolute;
+    left: 0;
+  }
+
+  .footer-product-links a,
+  .footer-quick-links a {
+    padding: 0;
+  }
+
+  /* Product list header desktop */
   .upper-list-wrapper .footer-heading {
     display: inline-block;
     position: relative;
-    padding-bottom: clamp(0.3rem, 0.4vw, 0.45rem);
-    width: auto; /* remove the forced 100% width */
+    margin: 0;
+    padding-bottom: 0.45rem;
     font-family: var(--font-primary);
     font-weight: 600;
-    margin: 0 auto;
     font-size: clamp(1.05rem, 0.4vw + 0.95rem, 1.25rem);
-  }
-
-  .footer-end-col .upper-list-wrapper > .footer-heading {
-    margin-left: 0.4rem;
   }
 
   /* list header green bars */
@@ -222,87 +276,52 @@
     opacity: 0.5;
   }
 
-  /* main ul Desktop list */
-  .footer-links {
+  /*****
+   
+  Social media icons container 
+   
+   *****/
+
+  .footer-social-wrapper {
     display: flex;
-    flex-direction: column;
-    flex-wrap: nowrap;
-    padding-left: 0; /* no asymmetric indent on center col — keeps list box symmetric for centering */
-    margin: 0;
-    gap: 0;
-
+    align-items: center;
     justify-content: space-between;
-    flex: 1;
+    width: clamp(180px, 22vw, 220px);
+    gap: 0.75rem;
   }
 
-  /* Quick Links column keeps its left indent so bullets align under the heading */
-  .footer-end-col .footer-links {
-    padding-left: 1rem;
-  }
-
-  .footer-product-links li,
-  .footer-quick-links li {
-    display: grid;
-    grid-template-columns: 0.35rem auto;
-    gap: clamp(0.25rem, 0.4vw, 0.6rem);
-    align-items: start;
-    text-align: left;
-  }
-
-  .footer-product-links li::before,
-  .footer-quick-links li::before {
-    content: "•";
-    color: var(--primary);
-  }
-  /*Lower footer content*/
-  .footer-lower .footer-copyright-col {
-    grid-area: copyright;
-    justify-self: start;
-    align-self: center;
-    max-width: 24ch;
-  }
   .footer-lower .copyright-text {
     margin: 0;
     color: rgba(255, 255, 255, 0.72);
     font-size: clamp(0.76rem, 0.14vw + 0.72rem, 0.9rem);
     white-space: nowrap;
   }
+  /* legal links grid item */
   .footer-lower .footer-legal-col {
-    grid-area: legal;
+    grid-column: 2;
     justify-self: center;
-    max-width: 100%; /* prevent content from pushing the grid column wider */
+    width: 100%;
+    width: clamp(22rem, 30vw, 28rem);
+    max-width: 100%;
   }
 
-  /*legal links list */
+  /* Desktop legal links list */
   .footer-legal-list {
     display: flex;
-    flex-wrap: nowrap; /* links must stay on one line at all widths above 767px */
+    flex-wrap: nowrap;
     justify-content: center;
-    gap: clamp(0.75rem, 1.5vw, 1.5rem); /* responsive spacing between legal links */
+    gap: clamp(1rem, 1.8vw, 2rem);
     margin: 0;
     padding: 0;
     list-style: none;
+    padding-left: 0.5rem;
   }
 
   .footer-legal-link {
     display: inline-block;
     white-space: nowrap;
-    font-size: clamp(0.82rem, 0.2vw + 0.76rem, 0.95rem);
-  }
-
-  .footer-lower .footer-social-col {
-    display: flex;
-    grid-area: social;
-    justify-self: start;
-  }
-
-  .footer-social-wrapper {
-    display: flex;
-    align-items: center;
-    justify-content: space-evenly;
-    width: clamp(180px, 22vw, 220px); /* temporary lane width for desktop alignment test */
-
-    gap: 0.75rem;
+    font-size: clamp(0.75rem, 0.18vw + 0.76rem, 0.9rem);
+    text-decoration: none;
   }
 
   .social-link {
@@ -320,8 +339,165 @@
   }
 }
 
-/*Mobile footer specific media query */
+/* =========================================================
+   Medium screens: 2-column footer upper layout
+   Range: 768px - 1200px
+   Goal:
+   - Logo/tagline spans full width on top
+   - Featured Products on left
+   - Quick Links on right
+   ========================================================= */
 
+/** Responsive medium screen layout 
+   content-based breakpoint **/
+@media (min-width: 768px) and (max-width: 1200px) {
+  /**  Two columns layout **/
+  .footer-container {
+    grid-template-columns: 1fr 1fr;
+    padding-inline: clamp(1rem, 3vw, 2rem);
+  }
+
+  .footer-upper {
+    grid-template-rows: auto minmax(210px, auto);
+    row-gap: 1.25rem;
+  }
+
+  .footer-lower {
+    grid-template-columns: auto minmax(0, 1fr) auto;
+    column-gap: clamp(1rem, 2vw, 1.75rem);
+  }
+
+  .footer-lower .footer-copyright-col {
+    grid-column: 1;
+    justify-self: start;
+  }
+
+  .footer-lower .footer-legal-col {
+    grid-column: 2;
+    justify-self: center;
+    width: auto;
+    max-width: 100%;
+  }
+
+  .footer-lower .footer-social-col {
+    grid-column: 3;
+    justify-self: end;
+  }
+
+  /* Row 1: logo spans full width, centered left-col becomes central col */
+  .footer-upper .footer-top-left-col {
+    grid-column: 1 / -1;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  /* Center the logo visually in the full-width top row */
+  .footer-top-left-col .content-wrapper > .footer-logo {
+    margin: 0 auto;
+    width: clamp(280px, 34vw, 380px);
+    max-width: 100%;
+  }
+
+  /* Keep the subtitle readable and centered under the logo */
+  .footer-top-left-col .content-wrapper > .footer-subtitle {
+    text-align: center;
+    max-width: 40ch;
+    margin-inline: auto;
+  }
+
+  /* Second row: Featured Products goes in left column */
+  .footer-upper .footer-center-col {
+    grid-column: 1;
+    min-width: 0;
+  }
+  /* Second row: Quick Links goes in right column */
+  .footer-upper .footer-end-col {
+    grid-column: 2;
+    min-width: 0;
+  }
+
+  .footer-end-col .footer-quick-links {
+    padding-left: 0.5rem;
+  }
+  .footer-center-col .footer-product-links {
+    padding-right: 0.5rem;
+  }
+  .footer-center-col .upper-list-wrapper,
+  .footer-end-col .upper-list-wrapper {
+    gap: clamp(0.65rem, 0.7vw, 1rem);
+    min-height: 100%;
+  }
+}
+
+/* lower footer stack 2 column layout on small-meduim screens */
+
+@media (min-width: 768px) and (max-width: 992px) {
+  .footer-separator {
+    margin-block: 1.5rem;
+  }
+
+  .footer-lower {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 1.5rem;
+    padding: 0;
+  }
+
+  .footer-lower > * {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+  }
+
+  /* Row 1: social */
+  .footer-lower .footer-social-col {
+    order: 1;
+  }
+
+  .footer-social-wrapper {
+    width: auto;
+    justify-content: center;
+    align-items: center;
+    gap: clamp(1.25rem, 2.6vw, 1.75rem);
+  }
+
+  .social-link {
+    font-size: clamp(1.25rem, 0.3vw + 1.18rem, 1.4rem);
+  }
+
+  /* Row 2: legal */
+  .footer-lower .footer-legal-col {
+    order: 2;
+    width: 100%;
+    max-width: 100%;
+  }
+  .footer-legal-list {
+    width: 100%;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: clamp(1.25rem, 3vw, 2.25rem);
+    padding-left: 0;
+  }
+
+  .footer-legal-link {
+    font-size: 1rem;
+  }
+
+  /* Row 3: copyright */
+  .footer-lower .footer-copyright-col {
+    order: 3;
+  }
+
+  .footer-lower .copyright-text {
+    text-align: center;
+  }
+}
+
+/*Mobile footer specific media query */
 @media (max-width: 767px) {
   /* Mobile bottom footer */
   .footer-lower {
@@ -394,7 +570,7 @@
   /*Quick links on Mobile*/
   .footer-end-col .upper-list-wrapper {
     margin: 0 auto;
-    align-items: center;
+    align-items: flex-start;
   }
 
   .footer-quick-links {
@@ -442,58 +618,6 @@
 
   .footer-lower .copyright-text {
     white-space: normal;
-  }
-}
-
-@media (min-width: 768px) and (max-width: 1023px) {
-  .footer-upper {
-    grid-template-columns: 1fr 1fr;
-    grid-template-rows: auto auto;
-    gap: 1.5rem;
-  }
-
-  .footer-top-left-col {
-    text-align: center;
-  }
-
-  .footer-top-left-col .content-wrapper > .footer-logo {
-    margin: 0 auto;
-  }
-
-  .footer-lower {
-    gap: clamp(0.5rem, 1.5vw, 1.5rem);
-  }
-
-  .footer-lower .footer-social-col {
-    justify-self: end;
-  }
-
-  .footer-lower .footer-legal-col {
-    justify-self: center;
-  }
-
-  .footer-legal-list {
-    flex-wrap: nowrap; /* keep all three links on one line on tablet */
-  }
-}
-
-@media (min-width: 768px) and (max-width: 860px) {
-  .footer-lower .copyright-text {
-    font-size: 0.75rem;
-    white-space: nowrap;
-  }
-
-  .footer-legal-list {
-    gap: 0.5rem;
-  }
-
-  .footer-legal-link {
-    font-size: 0.8rem;
-  }
-
-  .footer-social-wrapper {
-    width: auto;
-    gap: 0.35rem;
   }
 }
 
@@ -558,5 +682,3 @@
     bottom: 156px; /* CHANGED: stronger lift to clear the social icons */
   }
 }
-
-/* NEW END */
