@@ -1,0 +1,272 @@
+/* This is CSS is responsible for category single page, its called product grid 
+to represent the product inside the single category. 00
+=========================================================
+   Category  Page Hero Banner
+   ========================================================= */
+
+/* 1. Kill ALL default browser margins on the children */
+.category-info .category-title,
+.category-info .category-description,
+.category-info .button-container {
+  margin: 0 !important;
+}
+
+.category-hero {
+  background: var(--hero-bg-gradient);
+  border-bottom: 1px solid #e2e8e4; /* Optional: A very faint border to define the edge */
+  padding: 3.5rem 1.25rem;
+  border-bottom: 1px solid #e2e8e4;
+  text-align: center;
+}
+
+/* FIX: Image centers correctly and sits on top */
+.category-hero .image-wrapper {
+  order: 1;
+  display: flex;
+  justify-content: center;
+  margin-bottom: 2rem; /* Adds space between bottles and title */
+  width: 100%;
+}
+
+.category-hero-img {
+  max-width: 250px;
+  height: auto;
+  width: auto;
+  max-height: 400px; /* Provides a sensible ceiling so it doesn't get ridiculously tall */
+  object-fit: contain;
+  display: block; /* Helps with layout stability */
+  padding: 0;
+}
+
+.category-hero .category-container {
+  order: 2; /* Moves text to the bottom of the stack */
+  padding-bottom: 1rem;
+}
+
+.category-info {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.2rem;
+}
+
+.category-description {
+  text-align: center;
+}
+
+/* 1. Global Paragraph Base */
+.category-hero .category-description p {
+  font-size: 1.15rem !important;
+  line-height: 1.7;
+  color: var(--gray-700);
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.category-hero .category-description p:first-of-type {
+  width: 100%;
+  max-width: 75ch; /* Generous width so it doesn't look squished */
+  margin-bottom: 1rem;
+}
+
+.button-container {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  font-family: var(--font-primary);
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.category-title {
+  font-size: clamp(2rem, 8vw, 3.5rem) !important;
+  color: var(--primary-dark);
+}
+
+/* =========================================================
+   2. TABLET & LAPTOP (768px - 1599px)
+   ========================================================= */
+@media (min-width: 768px) {
+  /* Product Grid: Card improvements */
+  .category-card .category-short-description {
+    padding: 0 1rem;
+    font-size: 0.85rem;
+  }
+}
+
+/* smaller desktops, tables, medium screen */
+@media (min-width: 992px) {
+  .category-hero {
+    padding: 2.5rem 0;
+  }
+  .category-hero .category-container {
+    order: 1; /* Moves text to the bottom of the stack */
+    padding: 32px 0;
+  }
+  /* Caps the image size so it matches the 1600px desktop look */
+  .image-wrapper .category-hero-img {
+    width: 100%;
+  }
+
+  .category-hero-img {
+    max-width: 320px; /* Allow slightly larger bottles on desktop */
+  }
+  .category-hero .btn-attention {
+    width: auto;
+  } /* Returns to natural size */
+}
+
+/* =========================================================
+   3. ULTRA-WIDE HYBRID (1600px+)
+   ========================================================= */
+
+/* 2. DESKTOP TAKEOVER: >= 992px */
+@media (min-width: 1600px) {
+  .category-hero .container {
+    position: relative;
+  }
+  .category-hero .row {
+    justify-content: center !important;
+  }
+  .category-hero .category-container {
+    order: 1; /* Moves text to the bottom of the stack */
+  }
+
+  /* Center text area - 
+     Release the text from its col-lg constraint so it finds true center 
+     */
+  .category-hero .category-container {
+    flex: 0 0 100% !important;
+    max-width: 100% !important;
+    z-index: 2; /* Keeps text and buttons clickable above the image */
+  }
+
+  .category-hero .category-info {
+    max-width: 800px;
+  }
+
+  /* Pull the image out of the column flow and pin it to the right */
+  .category-hero .image-wrapper {
+    /*
+    we had to rely on hybrid absolute, cz the bootstrap column system  
+      was taking too much text width making it look very narrow 
+      */
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    right: -55px;
+    /* Override the col-lg width constraint */
+    flex: 0 0 auto !important;
+    width: 280px;
+    z-index: 2;
+  }
+
+  .category-hero-img {
+    max-height: 340px;
+  }
+}
+
+/* =========================================================
+   Product Grid Image
+   Dedicated media box for the single category page cards
+   ========================================================= */
+
+/* Full-width product image container */
+.product-grid-item__media {
+  position: relative;
+  width: 100%;
+  background-color: var(--hero-bg-gradient);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.07);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+/* Smaller centered square stage */
+.product-grid-item__media-inner {
+  width: clamp(190px, 65vw, 224px);
+  aspect-ratio: 1 / 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+/* Image inside square stage */
+.product-grid-item__media-inner img.card-img-top {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  object-position: center center;
+  transform: translateY(15px) scale(1.28);
+  transform-origin: center center;
+}
+
+.product-grid-item .card {
+  display: flex;
+  flex-direction: column;
+  border: none;
+  box-shadow: 0 4px 16px rgba(46, 125, 50, 0.06);
+  border-radius: 8px;
+  border: 0.5px solid var(--gray-200);
+}
+
+/* Product Grid Styles */
+.product-grid-item {
+  transition: all 0.3s ease;
+  cursor: pointer;
+  margin-bottom: var(--content-spacing); /* Consistent spacing in product grid */
+}
+
+.product-grid-item:hover {
+  transform: translateY(-5px); /* Consistent with other hover effects */
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.1);
+}
+
+.product-grid-item .card-body {
+  padding: var(--space-md); /* Ensure consistent padding here too */
+  justify-content: flex-start; /* Align items to the start */
+}
+
+.product-grid-item .card-text {
+  flex: none; /* Prevent description from growing */
+  margin-bottom: var(--space-sm); /* Small margin below description */
+}
+
+.product-grid-item .card-body .d-flex {
+  margin-top: var(--space-sm); /* Add a small top margin to separate from description */
+}
+
+.product-grid-item .card-title {
+  font-size: 0.9rem;
+  font-weight: 600;
+}
+
+/* Mobile query */
+@media (max-width: 767px) {
+  .product-grid-item__media-inner img.card-img-top {
+    transform: translateY(10px) scale(1.22);
+  }
+
+  .category-description {
+    text-align: left;
+  }
+
+  /* FIX: The Green Button (Full-width for "Fat Finger" UX) */
+  .category-hero .btn-attention {
+    width: 100%; /* Spans the width of the phone screen */
+    max-width: 320px; /* Prevents it from becoming a giant bar on tablets */
+    padding: 1rem 1.5rem !important;
+    font-size: 1.1rem !important;
+    display: inline-block; /* Ensures padding and width behave correctly */
+  }
+  .category-hero .category-description p {
+    font-size: 1.1rem !important;
+    line-height: 1.6;
+    max-width: 65ch; /* Limits line length for better mobile reading */
+    margin: 0 auto 1.5rem auto; /* Centers the block and adds bottom breathing room */
+  }
+}

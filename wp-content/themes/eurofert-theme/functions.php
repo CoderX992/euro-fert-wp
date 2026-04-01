@@ -74,7 +74,24 @@ function eurofert_files()
     );
 
     // Other styles that depend on the main styles
-    wp_enqueue_style('eurofert_animation_styles', get_theme_file_uri('/css/animations.css'));
+    wp_enqueue_style(
+        'eurofert_animation_styles',
+        get_theme_file_uri('/css/animations.css'),
+        array('eurofert_main_styles'),
+        filemtime(get_theme_file_path('/css/animations.css'))
+    );
+
+    wp_enqueue_style('eurofert_category_styles', get_theme_file_uri('/css/category-grid.css'),  array('eurofert_main_styles'),  filemtime(
+        get_theme_file_path('/css/category-grid.css')
+    ));
+
+    wp_enqueue_style(
+        'eurofert_product_grid_styles',
+        get_theme_file_uri('/css/product-grid.css'),
+        array('eurofert_main_styles'),
+        filemtime(get_theme_file_path('/css/product-grid.css'))
+    );
+
     wp_enqueue_style(
         'eurofert_product_styles',
         get_theme_file_uri('/css/product-details.css'),
@@ -84,9 +101,6 @@ function eurofert_files()
         )
     );
 
-    wp_enqueue_style('eurofert_category_styles', get_theme_file_uri('/css/category-grid.css'),  array('eurofert_main_styles'),  filemtime(
-        get_theme_file_path('/css/product-details.css')
-    ));
 
     wp_enqueue_style('eurofert_header_styles', get_theme_file_uri('/css/header.css'), array('eurofert_main_styles'), filemtime(get_theme_file_path('/css/header.css')));
 

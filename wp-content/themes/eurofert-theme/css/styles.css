@@ -19,6 +19,7 @@ Updated Footer 15 December */
   --secondary: #5d4037;
   --secondary-light: #8b6b61;
   --accent-green: #93d500;
+  --hero-bg-gradient: linear-gradient(180deg, #ffffff 0%, #f7fdfa 100%);
 
   --product-background: #ecf4e8;
   --accent: #fb8c00;
@@ -40,7 +41,7 @@ Updated Footer 15 December */
   --gray-900: #212529;
   --border-green-light: #93d500;
   --sub-menu-color: #838383;
-  --modern-white: #fffdf7;
+
   --background-color: #f2f7f7;
   --ef-green: #2e7d32; /* border color */
   --ef-green-soft: #eef7ee; /* stripe bg */
@@ -73,7 +74,7 @@ Updated Footer 15 December */
   --font-button: "Poppins", system-ui, -apple-system, sans-serif; /* Special CTAs, attention-grabbing elements */
   --font-color: #374151;
   /* Readability & Layout Standards */
-  --optimal-line-length: 45ch; /* 40-50 characters for optimal readability */
+  --optimal-line-length: 55ch; /* 40-50 characters for optimal readability */
   --content-spacing: 1rem; /* Generous spacing between content blocks */
   --premium-spacing: 2rem; /* Extra spacing for premium feel */
   --text-block-spacing: 1.5rem; /* Spacing between text blocks */
@@ -134,9 +135,16 @@ main > *:first-child {
 }
 
 body {
+  background-color: transparent !important; /* Allows system/WP defaults to take over */
+}
+
+body.wp-admin {
+  background-color: #fff !important;
+}
+
+body {
   display: flex;
   font-family: var(--font-secondary);
-  background-color: var(--gray-100);
   margin: 0;
   flex-direction: column;
   min-height: 100dvh;
@@ -152,12 +160,6 @@ main {
   flex: 1;
   width: 100%;
 }
-
-/* whenever the first section should respect a fixed header offset */
-
-/* main > *:first-child > .container {
-  padding-top: calc(var(--header-offset) + var(--wp-admin-bar-h));
-} */
 
 /* WP ADMIN BAR  */
 body.admin-bar {
@@ -214,8 +216,7 @@ h3 {
 /* FONT product fields 
 Global Text Sizes for p elements*/
 p {
-  font-size: 1rem;
-  line-height: 1.7;
+  margin: 0; /*remove default margins */
 }
 
 ul {
@@ -225,7 +226,6 @@ ul {
 
 /* Optimal Line Length for Readability */
 
-.lead,
 .card-text,
 .testimonial-text {
   max-width: var(--optimal-line-length); /* 40-50 characters per line */
@@ -482,9 +482,6 @@ section:first-of-type {
   }
 }
 /*handling background colors , write here : */
-.intro-section {
-  background-color: var(--modern-white);
-}
 
 .intro-section .section-title {
   display: block; /* make it a full-width block */
@@ -746,48 +743,6 @@ section:first-of-type {
   padding: var(--space-md); /* Reduce padding to 1.5rem for a more compact card */
 }
 
-/* Product Grid Styles */
-.product-grid-item {
-  transition: all 0.3s ease;
-  cursor: pointer;
-  margin-bottom: var(--content-spacing); /* Consistent spacing in product grid */
-}
-
-.product-grid-item:hover {
-  transform: translateY(-5px); /* Consistent with other hover effects */
-  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.1);
-}
-
-.product-grid-item .card {
-  border: none;
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08); /* Softer, more premium shadow */
-  border-radius: 8px;
-}
-
-.product-grid-item .card-body {
-  padding: var(--space-md); /* Ensure consistent padding here too */
-  justify-content: flex-start; /* Align items to the start */
-}
-
-.product-grid-item .card-text {
-  flex: none; /* Prevent description from growing */
-  margin-bottom: var(--space-sm); /* Small margin below description */
-}
-
-.product-grid-item .card-body .d-flex {
-  margin-top: var(--space-sm); /* Add a small top margin to separate from description */
-}
-
-.product-grid-item .card-img-top {
-  height: 150px;
-  object-fit: cover;
-}
-
-.product-grid-item .card-title {
-  font-size: 0.9rem;
-  font-weight: 600;
-}
-
 .product-formula strong {
   font-weight: 700;
 }
@@ -979,6 +934,7 @@ section:first-of-type {
     font-size: 0.95rem;
   }
 }
+
 /* 
 ==================================================================================================
                  MOBILE FIRST: Base styles optimized for 320px+ 
@@ -1347,19 +1303,18 @@ section:first-of-type {
 }
 
 /* Product Grid Image Cropping */
-.product-grid-item .card-img-top,
 .product-category-card img {
   height: 200px;
-  object-fit: cover;
+  object-fit: contain;
   object-position: center;
   border-radius: 8px 8px 0 0;
 }
 
-/* Ensure consistent aspect ratio for all product images */
+/* Product Grid Image  */
 .product-card img,
 .product-category-card img {
   height: 220px;
-  object-fit: cover;
+
   object-position: center;
   transition: all 0.5s ease;
 }
@@ -2250,44 +2205,6 @@ section:first-of-type {
 }
 .bg-light {
   background-color: #f8f9fa !important;
-}
-
-/* =========================================================
-   Category  Hero Banner
-   ========================================================= */
-.category-hero {
-  overflow: hidden;
-  background-color: var(--background-color); /* site-native background */
-}
-
-.category-hero .container {
-  position: relative;
-  z-index: 2; /* text above overlay */
-}
-
-.image-wrapper {
-  position: absolute;
-  right: 0;
-  top: 50%;
-  transform: translateY(-50%);
-  height: clamp(260px, 45vh, 420px);
-  width: fit-content;
-  background: #fff;
-  border-radius: 18px;
-  padding: 14px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-.category-hero__overlay {
-  display: block;
-  width: 100%;
-  height: 100%;
-  object-fit: cover; /* no cropping */
-  /* Pin the focus to the right side, hiding the empty left canvas */
-  object-position: right center;
-  pointer-events: none;
 }
 
 /* Width Utilities */
