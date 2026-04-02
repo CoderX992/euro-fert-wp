@@ -91,7 +91,10 @@
           <?php
           foreach ($product_categories as $single_category) {
             $category_name = $single_category->name;
+
+            /*get the category perma link */
             $category_link = get_term_link($single_category);
+
             $category_short_description = get_field('short_description', $single_category);
             $category_tagline = get_field('tagline', $single_category);
             $category_featured_image = get_field('category_featured_image', $single_category);
@@ -105,7 +108,8 @@
             }
           ?>
             <div class="category-wrapper col-12 col-xl-4 col-xxl-3">
-              <div class="category-card card h-100 shadow-sm fade-in" style="cursor:pointer">
+              <!-- Category card-->
+              <div class="category-card card h-100 shadow-sm fade-in">
                 <img
                   src="<?php echo esc_url($category_image_url); ?>"
                   class="card-img-top category-thumbnail"
@@ -123,11 +127,25 @@
 
                   <?php if (!empty($category_short_description)) { ?>
                     <p class="category-short-description card-text">
-                      <?php /* Print optional short description only when it exists */ ?>
-                      <?php echo esc_html($category_short_description); ?>
+
+                      <?php
+                      /* Print optional short description only when it exists */
+                      echo esc_html($category_short_description); ?>
                     </p>
                   <?php } ?>
-                  <a class="btn btn-primary btn-sm" href="<?php echo esc_url($category_link); ?>">View Category</a>
+
+                  <!-- get category link-->
+                  <?php if (!is_wp_error($category_link)) : ?>
+                    <!-- Valid category URL: render normal CTA -->
+                    <a class="category-nav-btn btn btn-primary btn-sm" href="<?php echo esc_url($category_link); ?>">View Category
+
+                    </a>
+                  <?php else : ?>
+                    <!-- Fallback: hide navigation if URL generation failed -->
+                    <span class="category-nav-btn btn btn-secondary btn-sm disabled" aria-disabled="true">
+                      Category Unavailable
+                    </span>
+                  <?php endif; ?>
                 </div>
               </div>
             </div>

@@ -5,7 +5,6 @@
   background: white;
   overflow: hidden;
   transition: all 0.3s ease;
-  cursor: pointer;
   border-radius: 12px;
   box-shadow: 0 2px 12px rgba(0, 0, 0, 0.22);
   border: 2px solid #d9dee3;
@@ -31,11 +30,12 @@
 .category-preview .category-card .card-body {
   display: flex;
   flex-direction: column;
+
   flex: 1;
   min-height: auto;
   justify-content: flex-start;
   gap: 0.75rem;
-  padding-bottom: 1rem; /* NEW */
+  padding-bottom: 1rem;
 }
 
 /* Compact title */
@@ -70,6 +70,36 @@
   flex-shrink: 0;
 }
 
+.category-card .category-nav-btn {
+  margin-top: auto;
+  align-self: center;
+  width: auto;
+  max-width: 100%;
+}
+
+/* Fallback CTA style when category URL is invalid */
+.category-card .category-nav-btn.disabled {
+  /* Keep shape similar to real button for layout consistency */
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  /* Visual "disabled" state */
+  background-color: #e9ecef; /* light gray background */
+  border-color: #d1d5db; /* soft border */
+  color: #6c757d; /* muted text */
+  /* Prevent interaction */
+  pointer-events: none; /* no click/tap */
+  cursor: not-allowed; /* desktop feedback */
+  opacity: 1; /* keep text readable */
+  text-decoration: none;
+}
+
+/* Accessibility: visible focus ring for keyboard users */
+.category-card .category-nav-btn:focus-visible {
+  outline: 2px solid #1b6cff;
+  outline-offset: 2px;
+}
+
 /* Hover effect */
 .product-category-card:hover {
   transform: translateY(-3px); /* Subtle lift effect */
@@ -95,6 +125,7 @@
   line-height: 1.6;
   color: var(--gray-700);
 }
+
 /* ====================================================
       Category card image global rules - grid image
 ======================================================*/
@@ -110,8 +141,9 @@
   margin-bottom: 0.75rem;
   background: linear-gradient(180deg, #f9f9f9 0%, #fbfbfb 38%, #fcfcfc 100%);
 }
+
 /* Mobile category layout */
-@media (max-width: 767.98px) {
+@media (max-width: 767px) {
   .category-preview {
     padding: clamp(1.25rem, 5vw, 2rem) clamp(0.75rem, 4vw, 1.125rem);
   }
@@ -165,6 +197,10 @@
                                   Desktop category card - teaser
  ******  ================================================================ *******/
 @media (min-width: 768px) {
+  .category-card .category-nav-btn {
+    min-width: 140px; /* Consistent CTA size on larger cards */
+  }
+
   .category-card .card-title {
     margin: 0;
   }
