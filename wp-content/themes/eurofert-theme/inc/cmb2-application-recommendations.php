@@ -81,18 +81,25 @@ add_action('cmb2_admin_init', 'register_recommendation_table');
  * This allows our Node.js script to actually SAVE the data.
  */
 add_action('init', function () {
-    // 1. Register the Table (Must be type 'array' to accept your JSON)
     register_post_meta('eurofert_product', 'reco_rows', array(
         'show_in_rest' => array(
             'schema' => array(
                 'type'  => 'array',
-                'items' => array('type' => 'object'),
+                'items' => array(
+                    'type'       => 'object',
+                    'properties' => array(
+                        'crop'        => array('type' => 'string'),
+                        'fertigation' => array('type' => 'string'),
+                        'foliar'      => array('type' => 'string'),
+                        'time'        => array('type' => 'string'),
+                    ),
+                ),
             ),
         ),
-        'single'       => true,
-        'type'         => 'array',
+        'single'        => true,
+        'type'          => 'array',
         'auth_callback' => function () {
-            return current_user_can('edit_posts'); // 🔓 This opens the gate for the API
-        } // Changed from 'string' to 'array'
+            return current_user_can('edit_posts');
+        },
     ));
 });
