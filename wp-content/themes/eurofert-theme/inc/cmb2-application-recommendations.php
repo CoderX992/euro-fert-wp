@@ -90,6 +90,9 @@ add_action('init', function () {
             ),
         ),
         'single'       => true,
-        'type'         => 'array', // Changed from 'string' to 'array'
+        'type'         => 'array',
+        'auth_callback' => function () {
+            return current_user_can('edit_posts'); // 🔓 This opens the gate for the API
+        } // Changed from 'string' to 'array'
     ));
 });
