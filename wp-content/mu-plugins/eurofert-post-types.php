@@ -8,7 +8,7 @@ function eurofert_custom_post_types()
         'has_archive' => true,
         'rewrite' => array('slug' => 'products'),
         'show_in_rest' => true,  //enables Gutenberg editor
-        'supports' => array('title', 'editor', 'thumbnail'),
+        'supports' => array('title', 'editor', 'thumbnail', 'custom_fields'),
         'labels' => array(
             'add_new_item' => 'Add New Product',
             'edit_item' => 'Edit Product',
