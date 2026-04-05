@@ -22,6 +22,7 @@ function register_recommendation_table()
         'object_types' => array('eurofert_product'),
         'context'      => 'normal',
         'priority'     => 'high',
+        'show_in_rest' =>  true
     ));
 
 
@@ -74,3 +75,21 @@ function register_recommendation_table()
 
 
 add_action('cmb2_admin_init', 'register_recommendation_table');
+
+/**
+ * Register the recommendations_table meta key for the REST API.
+ * This allows our Node.js script to actually SAVE the data.
+ */
+add_action('init', function () {
+    // 1. Register the Table (Must be type 'array' to accept your JSON)
+    register_post_meta('eurofert_product', 'reco_rows', array(
+        'show_in_rest' => array(
+            'schema' => array(
+                'type'  => 'array',
+                'items' => array('type' => 'object'),
+            ),
+        ),
+        'single'       => true,
+        'type'         => 'array', // Changed from 'string' to 'array'
+    ));
+});
