@@ -76,11 +76,12 @@ function register_recommendation_table()
 add_action('cmb2_admin_init', 'register_recommendation_table');
 
 /**
- * Register the recommendations_table meta key for the REST API.
- * This allows our Node.js script to actually SAVE the data.
- */
-/**
- * Register the recommendations_table meta key for the REST API.
+ * Register reco_rows for the REST API.
+ *
+ * WordPress only persists keys present in the registered meta schema; anything else
+ * is ignored with no error, so the post can return 201 while reco_rows never saves.
+ * CMB2 stores this group as one serialized array: list of rows, each row an assoc.
+ * array with keys crop, fertigation, foliar, time — same shape as your Node payload.
  */
 add_action('init', function () {
     register_post_meta('eurofert_product', 'reco_rows', array(
@@ -88,10 +89,14 @@ add_action('init', function () {
             'schema' => array(
                 'type'  => 'array',
                 'items' => array(
-                    'type' => 'object',
-                    // This is the magic line. It tells WP to accept your JSON 
-                    // without forcing it to strictly match predefined keys.
-                    'additionalProperties' => true,
+                    'type'                 => 'object',
+                    'additionalProperties' => false,
+                    'properties'           => array(
+                        'crop'        => array('type' => 'string'),
+                        'fertigation' => array('type' => 'string'),
+                        'foliar'      => array('type' => 'string'),
+                        'time'        => array('type' => 'string'),
+                    ),
                 ),
             ),
         ),
@@ -102,3 +107,39 @@ add_action('init', function () {
         },
     ));
 });
+
+/**
+ * Fallback: write reco_rows from the REST request after core meta handling.
+ *
+ * Ensures rows persist if the theme was not deployed, meta was not registered on
+ * the server, or another layer interfered with update_value().
+ */
+function eurofert_rest_persist_reco_rows($post, $request, $creating)
+{
+    $meta = $request->get_param('meta');
+    if (! is_array($meta) || ! array_key_exists('reco_rows', $meta)) {
+        return;
+    }
+
+    $raw = $meta['reco_rows'];
+    if (! is_array($raw)) {
+        return;
+    }
+
+    $rows = array();
+    foreach ($raw as $row) {
+        if (! is_array($row)) {
+            continue;
+        }
+        $rows[] = array(
+            'crop'        => isset($row['crop']) ? sanitize_textarea_field((string) $row['crop']) : '',
+            'fertigation' => isset($row['fertigation']) ? sanitize_textarea_field((string) $row['fertigation']) : '',
+            'foliar'      => isset($row['foliar']) ? sanitize_textarea_field((string) $row['foliar']) : '',
+            'time'        => isset($row['time']) ? sanitize_textarea_field((string) $row['time']) : '',
+        );
+    }
+
+    update_post_meta($post->ID, 'reco_rows', $rows);
+}
+
+add_action('rest_after_insert_eurofert_product', 'eurofert_rest_persist_reco_rows', 99, 3);
