@@ -21,8 +21,7 @@ function register_recommendation_table()
         'title'        => 'Application Recommendations',
         'object_types' => array('eurofert_product'),
         'context'      => 'normal',
-        'priority'     => 'high',
-        'show_in_rest' =>  true
+        'priority'     => 'high'
     ));
 
 
@@ -80,19 +79,19 @@ add_action('cmb2_admin_init', 'register_recommendation_table');
  * Register the recommendations_table meta key for the REST API.
  * This allows our Node.js script to actually SAVE the data.
  */
+/**
+ * Register the recommendations_table meta key for the REST API.
+ */
 add_action('init', function () {
     register_post_meta('eurofert_product', 'reco_rows', array(
         'show_in_rest' => array(
             'schema' => array(
                 'type'  => 'array',
                 'items' => array(
-                    'type'       => 'object',
-                    'properties' => array(
-                        'crop'        => array('type' => 'string'),
-                        'fertigation' => array('type' => 'string'),
-                        'foliar'      => array('type' => 'string'),
-                        'time'        => array('type' => 'string'),
-                    ),
+                    'type' => 'object',
+                    // This is the magic line. It tells WP to accept your JSON 
+                    // without forcing it to strictly match predefined keys.
+                    'additionalProperties' => true,
                 ),
             ),
         ),
