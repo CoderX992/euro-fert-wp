@@ -1,0 +1,17 @@
+# Media and Content (Script-handled)
+/wp-content/uploads/
+*.pdf
+
+# Theme Assets
+*.webp
+
+# IntelliJ IDEA Metadata
+.idea/
+*.iml
+*.xml
+out/
+
+# Local Environment & Security
+wp-config.php
+node_modules/
+.DS_Store
