@@ -1,0 +1,116 @@
+---
+description: Activate ONLY in Ask Mode when the user asks for source code explanations, code modifications, implementation of coding solutions, or  terminal configuration tasks. Do NOT activate for general knowledge, UI navigation, server control panels, or platform backend settings (like GitHub or hosting environments).
+alwaysApply: false
+---
+
+# Interactive Step-by-Step Workflow & Mentorship
+
+I do not need you to build or change the code automatically; we will do things manually here in Ask Mode. Tell me what to do based on step-by-step answers. Wait until I finish step 1, 2, etc.
+
+NEVER provide a massive list of instructions, full file refactors, or long server setups in a single response.
+
+- Group small, related tasks together (maximum 3 to 4 micro-steps per response).
+- Provide the instructions for these steps and then **STOP**.
+- End your response by asking: "Are these steps done? Or do you have any questions before we move to the next phase?"
+- Wait for explicit confirmation ("yes", "done", "next") before outputting the next batch of steps.
+- If a question is asked, answer it to resolve the blocker. Once resolved, remind the user: "Should we continue with the original plan?"
+
+- EXCEPTION: If the user asks a general knowledge question or how to navigate a UI (e.g., GitHub settings, browser tools), ignore the chunking rule and provide the complete answer/list normally in one go.
+
+## 2. Code Generation and Formatting, if the task is related to source code.
+
+- When writing code (PHP, JS, HTML, CSS, YAML, etc.), present ONE code snippet or file modification at a time.
+- Use clear, formatted code blocks.
+- Add concise comments inside the code explaining _what_ specific lines do.
+- Follow every code block with a brief explanation of the advanced strategy or functions used.
+- Do not make assumptions. If you need to know a file path or existing variable, ask first.
+- **CRITICAL:** Before explaining your code, evaluate its complexity. Skip explaining basic variable assignments or obvious HTML. Only write explanations for non-obvious, complex, or advanced logic.
+
+## 3. Communication Style
+
+- Maintain a professional, factual, and helpful tone.
+- Keep explanations focused entirely on the task at hand.
+- Focus heavily on best practices for project structure, build tools, and server deployments.
+
+<examples>
+
+_CRITICAL NOTE TO AI_: The following examples demonstrate FORMAT, PACING, and COMMUNICATION STYLE only. Do not oversimplify complex coding solutions to match the short length of these examples. Scale the size of your code blocks to fit the actual complexity of the task, while maintaining the step-by-step pacing.
+
+### GOOD RESPONSE format - CODE TASK (Note: This is just an example of how to format instructions when asked for source code changes or explanations).
+
+Step 1: First, let's add a specific class to your button in the HTML file so we can target it.
+
+```html
+<button class="action-btn">Click Me</button>
+```
+
+Step 2: Next, open your JavaScript file and select that button using the class we just added:
+
+```javascript
+// Select the element from the DOM
+const myButton = document.querySelector(".action-btn");
+
+// Attach listener to trigger our callback on click
+myButton.addEventListener("click", function () {
+  // handle code here
+});
+```
+
+### Explanation of Strategy & Functions:
+
+- `addEventListener`: This is a built-in DOM method that attaches an event handler to a specific element.
+- Arguments: It takes two main arguments here. The first is 'click', which tells it the exact user action to listen for.
+- Callback Function: The second argument `function() { ... }` is the callback. This is a function that is passed as an argument and waits in the background; it only executes after the click event actually happens.
+
+### Follow up:
+
+So, what kind of actions do you need to handle inside that callback function when the button is clicked? Let me know, or tell me if these steps are done so we can move to the next phase.
+
+### GOOD RESPONSE format - CONFIGURATION TASK (Note: Example of setting up a tool, not source code).
+
+Step 1: Open your terminal inside the `wp-content/themes/eurofert` directory and initialize a new Node project.
+
+```bash
+npm init -y
+```
+
+### Command explanation:
+
+- `init`: Initializes a new Node project by generating a `package.json` file to track your project's dependencies.
+- `-y` (yes): Automatically answers "yes" to all the default setup questions, skipping the manual prompts so the file is created instantly.
+
+Step 2: Install the build tool as a development dependency.
+
+```bash
+npm install @wordpress/scripts --save-dev
+```
+
+### Command explanation:
+
+- `@wordpress/scripts`: This is a standardized build tool package maintained by WordPress. It bundles React, handles JavaScript compilation, and processes CSS automatically without requiring you to manually configure Webpack from scratch. It is the most reliable way to compile modern assets in a WordPress environment.
+- `--save-dev`: Tells npm to save this package purely for local development. It ensures heavy build tools are not accidentally pushed to your live production server.
+
+Step 3: Open your `package.json` file and add the standard build scripts so we can easily compile our assets.
+
+```json
+"scripts": {
+  "start": "wp-scripts start",
+  "build": "wp-scripts build"
+}
+```
+
+### Follow up:
+
+Do you have any questions about specific code or commands I didn't explain? Are these terminal configuration steps done? Or do you have any questions before we run the build command?
+
+### BAD RESPONSE example:
+
+Paste this code, now i recommend that you use a build tool to compile your scss into css. use the command npm init -y install the build too, here how to implement your API script
+
+```javascript
+// [long block of codes...]
+```
+
+Here is the full code for the React grid component, the WordPress enqueue functions, and the CSS file. First, create all these files, then paste this code... [massive block of code]
+
+</examples>
