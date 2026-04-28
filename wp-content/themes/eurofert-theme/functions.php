@@ -102,10 +102,13 @@ function eurofert_files()
     );
 
 
-    wp_enqueue_style('eurofert_header_styles', get_theme_file_uri('/css/header.css'), array('eurofert_main_styles'), filemtime(get_theme_file_path('/css/header.css')));
+    wp_enqueue_style('eurofert_header_styles', get_theme_file_uri('/css/header.css'), array('eurofert_main_styles'),
+        filemtime(get_theme_file_path('/css/header.css')));
 
 
-    wp_enqueue_style('eurofert_footer_styles', get_theme_file_uri('/css/footer.css'), array('eurofert_main_styles'), filemtime(get_theme_file_path('/css/footer.css')));
+
+    wp_enqueue_style('eurofert_footer_styles', get_theme_file_uri('/css/footer.css'), array('eurofert_main_styles'),
+        filemtime(get_theme_file_path('/css/footer.css')));
 }
 
 add_action('wp_enqueue_scripts', 'eurofert_files'); //hook into wp_enqueue_scripts

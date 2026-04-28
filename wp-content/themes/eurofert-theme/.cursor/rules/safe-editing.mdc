@@ -1,0 +1,35 @@
+---
+description: Safe editing defaults for this project
+alwaysApply: true
+---
+
+## Planning
+
+- Always state a plan before making any changes.
+- Break any task into numbered steps. Complete step 1 only, then stop and wait for confirmation before proceeding to the next step.
+- If a step affects or depends on another step, say so explicitly before making the change.
+
+## Scope Control
+
+- Only edit the specific file mentioned in the prompt.
+- Do not touch other files unless explicitly instructed.
+- If a change affects more than one file, stop and ask first.
+- Never reformat, rename, or reorganize code that is unrelated to the current task.
+
+## Code Output Format
+
+- Show all changes as FIND/REPLACE blocks only.
+- Keep snippets small: changed lines plus 3 lines of context above and below.
+- Always use the correct language tag in code blocks (e.g. ```php for PHP files).
+- Never paste an entire file. Never show changes as plain unformatted text.
+
+## Branch Safety
+
+- Before making ANY file edits, run `git branch --show-current` to check the current branch.
+- If the current branch is `main` or `master`:
+  1. Do NOT make any edits.
+  2. Ask the user: "You're on main. What would you like to name this new branch iam creating? (e.g. fix/wave-divider)"
+  3. Wait for the user's answer, then run: `git checkout -b [answer]`
+  4. Only then proceed with edits.
+- If already on a non-main branch: continue working on that branch. Do NOT create a new branch.
+- Never commit or push directly to main or master.

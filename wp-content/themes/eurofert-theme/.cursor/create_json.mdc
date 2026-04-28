@@ -1,0 +1,74 @@
+---
+alwaysApply: false
+---
+
+# Extracting Recommendation Tables to JSON
+
+## Trigger
+
+When the user references the datasheets folder, containing a Word doc table, image, a .txt file OR if he pastes a freeform text describing a fertilizer product's "Crops and rate of use" / "Application Recommendations" table, treat it as a request to produce a JSON file.
+
+## Where to save and how to write the file
+
+1. Read the input: either `./datasheets/<product-slug>.txt`, or the pasted text in the user's message.
+2. Parse it into a JavaScript array of row objects, where each object has exactly the keys `crop`, `fertigation`, `foliar`, `time` (all strings).
+3. Serialize that array as valid JSON, pretty-printed with 2-space indentation.
+4. Write the serialized JSON string to `./datasheets/<product-slug>.json` (overwrite if it exists).
+5. Verify the new file by re-reading it from disk and confirming `JSON.parse()` succeeds AND that the parsed value is an array of objects with the four required keys.
+6. ONLY if step 5 succeeds AND the input came from a `.txt` file in `./datasheets/`: delete the original `./datasheets/<product-slug>.txt`.
+
+If `products.csv` exists in the project root, verify the slug appears in its `slug` column. Warn (don't block) if the slug is not found in the CSV - it might be a typo or a brand new product not yet added.
+
+### What the `.json` content MUST be
+
+A valid JSON array, like:
+\`\`\`json
+[
+{
+"crop": "Vegetables (GH/Open Field)",
+"fertigation": "1.5 - 3 L / GH/500 m2",
+"foliar": "200 - 300 ml / 100 L Water",
+"time": "During vegetative growth stages"
+}
+]
+\`\`\`
+
+## Extraction rules
+
+1. **Row order**: each row of the source table maps to one object in the JSON array. Preserve the source's row order.
+
+2. **Preserve text exactly**: if the source pastes "Field crops" output "crops". Never invent or correct missing words.
+
+3. **Preserve special characters literally**: `²`, `–` (en-dash), `&`, `°`, parentheses, etc. Do NOT normalize `m2` to `m²` or `-` to `–`. The PHP layer handles display conversion downstream.
+
+4. **Whitespace around numeric range hyphens**: when a hyphen `-` sits between two numbers with no space, add a single space on each side.
+   - `5-10 L/ha` → `5 - 10 L/ha`
+   - `2-4 kg/500 m²` → `2 - 4 kg/500 m²`
+   - `12-15 Kg/ha` → `12 - 15 Kg/ha`
+   - Apply only to hyphens between digits. Do NOT change hyphens inside words ("growth-stage" stays as is).
+   - Do NOT change en-dashes `–` (they're already spaced in source).
+
+5. **Multi-line cells in fertigation**: when a single cell holds two or more values on separate lines (e.g., one for greenhouses and one for hectares), join them with a literal `\n` (newline).
+   - Example source: `1.5 - 3 L / GH/500 m²` on line 1, `10 - 20 L / Ha` on line 2.
+   - JSON: `"fertigation": "1.5 - 3 L / GH/500 m²\n10 - 20 L / Ha"`
+
+6. **Merged Fertigation + Foliar cell** (one cell visually spans both columns): duplicate the value into BOTH `fertigation` AND `foliar`.
+   - Reason: WP CMB2 metabox shows two empty fields if foliar is `""`. Duplicating ensures both fields show data.
+   - Example: Field crops with merged "8 - 10 L / Ha" → `"fertigation": "8 - 10 L / Ha", "foliar": "8 - 10 L / Ha"`.
+
+7. **Table has NO Foliar column at all** (only Crop + Fertigation + Time): every row's `foliar` is `""`.
+   - Recognise this case from the table header: if there's no "Foliar" header, the table has no foliar data.
+
+8. **Single row's Foliar cell is empty** (other rows in the same table do have foliar values): that row's `foliar` is `""`.
+
+9. **Ignore decoration**: footnotes, asterisks pointing to commentary (`**Not recommended for…`), highlighted backgrounds, merged-header decorations, table column-group labels like "Application Rate". Extract only the text content of data cells.
+
+10. **Crop names may include parentheses or extra qualifiers** like "Vegetables (GH/Open Field)" or "Vegetables Green houses Open Field". Preserve them verbatim; do not split or simplify.
+
+11. **When in doubt, ask**: if a row's structure is genuinely ambiguous (e.g. you can't tell which column a value belongs to), ask the user before writing the file. Never silently guess.
+
+## Output style
+
+- JSON should be pretty-printed with 2-space indentation.
+- String values use double quotes.
+- The final element of an array has no trailing comma.
