@@ -1,0 +1,26 @@
+[
+  {
+    "crop": "Vegetables (GH/Open Field)",
+    "fertigation": "1.5 - 3 L / GH (500M2)\n10 - 20 L / Ha",
+    "foliar": "200 - 300",
+    "time": "Fruit development & ripening stages"
+  },
+  {
+    "crop": "crops",
+    "fertigation": "8 - 10 L/ Ha",
+    "foliar": "8 - 10 L/ Ha",
+    "time": "Heading stage"
+  },
+  {
+    "crop": "Fruit trees",
+    "fertigation": "10 - 20 L/ha",
+    "foliar": "200 - 300",
+    "time": "Fruit development & ripening stages"
+  },
+  {
+    "crop": "Ornamentals & flowers",
+    "fertigation": "10 - 20 L/ha",
+    "foliar": "200 - 300",
+    "time": "Upon need"
+  }
+]
