@@ -7,7 +7,8 @@
     "start": "wp-scripts start --webpack-src-dir=resources --output-path=public",
     "build": "wp-scripts build --webpack-src-dir=resources --output-path=public",
     "products": "node scripts/api_sync_product.js",
-    "browser-sync": "browser-sync start --proxy \"http://localhost/eurofert\" --files \"public/*.css, public/*.js, **/*.php\""
+    "browser-sync": "browser-sync start --proxy \"http://localhost/eurofert\" --files \"public/*.css, public/*.js, **/*.php\"",
+    "dev": "concurrently \"npm:start\" \"npm:browser-sync\""
   },
   "keywords": [],
   "author": "",
@@ -19,6 +20,7 @@
   "devDependencies": {
     "@wordpress/scripts": "^32.0.0",
     "browser-sync": "^3.0.4",
+    "concurrently": "^9.2.1",
     "path": "^0.12.7",
     "webpack-remove-empty-scripts": "^1.1.1"
   }
