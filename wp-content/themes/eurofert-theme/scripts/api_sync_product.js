@@ -2,13 +2,20 @@ const fs = require("fs"); //Node js Module called file system = fs ,
 // Purpose: To read, write, and manipulate files and directories.
 const path = require("path");
 const csv = require("csv-parser");
+require("dotenv").config({ path: path.join(__dirname, "../.env") }); // Load environment variables from .env file
 
 // --- CONFIGURATION ---
-const LIVE_SERVER_URL = "http://3.121.6.4/wp-json/wp/v2";
-const USERNAME = "ahmadsaf_admin";
-const APP_PASSWORD = "oaN2 YJ6f cs35 s5N1 gWZI kZp5"; // Your 16-character password
+const LIVE_SERVER_URL = process.env.LIVE_SERVER_URL;
+const USERNAME = process.env.WP_USERNAME;
+const APP_PASSWORD = process.env.WP_APP_PASSWORD; //password for the API
 
+if (!LIVE_SERVER_URL || !USERNAME || !APP_PASSWORD) {
+  throw new Error("Missing required env vars. Set LIVE_SERVER_URL, WP_USERNAME, WP_APP_PASSWORD in .env");
+}
+
+// authentication header for the API, part of the http request
 const authHeader = "Basic " + Buffer.from(`${USERNAME}:${APP_PASSWORD}`).toString("base64");
+
 const BASE_IMAGE_DIR =
   "C:\\Users\\Ahmad Safieddine\\OneDrive\\Desktop\\Place For My Stuff\\Eurofert files\\Content of Website\\Products\\Product Images\\";
 const BASE_JSON_DIR = path.join(__dirname, "../datasheets/");
@@ -57,8 +64,8 @@ async function runProductSync() {
 
           // Handle Featured Image
           let featuredMediaId = null;
-          if (item.local_image_path && item.local_image_path.trim() !== "") //check for empty column in the excel sheet
-          {
+          if (item.local_image_path && item.local_image_path.trim() !== "") {
+            //check for empty column in the excel sheet
             // Section A : find Image path = the Base Folder + Category Folder + Filename
             const imgPath = path.join(BASE_IMAGE_DIR, item.category_slug, item.local_image_path.trim());
 

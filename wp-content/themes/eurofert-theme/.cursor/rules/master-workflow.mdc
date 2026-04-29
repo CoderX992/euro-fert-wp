@@ -1,5 +1,9 @@
 ---
-description: Activate ONLY in Ask Mode when the user asks for source code explanations, code modifications, implementation of coding solutions, or  terminal configuration tasks. Do NOT activate for general knowledge, UI navigation, server control panels, or platform backend settings (like GitHub or hosting environments).
+description: 
+
+Activate when the user asks about source code explanations, code modifications, implementation of coding solutions, terminal configuration tasks, setting up build tools, project structure planning, file organization, or deciding how to approach a development task. 
+
+Do NOT activate for  UI navigation, server control panels, or platform backend settings (like GitHub or hosting environments).
 alwaysApply: false
 ---
 

@@ -1,7 +1,7 @@
-@use "styles";
-@use "animations";
-@use "category-grid";
-@use "product-grid";
-@use "product-details";
-@use "header";
-@use "footer";
+@import "base/styles";
+@import "modules/animations";
+@import "modules/category-grid";
+@import "modules/product-grid";
+@import "modules/product-details";
+@import "modules/header";
+@import "modules/footer";

@@ -15,3 +15,8 @@ out/
 wp-config.php
 node_modules/
 .DS_Store
+
+# Theme local secrets
+/wp-content/themes/eurofert-theme/.env
+/wp-content/themes/eurofert-theme/.env.*
+!/wp-content/themes/eurofert-theme/.env.example
