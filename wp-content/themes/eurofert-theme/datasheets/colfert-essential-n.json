@@ -1,0 +1,32 @@
+[
+  {
+    "crop": "Vegetables (GH/Open Field)",
+    "fertigation": "1.5 – 3 L / GH/500 m² \n 10 - 20 L / Ha",
+    "foliar": "200 - 300 ml/100 L Water",
+    "time": "During vegetative growth stages"
+  },
+  {
+    "crop": "Field crops",
+    "fertigation": "8 - 10 L / Ha",
+    "foliar": "8 - 10 L / Ha",
+    "time": "1 month old plants"
+  },
+  {
+    "crop": "Fruit trees",
+    "fertigation": "10 - 20 L / Ha",
+    "foliar": "200 - 300 ml / 100 L Water",
+    "time": "During vegetative growth stages"
+  },
+  {
+    "crop": "Ornamentals & flowers",
+    "fertigation": "10 - 20 L / Ha",
+    "foliar": "200 - 300 ml / 100 L Water",
+    "time": "Weekly"
+  },
+  {
+    "crop": "Nurseries",
+    "fertigation": "5-10 L/ha",
+    "foliar": "200 - 300 ml / 100 L Water",
+    "time": "Upon need"
+  }
+]
