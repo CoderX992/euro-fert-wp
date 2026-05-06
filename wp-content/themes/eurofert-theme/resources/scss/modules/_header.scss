@@ -31,12 +31,6 @@
   box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
 }
 
-.header.header--hidden {
-  /* Slide the header UP out of view */
-  /* Since Admin Bar is z-index: 99999, this slides neatly underneath it */
-  transform: translateY(-100%);
-}
-
 /* main navigation container site nav 
    Site navigation  GLOBAL
    Site nav global 
@@ -89,6 +83,13 @@
   object-fit: contain;
   image-rendering: -webkit-optimize-contrast; /* sharper in WebKit */
   transition: all 0.3s ease;
+}
+
+@media (min-width: 992px) {
+  .logo {
+    max-height: 70px;
+    max-width: 240px;
+  }
 }
 
 .nav-link span {
@@ -470,11 +471,9 @@
   }
 
   /** Mobile header - Mobile Fixed header **/
+  .header,
   .header.header--scrolled {
-    padding: 0.35rem 0;
-    background-color: rgba(255, 255, 255, 0.9);
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08); /* Softer shadow */
-    border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+    padding-block: 0.85rem; /* same value in both states */
   }
 
   /*************************************************************************************** 
