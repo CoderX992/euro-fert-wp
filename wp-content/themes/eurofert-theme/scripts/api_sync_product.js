@@ -16,9 +16,11 @@ if (!LIVE_SERVER_URL || !USERNAME || !APP_PASSWORD) {
 // authentication header for the API, part of the http request
 const authHeader = "Basic " + Buffer.from(`${USERNAME}:${APP_PASSWORD}`).toString("base64");
 
-const BASE_IMAGE_DIR =
-  "C:\\Users\\Ahmad Safieddine\\OneDrive\\Desktop\\Place For My Stuff\\Eurofert files\\Content of Website\\Products\\Product Images\\";
+const BASE_IMAGE_DIR = process.env.LOCAL_IMAGE_DIR;
 const BASE_JSON_DIR = path.join(__dirname, "../datasheets/");
+if (!BASE_IMAGE_DIR) {
+  throw new Error("Missing required env var: LOCAL_IMAGE_DIR must be set in your .env file.");
+}
 // --- THE CORE ENGINE ---
 
 async function runProductSync() {

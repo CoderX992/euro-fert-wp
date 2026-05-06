@@ -1,1 +1,519 @@
-(()=>{"use strict";var e={366(){function e(e,t){return(t||document).querySelector(e)}function t(e,t){return Array.prototype.slice.call((t||document).querySelectorAll(e))}function n(e,t,n,o){e&&e.addEventListener(t,n,o||!1)}function o(e,t){try{e()}catch(e){console.error(t+" failed:",e)}}function i(){var t=e("#header")||e(".header");if(t){var n=Math.ceil(t.getBoundingClientRect().height);document.documentElement.style.setProperty("--header-offset",n+"px")}}function r(){var t=e("#header"),o=e(".back-to-top"),r=e("footer.footer")||e(".footer");if(t){var a=window.scrollY||0,s=null;n(window,"scroll",c,{passive:!0}),n(window,"scroll",l,{passive:!0}),n(window,"scroll",u,{passive:!0}),n(window,"resize",function(){i(),u()}),n(window,"load",function(){i(),u()}),n(o,"click",function(e){e.preventDefault(),window.scrollTo({top:0,behavior:"smooth"})}),c(),i(),l(),u()}function c(){var e=window.scrollY||0,n=e>50;n!==s&&(t.classList.toggle("header--scrolled",n),s=n,i()),document.body.classList.contains("menu-open")||(e>a&&e>120?t.classList.add("header--hidden"):t.classList.remove("header--hidden")),a=e}function l(){o&&o.classList.toggle("active",(window.scrollY||0)>300)}function u(){if(o){var e=0;if(r){var t=r.getBoundingClientRect(),n=(window.innerHeight||document.documentElement.clientHeight)-t.top;n>0&&(e=Math.ceil(n+12))}o.style.setProperty("--back-top-dynamic-offset",e+"px")}}}function a(){var o,r;o=(window.location.pathname||"").replace(/\/+$/,""),t(".nav-link:not(.parent-link)").forEach(function(e){var t="";try{t=new URL(e.href,window.location.origin).pathname.replace(/\/+$/,"")}catch(n){t=(e.getAttribute("href")||"").replace(/\/+$/,"")}e.classList.toggle("active",t&&t===o)}),(r=t(".nav-item.has-dropdown")).length&&(r.forEach(function(t){var o=e(".nav-opener",t),i=e(".parent-link",t);function a(e){e.preventDefault(),e.stopPropagation();var n,o=!t.classList.contains("open");n=t,r.forEach(function(e){e!==n&&e.classList.remove("open")}),t.classList.toggle("open",o)}n(o,"click",a),n(i,"click",a)}),n(document,"click",function(e){window.matchMedia&&window.matchMedia("(min-width: 768px)").matches&&(e.target.closest(".nav-item.has-dropdown")||r.forEach(function(e){e.classList.remove("open")}))}));var a=e("#navbarSupportedContent")||e(".navbar-collapse");a&&"undefined"!=typeof bootstrap&&(n(a,"shown.bs.collapse",function(){document.body.classList.add("menu-open"),i()}),n(a,"hidden.bs.collapse",function(){document.body.classList.remove("menu-open"),i()})),n(document,"click",function(e){var t=e.target;t&&t.closest&&t.closest(".navbar-toggler")?a?setTimeout(i,0):setTimeout(i,250):t&&t.closest&&t.closest(".nav-opener, .parent-link")&&setTimeout(i,0)})}function s(){var t=e("#testimonialCarousel");t&&"undefined"!=typeof bootstrap&&bootstrap.Carousel&&new bootstrap.Carousel(t,{interval:5e3,wrap:!0})}function c(){var o=e(".contact-form form");o&&(n(o,"submit",function(n){n.preventDefault();var i=!0;t("[required]",o).forEach(function(e){var t=e.value&&""!==e.value.trim();e.classList.toggle("is-invalid",!t),t||(i=!1)});var r=e("#email",o);if(r&&r.value){var a=/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(r.value);r.classList.toggle("is-invalid",!a),a||(i=!1)}i&&(o.reset(),alert("Thank you! Your message has been sent successfully."))}),t("input, textarea",o).forEach(function(e){n(e,"input",function(){e.hasAttribute("required")&&e.classList.toggle("is-invalid",""===e.value.trim()),"email"===e.type&&e.value&&e.classList.toggle("is-invalid",!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(e.value))})}))}function l(){var e=t(".fade-in, .slide-up, .scale-in, .product-grid-item");if(e.length)if("IntersectionObserver"in window){var o=new IntersectionObserver(function(e){e.forEach(function(e){e.isIntersecting&&u(e.target)})},{threshold:.15});e.forEach(function(e){o.observe(e)})}else i(),n(window,"scroll",i,{passive:!0});function i(){e.forEach(function(e){(function(e){var t=e.getBoundingClientRect();return t.top<=.85*(window.innerHeight||document.documentElement.clientHeight)&&t.bottom>=0})(e)&&u(e)})}}function u(e){e.classList.contains("product-grid-item")?e.classList.add("animate"):e.classList.add("active")}function d(){const e=document.querySelector(".product-navigation-panel");if(!e)return;const t=Array.from(e.querySelectorAll('.nav-panel-link[href^="#"]'));if(!t.length)return;let n=!1,o=null;const i=()=>{const e=getComputedStyle(document.documentElement).getPropertyValue("--header-offset").trim(),t=parseInt(e,10);return Number.isFinite(t)?t:72},r=e=>{t.forEach(t=>t.classList.toggle("active",t===e))};t.forEach(e=>{e.addEventListener("click",t=>{t.preventDefault();const i=e.getAttribute("href").slice(1),a=document.getElementById(i);a&&(n=!0,r(e),a.scrollIntoView({behavior:"smooth",block:"start"}),clearTimeout(o),o=setTimeout(()=>{n=!1,history.replaceState(null,"",`#${i}`)},1e3))})});const a=t.map(e=>document.getElementById(e.getAttribute("href").slice(1))).filter(Boolean);if("IntersectionObserver"in window&&a.length){const e=new IntersectionObserver(e=>{if(n)return;const o=e.filter(e=>e.isIntersecting);if(0===o.length)return;const i=o.sort((e,t)=>t.intersectionRatio-e.intersectionRatio)[0];if(!(i.intersectionRatio<.1)&&i){const e=t.find(e=>e.getAttribute("href")===`#${i.target.id}`);e&&r(e)}},{threshold:[0,.1,.25,.5,.75,1],rootMargin:`-${i()+24}px 0px -50% 0px`});a.forEach(t=>e.observe(t))}const s=location.hash&&t.find(e=>e.getAttribute("href")===location.hash)||t[0];s&&requestAnimationFrame(()=>r(s))}document.addEventListener("DOMContentLoaded",function(){o(r,"initScrollHeaderAndBackToTop"),o(a,"initMobileMenuAndDropdown"),o(s,"initTestimonialCarousel"),o(c,"initContactFormValidation"),o(l,"initViewportAnimations"),o(d,"initProductDrawerNavDash")})}},t={};function n(o){var i=t[o];if(void 0!==i)return i.exports;var r=t[o]={exports:{}};return e[o](r,r.exports,n),r.exports}n.n=e=>{var t=e&&e.__esModule?()=>e.default:()=>e;return n.d(t,{a:t}),t},n.d=(e,t)=>{for(var o in t)n.o(t,o)&&!n.o(e,o)&&Object.defineProperty(e,o,{enumerable:!0,get:t[o]})},n.o=(e,t)=>Object.prototype.hasOwnProperty.call(e,t),n(366)})();
+/******/ (() => { // webpackBootstrap
+/******/ 	"use strict";
+/******/ 	var __webpack_modules__ = ({
+
+/***/ "./resources/js/main.js"
+/*!******************************!*\
+  !*** ./resources/js/main.js ***!
+  \******************************/
+() {
+
+
+
+/* Updated : #1 bug : False Navigation active link  */
+function qs(selector, root) {
+  return (root || document).querySelector(selector);
+}
+function qsa(selector, root) {
+  return Array.prototype.slice.call((root || document).querySelectorAll(selector));
+}
+function addListener(el, eventName, handler, options) {
+  if (!el) return;
+  el.addEventListener(eventName, handler, options || false);
+}
+
+/* -----------------------------
+   Entry point (runs once)
+------------------------------ */
+document.addEventListener("DOMContentLoaded", function () {
+  safeInit(initScrollHeaderAndBackToTop, "initScrollHeaderAndBackToTop");
+  safeInit(initMobileMenuAndDropdown, "initMobileMenuAndDropdown");
+  safeInit(initTestimonialCarousel, "initTestimonialCarousel");
+  safeInit(initContactFormValidation, "initContactFormValidation");
+  safeInit(initViewportAnimations, "initViewportAnimations");
+  safeInit(initProductDrawerNavDash, "initProductDrawerNavDash");
+});
+function safeInit(fn, name) {
+  try {
+    fn();
+  } catch (e) {
+    console.error(name + " failed:", e);
+  }
+}
+/* -----------------------------
+   Keep CSS --header-offset in sync with real header height
+------------------------------ */
+function syncHeaderOffset() {
+  var header = qs("#header") || qs(".header");
+  if (!header) return;
+  var h = Math.ceil(header.getBoundingClientRect().height);
+  document.documentElement.style.setProperty("--header-offset", h + "px");
+}
+
+/* -----------------------------
+   1) Header scroll behavior + Back-to-top
+   - Safe even if elements are missing
+------------------------------ */
+function initScrollHeaderAndBackToTop() {
+  var header = qs("#header");
+  var backToTopBtn = qs(".back-to-top");
+  var footer = qs("footer.footer") || qs(".footer");
+  if (!header) return;
+  var lastScrollY = window.scrollY || 0;
+  var isScrolled = null; // track header--scrolled state
+
+  function updateHeaderOnScroll() {
+    var currentY = window.scrollY || 0;
+
+    // 1) shrink header (resync offset only when state changes)
+    var shouldBeScrolled = currentY > 50;
+    if (shouldBeScrolled !== isScrolled) {
+      header.classList.toggle("header--scrolled", shouldBeScrolled);
+      isScrolled = shouldBeScrolled;
+      syncHeaderOffset();
+    }
+
+    // if menu open, do not auto-hide
+    var menuOpen = document.body.classList.contains("menu-open");
+    if (menuOpen) {
+      lastScrollY = currentY;
+      return;
+    }
+
+    // 2) auto-hide on scroll down, show on scroll up
+    if (currentY > lastScrollY && currentY > 120) {
+      header.classList.add("header--hidden");
+    } else {
+      header.classList.remove("header--hidden");
+    }
+    lastScrollY = currentY;
+  }
+  function updateBackToTopVisibility() {
+    if (!backToTopBtn) return;
+    backToTopBtn.classList.toggle("active", (window.scrollY || 0) > 300);
+  }
+  function updateBackToTopPosition() {
+    if (!backToTopBtn) return;
+    var dynamicOffset = 0;
+    if (footer) {
+      var footerRect = footer.getBoundingClientRect();
+      var viewportHeight = window.innerHeight || document.documentElement.clientHeight;
+
+      // Amount of footer that is currently visible at the bottom of the viewport.
+      var visibleFooter = viewportHeight - footerRect.top;
+      if (visibleFooter > 0) {
+        dynamicOffset = Math.ceil(visibleFooter + 12);
+      }
+    }
+    backToTopBtn.style.setProperty("--back-top-dynamic-offset", dynamicOffset + "px");
+  }
+  addListener(window, "scroll", updateHeaderOnScroll, {
+    passive: true
+  });
+  addListener(window, "scroll", updateBackToTopVisibility, {
+    passive: true
+  });
+  addListener(window, "scroll", updateBackToTopPosition, {
+    passive: true
+  });
+  addListener(window, "resize", function () {
+    syncHeaderOffset();
+    updateBackToTopPosition();
+  });
+  addListener(window, "load", function () {
+    syncHeaderOffset();
+    updateBackToTopPosition();
+  });
+  addListener(backToTopBtn, "click", function (e) {
+    e.preventDefault();
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth"
+    });
+  });
+
+  // initial state
+  updateHeaderOnScroll();
+  syncHeaderOffset();
+  updateBackToTopVisibility();
+  updateBackToTopPosition();
+}
+
+/* -----------------------------
+   2) Mobile menu (Bootstrap Collapse) + Dropdown submenu
+   - Works for WP templates that include your header
+------------------------------ */
+function initMobileMenuAndDropdown() {
+  // Highlight active page link (desktop & mobile)
+  setActiveNavLink();
+
+  // Dropdown open/close behavior for "Product Categories"
+  initHeaderDropdownToggles();
+
+  // --- Optional but recommended: keep "menu-open" in sync with the real menu state ---
+  // This makes your hide-on-scroll header stop hiding while the menu is open.
+  var collapseEl = qs("#navbarSupportedContent") || qs(".navbar-collapse");
+  if (collapseEl && typeof bootstrap !== "undefined") {
+    addListener(collapseEl, "shown.bs.collapse", function () {
+      document.body.classList.add("menu-open");
+      syncHeaderOffset();
+    });
+    addListener(collapseEl, "hidden.bs.collapse", function () {
+      document.body.classList.remove("menu-open");
+      syncHeaderOffset();
+    });
+  }
+
+  // --- Single document click listener (replaces the two you currently have) ---
+  addListener(document, "click", function (e) {
+    var target = e.target;
+
+    // 1) Navbar toggler clicked
+    var toggler = target && target.closest && target.closest(".navbar-toggler");
+    if (toggler) {
+      // If Bootstrap events exist, they'll handle syncing precisely.
+      // Fallback: sync after the UI has had time to update.
+      if (!collapseEl) {
+        setTimeout(syncHeaderOffset, 250);
+      } else {
+        // Even with Bootstrap events, a micro-sync is harmless and can help on some themes
+        setTimeout(syncHeaderOffset, 0);
+      }
+      return;
+    }
+
+    // 2) Dropdown opener / parent link clicked (submenu can change header height on desktop)
+    var opener = target && target.closest && target.closest(".nav-opener, .parent-link");
+    if (opener) {
+      setTimeout(syncHeaderOffset, 0);
+    }
+  });
+}
+function setActiveNavLink() {
+  var currentPath = (window.location.pathname || "").replace(/\/+$/, "");
+  qsa(".nav-link:not(.parent-link)").forEach(function (link) {
+    var linkPath = "";
+    try {
+      linkPath = new URL(link.href, window.location.origin).pathname.replace(/\/+$/, "");
+    } catch (e) {
+      linkPath = (link.getAttribute("href") || "").replace(/\/+$/, "");
+    }
+    link.classList.toggle("active", linkPath && linkPath === currentPath);
+  });
+}
+
+/* Dropdown open/close behavior: toggles .open on .nav-item.has-dropdown */
+function initHeaderDropdownToggles() {
+  var dropdownParents = qsa(".nav-item.has-dropdown");
+  if (!dropdownParents.length) return;
+  function closeAllDropdowns(exceptItem) {
+    dropdownParents.forEach(function (item) {
+      if (item !== exceptItem) item.classList.remove("open");
+    });
+  }
+  dropdownParents.forEach(function (parentItem) {
+    var opener = qs(".nav-opener", parentItem);
+    var parentLink = qs(".parent-link", parentItem);
+    function toggleSubmenu(e) {
+      // Important: this stops <a href=""> from navigating/reloading
+      e.preventDefault();
+      e.stopPropagation();
+      var willOpen = !parentItem.classList.contains("open");
+      closeAllDropdowns(parentItem);
+      parentItem.classList.toggle("open", willOpen);
+    }
+    addListener(opener, "click", toggleSubmenu);
+    addListener(parentLink, "click", toggleSubmenu);
+  });
+
+  // Desktop only: click outside closes dropdown
+  addListener(document, "click", function (event) {
+    var isDesktop = window.matchMedia && window.matchMedia("(min-width: 768px)").matches;
+    if (!isDesktop) return;
+    var clickedInside = event.target.closest(".nav-item.has-dropdown");
+    if (!clickedInside) {
+      dropdownParents.forEach(function (item) {
+        item.classList.remove("open");
+      });
+    }
+  });
+}
+
+/* -----------------------------
+   3) Bootstrap Testimonial Carousel
+------------------------------ */
+function initTestimonialCarousel() {
+  var el = qs("#testimonialCarousel");
+  if (!el) return;
+  if (typeof bootstrap === "undefined" || !bootstrap.Carousel) return;
+
+  // eslint-disable-next-line no-unused-vars
+  new bootstrap.Carousel(el, {
+    interval: 5000,
+    wrap: true
+  });
+}
+
+/* -----------------------------
+   4) Contact form validation (only runs if contact form exists)
+------------------------------ */
+function initContactFormValidation() {
+  var form = qs(".contact-form form");
+  if (!form) return;
+  addListener(form, "submit", function (e) {
+    e.preventDefault();
+    var isValid = true;
+    var requiredFields = qsa("[required]", form);
+    requiredFields.forEach(function (field) {
+      var ok = field.value && field.value.trim() !== "";
+      field.classList.toggle("is-invalid", !ok);
+      if (!ok) isValid = false;
+    });
+    var emailField = qs("#email", form);
+    if (emailField && emailField.value) {
+      var emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      var okEmail = emailRegex.test(emailField.value);
+      emailField.classList.toggle("is-invalid", !okEmail);
+      if (!okEmail) isValid = false;
+    }
+    if (isValid) {
+      form.reset();
+      alert("Thank you! Your message has been sent successfully.");
+    }
+  });
+  qsa("input, textarea", form).forEach(function (input) {
+    addListener(input, "input", function () {
+      if (input.hasAttribute("required")) {
+        input.classList.toggle("is-invalid", input.value.trim() === "");
+      }
+      if (input.type === "email" && input.value) {
+        var emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        input.classList.toggle("is-invalid", !emailRegex.test(input.value));
+      }
+    });
+  });
+}
+
+/* -----------------------------
+   5) Viewport animations (fade/slide/scale)
+------------------------------ */
+function initViewportAnimations() {
+  var animated = qsa(".fade-in, .slide-up, .scale-in, .product-grid-item");
+  if (!animated.length) return;
+  if ("IntersectionObserver" in window) {
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        if (entry.isIntersecting) activateEl(entry.target);
+      });
+    }, {
+      threshold: 0.15
+    });
+    animated.forEach(function (el) {
+      io.observe(el);
+    });
+    return;
+  }
+  function isInViewport(el) {
+    var rect = el.getBoundingClientRect();
+    return rect.top <= (window.innerHeight || document.documentElement.clientHeight) * 0.85 && rect.bottom >= 0;
+  }
+  function check() {
+    animated.forEach(function (el) {
+      if (isInViewport(el)) activateEl(el);
+    });
+  }
+  check();
+  addListener(window, "scroll", check, {
+    passive: true
+  });
+}
+function activateEl(el) {
+  // .product-grid-item uses .animate in animations.css
+  if (el.classList.contains("product-grid-item")) {
+    el.classList.add("animate");
+    return;
+  }
+  // other viewport animations use .active
+  el.classList.add("active");
+}
+
+/* drawer navigation*/
+function initProductDrawerNavDash() {
+  const panel = document.querySelector(".product-navigation-panel");
+  if (!panel) return;
+  const links = Array.from(panel.querySelectorAll('.nav-panel-link[href^="#"]'));
+  if (!links.length) return;
+
+  // 1. STATE LOCK: Prevents observer from firing while we scroll manually
+  // THIS IS THE MISSING PART THAT FIXES THE FLICKER
+  let isManualScrolling = false;
+  let manualScrollTimer = null;
+  const getHeaderOffset = () => {
+    const cssVar = getComputedStyle(document.documentElement).getPropertyValue("--header-offset").trim();
+    const n = parseInt(cssVar, 10);
+    return Number.isFinite(n) ? n : 72;
+  };
+  const setActive = link => {
+    links.forEach(a => a.classList.toggle("active", a === link));
+  };
+  links.forEach(a => {
+    a.addEventListener("click", e => {
+      e.preventDefault();
+      const id = a.getAttribute("href").slice(1);
+      const target = document.getElementById(id);
+      if (!target) return;
+
+      // 2. LOCK ON: Stop the camera immediately
+      isManualScrolling = true;
+      setActive(a);
+
+      // 3. Scroll: We use scrollIntoView so it respects your CSS 'scroll-margin-top'
+      target.scrollIntoView({
+        behavior: "smooth",
+        block: "start"
+      });
+
+      // 4. LOCK OFF: Restart camera after scroll finishes (approx 1000ms)
+      clearTimeout(manualScrollTimer);
+      manualScrollTimer = setTimeout(() => {
+        isManualScrolling = false;
+        // Update URL hash safely
+        history.replaceState(null, "", `#${id}`);
+      }, 1000);
+    });
+  });
+  const sections = links.map(a => document.getElementById(a.getAttribute("href").slice(1))).filter(Boolean);
+  if ("IntersectionObserver" in window && sections.length) {
+    const observer = new IntersectionObserver(entries => {
+      // 5. THE GUARD: If we are manually scrolling, STOP here.
+      if (isManualScrolling) return;
+      const visibleEntries = entries.filter(en => en.isIntersecting);
+      if (visibleEntries.length === 0) return;
+
+      // Sort by how much is visible (Intersection Ratio)
+      const best = visibleEntries.sort((a, b) => b.intersectionRatio - a.intersectionRatio)[0];
+
+      // 6. NOISE FILTER: Ignore tiny slivers (less than 10% visible)
+      if (best.intersectionRatio < 0.1) return;
+      if (best) {
+        const link = links.find(a => a.getAttribute("href") === `#${best.target.id}`);
+        if (link) setActive(link);
+      }
+    }, {
+      threshold: [0, 0.1, 0.25, 0.5, 0.75, 1],
+      // 7. SYNC: Matches your CSS offset (Header + 24px)
+      rootMargin: `-${getHeaderOffset() + 24}px 0px -50% 0px`
+    });
+    sections.forEach(sec => observer.observe(sec));
+  }
+
+  // Initial active state check
+  const initial = location.hash && links.find(a => a.getAttribute("href") === location.hash) || links[0];
+  if (initial) requestAnimationFrame(() => setActive(initial));
+}
+
+/***/ },
+
+/***/ "./resources/scss/screen.scss"
+/*!************************************!*\
+  !*** ./resources/scss/screen.scss ***!
+  \************************************/
+(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
+
+__webpack_require__.r(__webpack_exports__);
+// extracted by mini-css-extract-plugin
+
+
+/***/ }
+
+/******/ 	});
+/************************************************************************/
+/******/ 	// The module cache
+/******/ 	var __webpack_module_cache__ = {};
+/******/ 	
+/******/ 	// The require function
+/******/ 	function __webpack_require__(moduleId) {
+/******/ 		// Check if module is in cache
+/******/ 		var cachedModule = __webpack_module_cache__[moduleId];
+/******/ 		if (cachedModule !== undefined) {
+/******/ 			return cachedModule.exports;
+/******/ 		}
+/******/ 		// Create a new module (and put it into the cache)
+/******/ 		var module = __webpack_module_cache__[moduleId] = {
+/******/ 			// no module.id needed
+/******/ 			// no module.loaded needed
+/******/ 			exports: {}
+/******/ 		};
+/******/ 	
+/******/ 		// Execute the module function
+/******/ 		if (!(moduleId in __webpack_modules__)) {
+/******/ 			delete __webpack_module_cache__[moduleId];
+/******/ 			var e = new Error("Cannot find module '" + moduleId + "'");
+/******/ 			e.code = 'MODULE_NOT_FOUND';
+/******/ 			throw e;
+/******/ 		}
+/******/ 		__webpack_modules__[moduleId](module, module.exports, __webpack_require__);
+/******/ 	
+/******/ 		// Return the exports of the module
+/******/ 		return module.exports;
+/******/ 	}
+/******/ 	
+/************************************************************************/
+/******/ 	/* webpack/runtime/compat get default export */
+/******/ 	(() => {
+/******/ 		// getDefaultExport function for compatibility with non-harmony modules
+/******/ 		__webpack_require__.n = (module) => {
+/******/ 			var getter = module && module.__esModule ?
+/******/ 				() => (module['default']) :
+/******/ 				() => (module);
+/******/ 			__webpack_require__.d(getter, { a: getter });
+/******/ 			return getter;
+/******/ 		};
+/******/ 	})();
+/******/ 	
+/******/ 	/* webpack/runtime/define property getters */
+/******/ 	(() => {
+/******/ 		// define getter functions for harmony exports
+/******/ 		__webpack_require__.d = (exports, definition) => {
+/******/ 			for(var key in definition) {
+/******/ 				if(__webpack_require__.o(definition, key) && !__webpack_require__.o(exports, key)) {
+/******/ 					Object.defineProperty(exports, key, { enumerable: true, get: definition[key] });
+/******/ 				}
+/******/ 			}
+/******/ 		};
+/******/ 	})();
+/******/ 	
+/******/ 	/* webpack/runtime/hasOwnProperty shorthand */
+/******/ 	(() => {
+/******/ 		__webpack_require__.o = (obj, prop) => (Object.prototype.hasOwnProperty.call(obj, prop))
+/******/ 	})();
+/******/ 	
+/******/ 	/* webpack/runtime/make namespace object */
+/******/ 	(() => {
+/******/ 		// define __esModule on exports
+/******/ 		__webpack_require__.r = (exports) => {
+/******/ 			if(typeof Symbol !== 'undefined' && Symbol.toStringTag) {
+/******/ 				Object.defineProperty(exports, Symbol.toStringTag, { value: 'Module' });
+/******/ 			}
+/******/ 			Object.defineProperty(exports, '__esModule', { value: true });
+/******/ 		};
+/******/ 	})();
+/******/ 	
+/************************************************************************/
+var __webpack_exports__ = {};
+// This entry needs to be wrapped in an IIFE because it needs to be isolated against other modules in the chunk.
+(() => {
+/*!****************************!*\
+  !*** ./resources/index.js ***!
+  \****************************/
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _scss_screen_scss__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./scss/screen.scss */ "./resources/scss/screen.scss");
+/* harmony import */ var _js_main_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./js/main.js */ "./resources/js/main.js");
+/* harmony import */ var _js_main_js__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_js_main_js__WEBPACK_IMPORTED_MODULE_1__);
+
+
+})();
+
+/******/ })()
+;
+//# sourceMappingURL=index.js.map
