@@ -20,3 +20,4 @@ node_modules/
 /wp-content/themes/eurofert-theme/.env
 /wp-content/themes/eurofert-theme/.env.*
 !/wp-content/themes/eurofert-theme/.env.example
+wp-content/themes/eurofert-theme/public/
