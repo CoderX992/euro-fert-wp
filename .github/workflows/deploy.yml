@@ -36,6 +36,7 @@ jobs:
 
           # Exclude dev/local-only files from server deploy
           rsyncArgs: >-
+            --delete
             --exclude=.git
             --exclude=.github
             --exclude=.cursor
