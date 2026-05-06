@@ -8,7 +8,8 @@ Updated Footer 15 December */
    - Mobile drawer: up to 767.98px
    - Tablet/Desktop full menu: from 768px
    - Fallback: extend drawer to 991.98px if link count > 5 */
-/* Base Styles */
+/* Padding first section below fixed header */
+$first-section-pad-default: 3rem;
 
 :root {
   /* Color System */
@@ -79,10 +80,6 @@ Updated Footer 15 December */
   --premium-spacing: 2rem; /* Extra spacing for premium feel */
   --text-block-spacing: 1.5rem; /* Spacing between text blocks */
 
-  /*wave decoration*/
-  --wave-height: 120px; /* bigger wave */
-  --wave-lift: 0px; /* increase to push wave UP into hero (try 20px, 40px) */
-
   /* side drawer panel size*/
   --drawer-max-width: 290px;
   --drawer-sticky-top: 140px;
@@ -107,31 +104,34 @@ Updated Footer 15 December */
   /* medium screens need extra breathing room */
   --back-top-right-medium: clamp(24px, 3vw, 48px);
   --back-top-bottom-medium: clamp(76px, 8vw, 110px);
-
   --back-top-footer-bottom: var(--back-top-bottom);
 }
 /* CRITICAL: Fluid base font size for better zoom behavior */
 *,
-*:before,
-*:after {
+*::before,
+*::after {
   box-sizing: border-box;
 }
 
-html,
-body {
-  margin: 0;
-}
-
 html {
-  font-size: 100%; /*ensures content scaling */
   -webkit-text-size-adjust: 100%;
   -ms-text-size-adjust: 100%;
   scroll-behavior: smooth;
-  scroll-padding-top: calc(var(--header-offset) + var(--wp-admin-bar-h));
+  scroll-padding-top: calc(
+    var(--header-offset) + var(--wp-admin-bar-h) + var(#{$first-section-pad-default}, --first-section-pad)
+  );
 }
-/* ============ Header scrolling resizing and positioning =======================*/
+
+body {
+  margin: 0;
+  font-size: 1.1rem;
+}
+
+/* ============ Header offset calculated by javascript =========*/
 main > *:first-child {
-  padding-top: calc(var(--header-offset) + var(--wp-admin-bar-h));
+  //prettier-ignore
+  padding-top: calc(
+    var(--header-offset) + var(--wp-admin-bar-h));
 }
 
 body {
@@ -362,77 +362,6 @@ img {
 .btn-attention:hover {
   transform: translateY(-2px);
   box-shadow: 0 8px 25px rgba(46, 125, 50, 0.3);
-}
-
-.hero-overlay {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-color: rgba(0, 0, 0, 0.4);
-}
-
-/* Hero Section layout, global hero background, global background image, 
-mobile first approach Global Hero Background */
-.hero-section {
-  position: relative;
-  background-image: url("https://images.pexels.com/photos/440731/pexels-photo-440731.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2");
-  background-size: cover;
-  background-position: center 82%;
-  color: white;
-  text-align: left;
-}
-
-.hero-section > .container .row {
-  min-height: clamp(380px, 50vh, 520px);
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  justify-content: flex-start;
-}
-
-/* Mobile first hero buttons global */
-.hero-actions {
-  max-width: 100%;
-}
-
-/* Wave Divider */
-.hero-section .wave-divider {
-  position: absolute;
-  left: 0;
-  right: 0;
-  bottom: -1px;
-  width: 100%;
-  overflow: hidden;
-  line-height: 0;
-  z-index: 1;
-  pointer-events: none;
-}
-/* wave design at the bottom of hero */
-.wave-divider svg {
-  display: block;
-  width: 100%;
-  height: 100%;
-}
-
-.hero-content .lead {
-  font-size: 1rem;
-  line-height: 1.5;
-}
-
-/* 
-Mobile-first responsive hero header and subtitle typography */
-
-.hero-content h1 {
-  font-size: 1.75rem;
-  line-height: 1.25;
-  margin-bottom: 1rem;
-}
-
-.hero-content .lead {
-  font-size: 1rem;
-  line-height: 1.7;
 }
 
 /* Small Devices mobile screens small screens mobile screen (576px and up) */
@@ -781,57 +710,10 @@ section:first-of-type {
 @media (max-width: 767.98px) {
   /*mobile spacing*/
   :root {
-    --wave-height: 44px; /* smaller wave on mobile */
     --section-padding-y: 2.5rem;
     --premium-spacing: 2rem; /* Adjusted premium spacing for mobile */
     --content-spacing: 1.25rem; /* Adjusted content spacing for mobile */
     --optimal-line-length: 45ch; /* Shorter lines for mobile */
-  }
-
-  /* mobile hero section */
-  .hero-section {
-    padding-bottom: var(--wave-height);
-  }
-  /*mobile hero container*/
-  .hero-section > .container .row {
-    min-height: auto; /* stop forcing tall hero */
-    align-items: flex-start; /* stop vertical centering */
-    padding-bottom: 1rem;
-  }
-
-  /* mobile hero buttons*/
-  .hero-actions {
-    display: flex;
-    flex-direction: column;
-    gap: 12px;
-    align-items: center;
-    width: 100%;
-  }
-
-  /*mobile background hero image  */
-  .hero-content {
-    padding: 0; /* Removed excessive bottom padding */
-    text-align: center;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    width: 100%;
-  }
-
-  .hero-content h1 {
-    font-size: 1.7rem;
-    line-height: 1.4;
-    text-align: center;
-    padding: 0 0.5rem;
-  }
-
-  .hero-content .lead {
-    font-size: 0.95rem;
-    line-height: 1.6;
-    margin-bottom: 1.5rem; /* Increased spacing below subtitle */
-    text-align: center;
-    max-width: 95%;
-    padding: 0 0.5rem;
   }
 
   .section-title {
@@ -925,10 +807,6 @@ section:first-of-type {
     margin-top: var(--space-xs);
   }
 
-  .wave-divider svg {
-    height: 60px;
-  }
-
   .btn-lg {
     padding: var(--space-xs) var(--space-sm);
     font-size: 0.95rem;
@@ -953,17 +831,15 @@ section:first-of-type {
     --premium-spacing: 2.5rem; /* Adjusted premium spacing for tablet */
     --content-spacing: 1.5rem; /* Adjusted content spacing for tablet */
   }
+
   /* Maintain optimal line length on tablet */
-  .lead,
   .card-text {
     max-width: 42ch; /* Slightly shorter for tablet */
   }
 
   /* Critical: Fix navbar to prevent overflow */
   .navbar,
-  .site-nav,
-  .header,
-  .hero-section .container {
+  .site-nav {
     width: 100%;
   }
   /* Mobile Typography - Readable and properly sized for 375px+ */
@@ -1204,8 +1080,7 @@ section:first-of-type {
   }
 
   /* Text wrapping optimization - max 6 words per line */
-  .hero-content h1,
-  .hero-content .lead,
+
   .section-title,
   .card-title,
   .card-text,
@@ -1214,15 +1089,6 @@ section:first-of-type {
     word-wrap: break-word;
     overflow-wrap: break-word;
     hyphens: auto;
-  }
-
-  /* Specific width constraints for optimal readability */
-  .hero-content h1 {
-    max-width: min(90%, 35ch);
-  }
-
-  .hero-content .lead {
-    max-width: min(85%, 40ch);
   }
 
   /*Potential BUG  or conflict below : */
@@ -1333,136 +1199,15 @@ section:first-of-type {
   }
 }
 
-/* Desktop Media Query - Footer Layout - Desktop Layout - Desktop hero section */
-@media (min-width: 768px) {
-  .hero-section {
-    display: grid;
-    grid-template-columns: var(--hero-gutter) minmax(0, 900px) 1fr;
-    grid-template-rows:
-      auto
-      auto
-      var(--wave-height);
-  }
-
-  .hero-section .container {
-    grid-row: 1;
-    grid-column: 2;
-    width: 100%;
-  }
-
-  .hero-actions {
-    display: flex;
-    grid-row-start: 2;
-    grid-row-end: 4;
-    grid-column: 2;
-    align-self: end;
-    margin-bottom: calc(var(--wave-height) * 0.5); /* gap between buttons and wave, consistent */
-    gap: var(--space-md);
-    align-items: center;
-  }
-
-  .hero-actions .btn {
-    padding: 1rem 1.5rem; /* smaller than btn-lg */
-    font-size: clamp(1rem, 0.25vw + 0.95rem, 1.2rem);
-    line-height: 1.1;
-    text-transform: none;
-  }
-
-  .hero-actions .btn-attention {
-    text-transform: none; /* goal image is Title Case */
-    letter-spacing: 0; /* removes "wide" feel */
-    font-weight: 600; /* still strong but not bulky */
-  }
-  /*styling home page - INTRO section*/
-  .hero-section > .container .row {
-    justify-content: flex-start;
-  }
-
-  .hero-section .wave-divider {
-    position: relative;
-    grid-row: 3;
-    grid-column: 1 / -1; /* spans all columns (full width) */
-    width: 100%;
-    z-index: 1;
-  }
-
-  /* Desktop hero: 3-level vertical layout , hero content vertical , hero vertical layout*/
-  .hero-content.hero-layout {
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-start;
-    max-width: 900px;
-    flex: 1;
-    gap: 1rem;
-  }
-
-  /* 3. Typography: Bigger & Aligned */
-  .hero-content h1.main-title {
-    font-size: clamp(2.5rem, 5vw, 3.3rem);
-    line-height: 1.2;
-    max-width: 850px; /* Limits width so it doesn't span the WHOLE screen */
-    margin: 0;
-  }
-
-  .hero-content .subtitle {
-    font-size: 1.3rem;
-    max-width: 850px; /* MATCHES the header width for perfect alignment */
-    color: rgba(255, 255, 255, 0.9); /* Softens the look */
-    margin: 0;
-  }
-}
-
-/* Desktop logo - Hero section Hero background for LARGE Desktop screens (992px and up) */
+/* Desktop logo */
 @media (min-width: 992px) {
   .logo {
     max-height: 70px;
     max-width: 240px;
   }
 }
-/* =========================================
-   FIXED: Tablet/Medium Layout (768px - 1199px)
-   Combined & Cleaned Version wave fixed 
 
-   wave fix 
-   ========================================= */
-
-@media (min-width: 768px) and (max-width: 1199px) {
-  .hero-section {
-    display: grid !important; /* Force Grid instead of Flex */
-    /* Row 1: Text, Row 2: Gap for buttons, Row 3: The Wave */
-    grid-template-rows: auto 60px var(--wave-height);
-    min-height: 70vh;
-    position: relative;
-  }
-
-  /* Position the text in the first row */
-  .hero-section .container {
-    grid-row: 1;
-    align-self: end;
-    padding-bottom: 20px;
-  }
-
-  /* POSITION BUTTONS INSIDE THE CURVE */
-  .hero-actions {
-    grid-row: 2 / 4; /* This makes buttons span into the wave's area */
-    z-index: 10;
-    align-self: center;
-    margin-top: 0;
-    /* This margin-bottom 'lifts' the buttons into the wave belly */
-    margin-bottom: 40px;
-    padding-left: 15px;
-  }
-
-  /* ANCHOR THE WAVE TO THE BOTTOM ROW */
-  .hero-section .wave-divider {
-    grid-row: 3;
-    position: relative; /* Keeps it at the bottom of the grid */
-    bottom: 0;
-    height: var(--wave-height);
-  }
-}
-
-/*        =========================================================================================
+/*=========================================================================================
                                      Footer – MOBILE Footer 
                 - Footer Mobile Responsive - Mobile layout Footer - Footer layout Mobile  
    ================================================================================================= */
@@ -1484,8 +1229,8 @@ section:first-of-type {
 */
 .container {
   margin-inline: auto;
+  padding-inline: var(--page-gutter-x);
 }
-
 /* Optional: container-fluid stays full width */
 .container-fluid {
   width: 100%;
@@ -1495,6 +1240,7 @@ section:first-of-type {
                                                   Container system 
      **********************************************************************************************
 */
+
 @media (min-width: 576px) {
   .container {
     max-width: 540px;
@@ -1521,14 +1267,14 @@ section:first-of-type {
   }
 }
 
-@media (min-width: 992px) {
-  .logo {
-    max-height: 70px;
-    max-width: 240px;
+@media (min-width: 1600px) {
+  .container {
+    max-width: 1480px;
   }
-
-  .hero-content h1.main-title {
-    font-size: 3.7rem;
+}
+@media (min-width: 1920px) {
+  .container {
+    max-width: 1720px;
   }
 }
 /**        ======================================================
@@ -1537,88 +1283,35 @@ section:first-of-type {
                            
  ****************************************************************************
          /**        ======================================================= */
+/* Bootstrap-5-style grid: gutter is configurable per-row via the
+   --bs-gutter-x / --bs-gutter-y custom properties. Override on a
+   single row with style="--bs-gutter-x: 10px" if needed. */
 .row {
+  --bs-gutter-x: 30px;
+  --bs-gutter-y: 0;
   display: flex;
   flex-wrap: wrap;
+  /* Cancel the top margin that .row > * adds to its first row of children. */
+  margin-top: calc(-1 * var(--bs-gutter-y));
+  /* Negative side margins offset the half-gutter padding on outer columns,
+     so the row's edges sit flush with its container. Equivalent to the
+     old margin-right/-left: -15px when --bs-gutter-x is 30px. */
+  margin-right: calc(-0.5 * var(--bs-gutter-x));
+  margin-left: calc(-0.5 * var(--bs-gutter-x));
 }
 
-.col,
-.col-1,
-.col-2,
-.col-3,
-.col-4,
-.col-5,
-.col-6,
-.col-7,
-.col-8,
-.col-9,
-.col-10,
-.col-11,
-.col-12,
-.col-sm-1,
-.col-sm-2,
-.col-sm-3,
-.col-sm-4,
-.col-sm-5,
-.col-sm-6,
-.col-sm-7,
-.col-sm-8,
-.col-sm-9,
-.col-sm-10,
-.col-sm-11,
-.col-sm-12,
-.col-md-1,
-.col-md-2,
-.col-md-3,
-.col-md-4,
-.col-md-5,
-.col-md-6,
-.col-md-7,
-.col-md-8,
-.col-md-9,
-.col-md-10,
-.col-md-11,
-.col-md-12,
-.col-lg-1,
-.col-lg-2,
-.col-lg-3,
-.col-lg-4,
-.col-lg-5,
-.col-lg-6,
-.col-lg-7,
-.col-lg-8,
-.col-lg-9,
-.col-lg-10,
-.col-lg-11,
-.col-lg-12,
-.col-xl-1,
-.col-xl-2,
-.col-xl-3,
-.col-xl-4,
-.col-xl-5,
-.col-xl-6,
-.col-xl-7,
-.col-xl-8,
-.col-xl-9,
-.col-xl-10,
-.col-xl-11,
-.col-xl-12,
-.col-xxl-1,
-.col-xxl-2,
-.col-xxl-3,
-.col-xxl-4,
-.col-xxl-5,
-.col-xxl-6,
-.col-xxl-7,
-.col-xxl-8,
-.col-xxl-9,
-.col-xxl-10,
-.col-xxl-11,
-.col-xxl-12 {
+/* Universal direct-child rule. Replaces the previous 78-selector padding
+   block that had to list every .col-* variant. Any direct child of .row
+   now gets the column-style padding/width here automatically. */
+.row > * {
+  /* position: relative kept so absolute-positioned children in columns still work. */
   position: relative;
+  flex-shrink: 0;
   width: 100%;
-  padding-right: 15px;
-  padding-left: 15px;
+  max-width: 100%;
+  padding-right: calc(var(--bs-gutter-x) * 0.5);
+  padding-left: calc(var(--bs-gutter-x) * 0.5);
+  margin-top: var(--bs-gutter-y);
 }
 
 .col {
@@ -2265,21 +1958,6 @@ section:first-of-type {
   padding: 3rem 2rem;
 }
 
-/* FIX 3: Contact Us Button - White Text */
-.hero-section .btn-outline-light,
-.hero-content .btn-outline-light,
-a.btn-outline-light {
-  color: white !important;
-  border: 2px solid white !important;
-}
-
-.hero-section .btn-outline-light:hover,
-.hero-content .btn-outline-light:hover,
-a.btn-outline-light:hover {
-  background-color: white !important;
-  color: var(--primary) !important;
-}
-
 /* FIX 8: Card Layout Consistency */
 .card {
   border: 1px solid rgba(0, 0, 0, 0.125);
@@ -2311,14 +1989,6 @@ a.btn-outline-light:hover {
   .feature-card {
     width: 100%;
   }
-
-  .hero-content h1 {
-    font-size: 1.75rem;
-  }
-
-  .hero-content .lead {
-    font-size: 1rem;
-  }
 }
 
 /* Media Query for Large Phones (576px+) problem2*/
@@ -2348,14 +2018,6 @@ a.btn-outline-light:hover {
   .btn {
     padding: 0.5625rem 1.125rem;
     font-size: 0.9375rem;
-  }
-
-  .wave-divider {
-    height: 60px;
-  }
-
-  .wave-divider svg {
-    height: 60px;
   }
 }
 

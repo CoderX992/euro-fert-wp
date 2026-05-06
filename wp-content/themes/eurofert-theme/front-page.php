@@ -1,31 +1,31 @@
 <?php get_header();
-
-
-
 ?>
 <!-- Hero Section -->
-<!-- Hero Section -->
-<main class="content">
-  <section class="home-page hero-section" id=" home">
-    <div class="hero-overlay"></div>
-    <div class="container">
-      <div class="row">
-        <div class="hero-content fade-in hero-layout">
-          <h1 class="main-title fw-bold">
-            Growth Rooted in Quality & Trust
-          </h1>
-          <p class="subtitle lead">
-            Advanced agricultural solutions that respect both soil and nature
-            while maximizing crop yield and quality.
-          </p>
-        </div>
+
+<main class="content home-page">
+  <section class="hero-section hero-section--image" id="home">
+    <div class="container hero-section__row">
+      <div class="hero-section__text fade-in">
+
+        <h1 class="hero-section__title fw-bold">
+          Growth Rooted in Quality &amp; Trust
+        </h1>
+
+        <p class="hero-section__subtitle">
+          Advanced agricultural solutions that respect both soil and nature
+          while maximizing crop yield and quality.
+        </p>
+      </div>
+
+      <div class="hero-section__buttons">
+        <a href="" class="btn btn-primary btn-explore">Explore Products</a>
+        <a href="#contact" class="btn btn-outline-light">Contact Us</a>
       </div>
     </div>
-    <div class="hero-buttons hero-actions">
-      <a href="product-categories.html" class="btn btn-primary btn-attention">Explore Products</a>
-      <a href="#contact" class="btn btn-outline-light">Contact Us</a>
-    </div>
-    <div class="wave-divider">
+
+
+
+    <div class="wave-divider" aria-hidden="true">
       <svg
         xmlns="http://www.w3.org/2000/svg"
         viewBox="0 0 1440 320"

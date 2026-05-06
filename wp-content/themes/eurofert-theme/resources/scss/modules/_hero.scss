@@ -1,0 +1,166 @@
+/* =============================================================================
+   Hero Section (front page)
+   - Mobile-first stacked layout (heading, subtitle, buttons)
+   - Buttons never collide with the wave at any breakpoint
+   - Top spacing relies on the global `main > *:first-child` rule in _styles.scss
+     which already adds calc(var(--header-offset) + var(--wp-admin-bar-h)).
+     This file only adds extra breathing room on top of that.
+   ============================================================================= */
+
+/* Hero-only design tokens */
+//wave height
+$wave-height-desktop: 118px;
+$wave-height-mobile: 62px;
+
+/* Spacing gaps for hero section */
+$hero-wave-clearance: clamp(6px, 1vw, 14px); /* breathing room between buttons and wave's top edge */
+
+/*control buttons and wave spacing */
+$hero-cta-dip-desktop: clamp(40px, 5vw, 80px);
+$hero-cta-dip-tablet: clamp(6px, 0.8vw, 12px);
+
+/* Extra breathing room added on TOP of var(--header-offset) under the fixed header.
+   Consumed by the global `main > *:first-child` rule via --first-section-pad. */
+
+.hero-section .container {
+  width: 100%;
+  @media (min-width: 768px) {
+    max-width: min(80vw, 1720px);
+    margin-left: var(--hero-gutter);
+    margin-right: auto;
+  }
+}
+
+.hero-section {
+  --hero-cta-dip: 0px;
+  position: relative;
+  --first-section-pad: clamp(0.5rem, 2vw, 1.5rem);
+  //prettier-ignore
+  background-image: linear-gradient(135deg, 
+  rgba(69, 160, 65, 0.25) 0%, 
+  rgba(45, 42, 38, 0.65) 100%),
+    url("https://images.pexels.com/photos/440731/pexels-photo-440731.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2");
+  background-size: cover;
+  background-position: center 80%;
+  color: #fff;
+
+  //wave spacing at the bottom
+  padding-bottom: calc(#{$wave-height-mobile} + #{$hero-wave-clearance});
+  text-align: center;
+
+  // ===== Section-level tablet+ overrides =====
+  @media (min-width: 768px) {
+    --hero-cta-dip: #{$hero-cta-dip-tablet};
+    text-align: left;
+    padding-bottom: calc(#{$wave-height-desktop} + #{$hero-wave-clearance});
+  }
+  // ===== Section-level large desktop override =====
+  @media (min-width: 992px) {
+    --hero-cta-dip: #{$hero-cta-dip-desktop};
+  }
+
+  &__row {
+    display: flex;
+    flex-direction: column;
+    //create vertical space
+    min-height: clamp(280px, 50svh, 440px);
+    border: 3px solid;
+    gap: 24px;
+  }
+
+  &__text {
+    border: 1px solid red;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-around;
+    width: 100%;
+    @media (min-width: 768px) {
+      width: 60%;
+      justify-content: space-evenly;
+      align-items: flex-start;
+    }
+  }
+
+  &__title {
+    font-size: clamp(1.85rem, 6vw, 2.4rem);
+    line-height: 1.15;
+    @media (min-width: 768px) {
+      font-size: clamp(2.4rem, 5vw, 3.3rem);
+    }
+  }
+
+  &__subtitle {
+    font-size: clamp(1rem, 3.6vw, 1.15rem);
+    line-height: 1.5;
+    color: rgba(255, 255, 255, 0.95);
+    max-width: 50ch;
+
+    @media (min-width: 768px) {
+      font-size: 1.3rem;
+      max-width: 60ch;
+    }
+  }
+
+  &__buttons {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: clamp(0.625rem, 1.2vw, 1rem);
+    transform: translateY(var(--hero-cta-dip));
+
+    .btn {
+      padding: 0.75em 1em;
+      font-size: 0.9375rem;
+      min-width: fit-content;
+    }
+
+    .btn-explore {
+      background: var(--primary);
+      &:hover {
+        background: var(--primary-dark);
+      }
+    }
+    .btn-outline-light {
+      color: #fff;
+      border: 2px solid #fff;
+
+      &:hover {
+        background: #fff;
+        color: var(--primary);
+      }
+    }
+
+    @media (min-width: 768px) {
+      flex-direction: row;
+      align-items: center;
+      .btn-attention {
+        text-transform: none;
+        letter-spacing: 0.5px;
+        font-weight: 600;
+      }
+    }
+  }
+
+  .wave-divider {
+    position: absolute;
+    inset: auto 0 -1px 0;
+    width: 100%;
+    height: $wave-height-mobile;
+    overflow: hidden;
+    line-height: 0;
+    z-index: 1;
+    pointer-events: none;
+    padding-inline: 0;
+    svg {
+      display: block;
+      width: 100%;
+      height: 100%;
+    }
+
+    @media (min-width: 768px) {
+      height: $wave-height-desktop;
+    }
+  }
+}
