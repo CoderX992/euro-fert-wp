@@ -15,8 +15,11 @@
     function normalize_string($stringPerRow)
     {
 
-      // 1) Normalize different newline formats into "\n"
-      $stringPerRow = trim((string) $stringPerRow);
+      // 1) NEW: Convert literal "\n" strings into real newline characters
+      $stringPerRow = str_replace("\\n", "\n", (string) $stringPerRow);
+
+      // 2) Normalize different newline formats into "\n"
+      $stringPerRow = trim($stringPerRow);
       $stringPerRow = str_replace(["\r\n", "\r"], "\n", $stringPerRow);
       $stringPerRow = str_replace(["–", "—"], "-", $stringPerRow);
 
@@ -74,6 +77,9 @@
 
 
       if (!empty($nutrient_table_rows)) {
+
+        // Support literal "\n" in the ACF field by converting it to real newlines first
+        $nutrient_table_rows = str_replace("\\n", "\n", $nutrient_table_rows);
 
         //creating an array of lines
         $dataArray = preg_split("/\r\n|\n|\r/", $nutrient_table_rows);
