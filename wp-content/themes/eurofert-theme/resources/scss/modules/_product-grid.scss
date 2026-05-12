@@ -205,6 +205,12 @@ to represent the product inside the single category. 00
   transform-origin: center center;
 }
 
+/* Specific fix for 600x800 images to prevent cropping their tight margins */
+.product-grid-item__media-inner img.card-img-top[width="600"],
+.product-grid-item__media-inner img.card-img-top[height="800"] {
+  transform: translateY(5px) scale(1.08);
+}
+
 .product-grid-item .card {
   display: flex;
   flex-direction: column;
@@ -245,10 +251,14 @@ to represent the product inside the single category. 00
   font-weight: 600;
 }
 
-/* Mobile query */
 @media (max-width: 767px) {
   .product-grid-item__media-inner img.card-img-top {
     transform: translateY(10px) scale(1.22);
+  }
+
+  /* Reduce mobile scale for 600x800 images as well */
+  .product-grid-item__media-inner img.card-img-top[width="600"] {
+    transform: translateY(5px) scale(1.05);
   }
 
   .category-description {
