@@ -1,0 +1,38 @@
+[
+  {
+    "crop": "Vegetables (GH/Open Field)",
+    "fertigation": "2 - 4 L/500 m2\n12 - 15 L/ha",
+    "foliar": "200 - 250 ml/100 L water",
+    "time": "During fruit development stage"
+  },
+  {
+    "crop": "Field crops",
+    "fertigation": "12 - 15 L/ha",
+    "foliar": "12 - 15 L/ha",
+    "time": "During heading stage"
+  },
+  {
+    "crop": "Forages",
+    "fertigation": "12 - 15 L/ha",
+    "foliar": "12 - 15 L/ha",
+    "time": "After each cut"
+  },
+  {
+    "crop": "Fruit trees",
+    "fertigation": "12 - 15 L/ha",
+    "foliar": "200 - 250 ml/100 L water",
+    "time": "During fruit development stage"
+  },
+  {
+    "crop": "Ornamentals",
+    "fertigation": "12 - 15 kg/ha",
+    "foliar": "200 - 300 g/100 L water",
+    "time": "Upon need"
+  },
+  {
+    "crop": "Nurseries",
+    "fertigation": "100 - 150 gm/100 L water",
+    "foliar": "100 - 150 gm/100 L water",
+    "time": "After true leaves formation"
+  }
+]

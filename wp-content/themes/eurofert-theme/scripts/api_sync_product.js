@@ -26,7 +26,7 @@ if (!BASE_IMAGE_DIR) {
 
 // Reads the --dry-run flag from the terminal command. process.argv is an array
 /* e.g. "node api_sync_product.js --dry-run" => process.argv = ["node", "api_sync_product.js", "--dry-run"]*/
-const DRY_RUN = process.argv.includes("--dry-run");
+const DRY_RUN = process.argv.includes('--dry-run') || process.argv.includes('dry-run');
 
 // --- THE CORE ENGINE ---
 
