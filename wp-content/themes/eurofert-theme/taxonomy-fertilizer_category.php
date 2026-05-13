@@ -69,7 +69,6 @@
 
    <!-- Product Grid -->
    <section class="product-grid py-5" id="productGrid">
-
      <div class="container">
        <div class="d-flex justify-content-between align-items-center mb-4">
          <a class="btn btn-outline-secondary" href="<?php echo esc_url(home_url('/')); ?>">
@@ -77,10 +76,7 @@
          </a>
        </div>
 
-
-
        <div class="row g-3" id="productGridContainer">
-
          <?php
           /** 1 check if current taxonomy term have products */
           if (have_posts()) :
@@ -89,50 +85,45 @@
 
               $product_url = get_permalink();
               $product_formula = function_exists('get_field') ?  get_field('formula') : '';
-
           ?>
-             <div class="col-lg-3 col-md-4 col-sm-6 mb-3">
-               <div class="product-grid-item">
-                 <a href="<?php echo esc_url($product_url); ?>">
-                   <div class="card">
-                     <div class="product-grid-item__media">
-                       <div class="product-grid-item__media-inner">
-                         <?php
-                          $product_image_id = get_post_thumbnail_id(get_the_ID());
+             <div class="product-grid__col col-lg-3 col-md-4 col-sm-6">
+               <a class="product-grid__item-link" href="<?php echo esc_url($product_url); ?>">
+                 <div class="card product-grid__item">
+                   <div class="product-grid__media">
+                     <?php
+                      $product_image_id = get_post_thumbnail_id(get_the_ID());
 
-                          if ($product_image_id) {
-                            echo wp_get_attachment_image(
-                              $product_image_id,
-                              'full',
-                              false,
-                              array(
-                                'class' => 'card-img-top',
-                                'alt'   => get_the_title(),
-                                'loading' => 'lazy',
-                                'decoding' => 'async'
-                              )
-                            );
-                          }
-                          ?>
-                       </div>
-                     </div>
-
-                     <div class="card-body p-3">
-                       <h5 class="card-title"> <?php echo esc_html(get_the_title()); ?></h5>
-                       <?php if (!empty($product_formula)) : ?>
-                         <p class="card-text small text-muted mb-2">
-                           <?php echo esc_html($product_formula) ?></p>
-                       <?php endif; ?>
-
-                       <div class="d-flex justify-content-between align-items-center">
-                         <small class="text-primary fw-bold">View Details</small>
-                         <i class="fas fa-arrow-right text-primary"></i>
-                       </div>
-                     </div>
-
+                      if ($product_image_id) {
+                        echo wp_get_attachment_image(
+                          $product_image_id,
+                          'product_portrait_thumb',
+                          false,
+                          array(
+                            'class' => 'product-grid__img',
+                            'alt'   => get_the_title(),
+                            'loading' => 'lazy',
+                            'decoding' => 'async'
+                          )
+                        );
+                      }
+                      ?>
                    </div>
-                 </a>
-               </div>
+                   <div class="card-body product-grid__body">
+                     <h5 class="product-grid__title"> <?php echo esc_html(get_the_title()); ?></h5>
+                     <?php if (!empty($product_formula)) : ?>
+                       <p class="product-grid__formula">
+                         <?php echo esc_html($product_formula) ?></p>
+                     <?php endif; ?>
+
+                     <div class="product-grid__footer">
+                       <small class="product-grid__cta text-primary fw-bold">View Details</small>
+                       <i class="fas fa-arrow-right text-primary product-grid__arrow"></i>
+                     </div>
+                   </div>
+
+                 </div>
+               </a>
+
              </div>
            <?php endwhile;
 

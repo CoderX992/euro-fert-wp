@@ -28,16 +28,6 @@ to represent the product inside the single category. 00
   width: 100%;
 }
 
-.category-hero-img {
-  max-width: 250px;
-  height: auto;
-  width: auto;
-  max-height: 400px; /* Provides a sensible ceiling so it doesn't get ridiculously tall */
-  object-fit: contain;
-  display: block; /* Helps with layout stability */
-  padding: 0;
-}
-
 .category-hero .category-container {
   order: 2; /* Moves text to the bottom of the stack */
   padding-bottom: 1rem;
@@ -168,99 +158,106 @@ to represent the product inside the single category. 00
 }
 
 /* =========================================================
-   Product Grid Image
-   Dedicated media box for the single category page cards
-   ========================================================= */
-
-/* Full-width product image container */
-.product-grid-item__media {
-  position: relative;
-  width: 100%;
-  background-color: var(--hero-bg-gradient);
-  border-bottom: 1px solid rgba(0, 0, 0, 0.07);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  overflow: hidden;
+          Product Grid                                       
+  ==========================================================*/
+.product-grid__col {
+  margin-bottom: var(--content-spacing);
 }
 
-/* Smaller centered square stage */
-.product-grid-item__media-inner {
-  width: clamp(190px, 65vw, 224px);
-  aspect-ratio: 1 / 1;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  overflow: hidden;
-}
-
-/* Image inside square stage */
-.product-grid-item__media-inner img.card-img-top {
+.product-grid__item-link {
   display: block;
-  width: 100%;
-  height: 100%;
-  object-fit: contain;
-  object-position: center center;
-  transform: translateY(15px) scale(1.28);
-  transform-origin: center center;
+  text-decoration: none;
+  color: inherit;
 }
 
-/* Specific fix for 600x800 images to prevent cropping their tight margins */
-.product-grid-item__media-inner img.card-img-top[width="600"],
-.product-grid-item__media-inner img.card-img-top[height="800"] {
-  transform: translateY(5px) scale(1.08);
-}
-
-.product-grid-item .card {
+.product-grid__item {
   display: flex;
   flex-direction: column;
-  border: none;
-  box-shadow: 0 4px 16px rgba(46, 125, 50, 0.06);
-  border-radius: 8px;
-  border: 0.5px solid var(--gray-200);
-}
-
-/* Product Grid Styles */
-.product-grid-item {
-  transition: all 0.3s ease;
   cursor: pointer;
-  margin-bottom: var(--content-spacing); /* Consistent spacing in product grid */
+  overflow: hidden;
+  border: 0.5px solid var(--gray-200);
+  box-shadow: 0 4px 16px rgba(46, 125, 50, 0.06);
+  border-radius: 5px;
+  transition:
+    transform 0.3s ease,
+    box-shadow 0.3s ease;
+  height: 100%;
 }
 
-.product-grid-item:hover {
-  transform: translateY(-5px); /* Consistent with other hover effects */
+.product-grid__item:hover {
+  transform: translateY(-5px);
   box-shadow: 0 12px 30px rgba(0, 0, 0, 0.1);
 }
 
-.product-grid-item .card-body {
-  padding: var(--space-md); /* Ensure consistent padding here too */
-  justify-content: flex-start; /* Align items to the start */
+/* Image container — aspect-ratio drives height automatically */
+.product-grid__media {
+  background: var(--hero-bg-gradient);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.07);
+  display: flex;
+  aspect-ratio: 1 / 1;
+  width: 100%;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  padding: 1.5rem;
+  height: 280px;
 }
 
-.product-grid-item .card-text {
-  flex: none; /* Prevent description from growing */
-  margin-bottom: var(--space-sm); /* Small margin below description */
+/* =========================================================
+   Product Grid Image
+   Dedicated media box for the single category page cards
+   ========================================================= */
+.product-grid__img {
+  display: block;
+  max-height: 100%;
+  max-height: 100%; /* CRITICAL: Stops vertical expansion */
+  object-fit: contain;
+  transition: transform 0.3s ease;
 }
 
-.product-grid-item .card-body .d-flex {
-  margin-top: var(--space-sm); /* Add a small top margin to separate from description */
+.product-grid__item:hover .product-grid__img {
+  transform: scale(1.06);
 }
 
-.product-grid-item .card-title {
+/* Card body — scoped override of card-body base */
+.product-grid__body {
+  padding: var(--space-md);
+  display: flex;
+  flex-direction: column;
+
+  flex: 1;
+}
+.product-grid__title {
   font-size: 0.9rem;
   font-weight: 600;
+  margin-bottom: var(--space-xs);
+}
+.product-grid__formula {
+  font-size: 0.85rem;
+  color: var(--gray-600);
+  margin-bottom: var(--space-sm);
+}
+.product-grid__footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: auto; /* pushes footer to bottom of card */
+}
+.product-grid__cta {
+  color: var(--primary);
+  font-weight: 700;
+}
+.product-grid__arrow {
+  color: var(--primary);
+}
+/* Mobile — no image override needed, aspect-ratio is already fluid */
+@media (max-width: 767px) {
+  .product-grid__body {
+    padding: var(--space-sm);
+  }
 }
 
 @media (max-width: 767px) {
-  .product-grid-item__media-inner img.card-img-top {
-    transform: translateY(10px) scale(1.22);
-  }
-
-  /* Reduce mobile scale for 600x800 images as well */
-  .product-grid-item__media-inner img.card-img-top[width="600"] {
-    transform: translateY(5px) scale(1.05);
-  }
-
   .category-description {
     text-align: left;
   }

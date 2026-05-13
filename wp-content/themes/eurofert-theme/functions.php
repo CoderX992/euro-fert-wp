@@ -38,6 +38,7 @@ function eurofert_theme_setup()
     // Use proper sizes for your project (example values)
     add_image_size('productImage_large', 960, 640, false);
     add_image_size('productImage_small', 600, 400, true);
+    add_image_size('product_portrait_thumb', 600, 800, false); // Portrait aspect ratio for grid
     add_image_size('pageBanner', 1920, 600, true);
 }
 

@@ -124,7 +124,7 @@ html {
 
 body {
   margin: 0;
-  font-size: 1.1rem;
+  font-size: 1.2rem;
 }
 
 /* ============ Header offset calculated by javascript =========*/
@@ -134,8 +134,9 @@ main > *:first-child {
     var(--header-offset) + var(--wp-admin-bar-h));
 }
 
-body {
-  background-color: transparent !important; /* Allows system/WP defaults to take over */
+img {
+  max-width: 100%;
+  height: auto;
 }
 
 body.wp-admin {
