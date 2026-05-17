@@ -2,52 +2,24 @@
 
 Google Fonts Import 
 
-Updated Footer 15 December */
+Updated Footer 15 December
+Updated colors on May 17  */
 /*Updated category card March 10 2026 */
+
 /* Breakpoints:
    - Mobile drawer: up to 767.98px
    - Tablet/Desktop full menu: from 768px
    - Fallback: extend drawer to 991.98px if link count > 5 */
+
 /* Padding first section below fixed header */
 $first-section-pad-default: 3rem;
-
+/* CRITICAL: Fluid base font size for better zoom behavior */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
 :root {
-  /* Color System */
-  --primary: #45a041;
-  --primary-light: #6abf4b;
-  --primary-dark: #007934;
-  --primary-muted: #4c6b4c;
-  --secondary: #5d4037;
-  --secondary-light: #8b6b61;
-  --accent-green: #93d500;
-  --hero-bg-gradient: linear-gradient(180deg, #ffffff 0%, #f7fdfa 100%);
-
-  --product-background: #ecf4e8;
-  --accent: #fb8c00;
-  --accent-light: #ffbd45;
-  --accent-dark: #c25e00;
-  --success: #388e3c;
-  --warning: #f57c00;
-  --error: #d32f2f;
-  --light: #f5f5f5;
-  --dark: #2d2a26;
-  --gray-100: #f8f9fa;
-  --gray-200: #e9ecef;
-  --gray-300: #dee2e6;
-  --gray-400: #ced4da;
-  --gray-500: #adb5bd;
-  --gray-600: #6c757d;
-  --gray-700: #495057;
-  --gray-800: #343a40;
-  --gray-900: #212529;
-  --border-green-light: #93d500;
-  --sub-menu-color: #838383;
-
-  --background-color: #f2f7f7;
-  --ef-green: #2e7d32; /* border color */
-  --ef-green-soft: #eef7ee; /* stripe bg */
-  --ef-green-soft-2: #f7fbf7; /* alternate stripe bg */
-
   /* Consistent Spacing System (8px base) */
   --space-xs: 0.5rem; /* 8px - Minimal spacing */
   --space-sm: 1rem; /* 16px - Small spacing */
@@ -62,9 +34,10 @@ $first-section-pad-default: 3rem;
   --page-gutter-y: clamp(28px, 6vw, 64px);
 
   /* Section-specific spacing */
-  --section-padding-y: clamp(3rem, 5vw, 4rem);
+  --section-padding-y: clamp(1.5rem, 3vw, 2.5rem);
   --section-margin-y: var(--space-lg);
   --content-max-width: 1200px;
+  --grid-spacing: 1.67rem;
 
   /* Typography |
     Website Fonts
@@ -106,12 +79,6 @@ $first-section-pad-default: 3rem;
   --back-top-bottom-medium: clamp(76px, 8vw, 110px);
   --back-top-footer-bottom: var(--back-top-bottom);
 }
-/* CRITICAL: Fluid base font size for better zoom behavior */
-*,
-*::before,
-*::after {
-  box-sizing: border-box;
-}
 
 html {
   -webkit-text-size-adjust: 100%;
@@ -137,6 +104,11 @@ main > *:first-child {
 img {
   max-width: 100%;
   height: auto;
+}
+
+ul[role="list"],
+ol[role="list"] {
+  list-style: none;
 }
 
 body.wp-admin {
@@ -378,7 +350,7 @@ img {
 }
 
 /* Section Styles */
-.section {
+section {
   padding: var(--section-padding-y) 0;
   border-top: 1px solid var(--gray-300);
 }
