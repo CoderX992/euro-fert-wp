@@ -23,11 +23,11 @@
 }
 
 .header--scrolled {
-  /* Change 2: Increase background opacity */
-  background-color: rgba(255, 255, 255, 0.98);
+  background-color: rgba(255, 255, 255, 0.85);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.06);
   padding-block: 1.1rem;
-  /* Change 3: Stronger shadow to separate from content */
-  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
 }
 
 .header--hidden {
