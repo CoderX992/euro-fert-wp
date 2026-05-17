@@ -23,7 +23,7 @@ $hero-cta-dip-tablet: clamp(6px, 0.8vw, 12px);
    Consumed by the global `main > *:first-child` rule via --first-section-pad. */
 
 .hero-section .container {
-  width: 100%; 
+  width: 100%;
   @media (min-width: 768px) {
     max-width: min(80vw, 1720px);
     margin-left: var(--hero-gutter);
@@ -61,12 +61,13 @@ $hero-cta-dip-tablet: clamp(6px, 0.8vw, 12px);
     //create vertical space
     // min-height: clamp(280px, 50svh, 440px);
     gap: 24px;
-    border: solid;
+
     @media (min-width: 768px) {
       gap: 0;
     }
   }
 
+  /*inner container - Parent Hero content */
   &__text {
     display: flex;
     flex-direction: column;
@@ -75,7 +76,6 @@ $hero-cta-dip-tablet: clamp(6px, 0.8vw, 12px);
     margin: 0;
     width: 100%;
 
-    border: solid;
     @media (min-width: 768px) {
       width: 80%;
       align-items: flex-start;
