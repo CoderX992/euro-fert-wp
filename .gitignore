@@ -2,8 +2,7 @@
 /wp-content/uploads/
 *.pdf
 
-# Theme Assets
-*.webp
+
 
 # IntelliJ IDEA Metadata
 .idea/
