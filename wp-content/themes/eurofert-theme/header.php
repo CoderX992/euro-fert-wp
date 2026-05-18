@@ -75,42 +75,36 @@
               <div>
 
                 <li class="submenu-item">
-                  <a href="products.html?category=maxigrowEssentials" class="submenu__link">
+                  <a href="" class="submenu__link">
                     MAXIGROW Essentials</a>
                 </li>
 
                 <li class="submenu-item">
-                  <a href="#" class="submenu__link">
-                    MaxiGrow Micronutrient
-                  </a>
+                  <a href="" class="submenu__link">MAXIGROW Power</a>
                 </li>
 
                 <li class="submenu-item">
-                  <a href="products.html?category=maxigrowPower" class="submenu__link">MAXIGROW Power</a>
+                  <a href="" class="submenu__link">MAXIGROW NPK</a>
                 </li>
 
                 <li class="submenu-item">
-                  <a href="products.html?category=maxigrowNPK" class="submenu__link">MAXIGROW NPK</a>
-                </li>
-
-                <li class="submenu-item">
-                  <a href="products.html?category=maxigrowFoliar" class="submenu__link">MAXIGROW Foliar</a>
+                  <a href="" class="submenu__link">MAXIGROW Foliar</a>
                 </li>
 
 
 
                 <li class="submenu-item">
-                  <a href="products.html?category=maxigrowTrace" class="submenu__link">MAXIGROW Trace</a>
+                  <a href="" class="submenu__link">MAXIGROW Trace</a>
                 </li>
 
 
 
                 <li class="submenu-item">
-                  <a href="products.html?category=maxigrowSpecialty" class="submenu__link">MAXIGROW Specialty</a>
+                  <a href="" class="submenu__link">MAXIGROW Specialty</a>
                 </li>
 
                 <li class="submenu-item">
-                  <a href="products.html?category=maxigrowTerra" class="submenu__link">MAXIGROW Terra</a>
+                  <a href="" class="submenu__link">MAXIGROW Terra</a>
                 </li>
               </div>
             </ul>

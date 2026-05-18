@@ -1,0 +1,25 @@
+# Media and Content (Script-handled)
+/wp-content/uploads/
+*.pdf
+
+# IntelliJ IDEA Metadata
+.idea/
+*.iml
+*.xml
+out/
+
+# Local Environment & Security
+wp-config.php
+node_modules/
+.DS_Store
+
+# Theme local secrets
+/wp-content/themes/eurofert-theme/.env
+/wp-content/themes/eurofert-theme/.env.*
+!/wp-content/themes/eurofert-theme/.env.example
+wp-content/themes/eurofert-theme/public/
+wp-content/themes/eurofert-theme/datasheets/*.txt
+
+# Sync Script Outputs
+.sync_progress.json
+dry_run_preview.txt
