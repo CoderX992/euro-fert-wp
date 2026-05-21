@@ -59,6 +59,8 @@
       $formula = function_exists('get_field') ? get_field('formula') : '';
       $subtitle = function_exists('get_field') ? get_field('subtitle') : '';
       $key_benefits = function_exists('get_field') ? get_field('key_benefits') : '';
+      $application_notes = function_exists('get_field') ? get_field('application_notes') : '';
+      $packages_content  = function_exists('get_field') ? get_field('packages_content') : '';
 
 
       // table fields
@@ -336,6 +338,7 @@
 
       $is_internal_user = is_user_logged_in() && current_user_can('edit_posts'); ?>
 
+      <!-- Product Page Layout-->
       <main class="content">
         <div class="product-details__wrapper">
           <!-- Navigation Panel (Right Drawer) -->
@@ -377,17 +380,10 @@
                   class="nav-panel-link"
                   data-section="application-recommendations"><span class="nav-link-text">Application Recommendations</span><span class="menu-dash" aria-hidden="true"></span></a>
               </li>
-              <li>
-                <a
-                  href="#packaging"
-                  class="nav-panel-link"
-                  data-section="packaging"><span class="nav-link-text">Packaging</span>
-                  <span class="menu-dash" aria-hidden="true"></span></a>
-              </li>
             </ul>
           </nav>
 
-
+          <!--  First Product Section -->
           <section class="overview-section" id="hero">
             <div class="product-details__container">
               <!-- Product Image -->
@@ -458,14 +454,22 @@
                     <ul id="productBenefits">
                       <?php foreach ($benefits as $b) { ?>
                         <li><?php echo esc_html($b); ?></li>
-                      <?php } ?>
+                  <?php } ?>
                     </ul>
                   <?php } ?>
+                </div>
+
+                <div class="product-packaging-selector">
+                  <span class="selector-label">Available Sizes</span>
+                  <div class="selector-options">
+                    <span class="selector-pill"><i class="fa-solid fa-bottle-water icon-sm"></i> 5 lt</span>
+                    <span class="selector-pill"><i class="fa-solid fa-prescription-bottle-medical icon-md"></i> 20 lt</span>
+                    <span class="selector-pill"><i class="fa-solid fa-cube icon-lg"></i> 1000 lt</span>
+                  </div>
                 </div>
               </div> <!-- end of hero content-->
             </div>
           </section>
-
 
           <div class="section-divider" aria-hidden="true">
             <div class="separator-line"></div>
@@ -480,12 +484,11 @@
             </div>
           </section>
 
-          <div class="section-divider" aria-hidden="true">
-            <div class="separator-line"></div>
-          </div>
-
           <!-- adding data to Nutrient Content table -->
           <?php if (!empty($nutrient_array_rows)) { ?>
+            <div class="section-divider" aria-hidden="true">
+              <div class="separator-line"></div>
+            </div>
             <section class="content-section nutrient-declaration-section" id="nutrient-declaration">
               <h2 class="section-heading">Nutrient Declaration</h2>
               <div class="inner__content">
@@ -620,11 +623,11 @@
           } //end of for loop
           ?>
 
-          <div class="section-divider" aria-hidden="true">
-            <div class="separator-line"></div>
-          </div>
-
           <?php if (!empty($recom_rows)) { ?>
+
+            <div class="section-divider" aria-hidden="true">
+              <div class="separator-line"></div>
+            </div>
 
             <!-- Adding Data to Application Recommendations Table -->
             <section
