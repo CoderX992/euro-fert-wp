@@ -10,6 +10,13 @@
 *.xml
 out/
 
+# Local AI History & Workflows
+docs/history/
+AntigravityBackups/
+
+# Exclude MCP Configuration (prevents exposing local database ports/credentials)
+mcp_config.json
+
 # Local Environment & Security
 wp-config.php
 node_modules/
@@ -25,3 +32,10 @@ wp-content/themes/eurofert-theme/datasheets/*.txt
 # Sync Script Outputs
 .sync_progress.json
 dry_run_preview.txt
+
+# WordPress Core & Plugins (AI Token Savers)
+wp-admin/
+wp-includes/
+wp-content/plugins/
+wp-content/cache/
+wp-content/upgrade/
